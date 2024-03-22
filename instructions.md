@@ -10,5 +10,6 @@ A área de atuação dessa empresa abrange a fabricação de motores elétricos 
 
 A necessidade premente da indústria é estabelecer um sistema avançado de controle e monitoramento de temperatura nas estufas de secagem. Para atender a essa demanda, propõe-se a implementação de um sistema de controle em malha fechada mostrado na figura 1, onde elementos essenciais incluem um sensor de temperatura LM35, um microcontrolador ESP32 e um transistor Mosfet IRF540. Além disso, a estufa utiliza elementos resistivos de 180 ohm para viabilizar o aquecimento.
 
+![pbl image](https://github.com/ConfuseKarma/DryFi-ProjectBasedLearning/assets/145780136/c67884b3-7a04-48d6-a9e5-190e555915e9)
 
 
