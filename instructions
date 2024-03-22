@@ -1,0 +1,14 @@
+# DryFi: Aplicação de IoT no monitoramento de estufas utilizadas na construção de motores elétricos
+
+## OBJETIVO:
+Desenvolver e implementar um sistema de controle e monitoramento IoT para as estufas de secagem de motores elétricos, utilizando a plataforma de back-end FIWARE para realizar o processamento e armazenamento das informações de contexto, visando otimizar o processo global de fabricação, assegurando precisão na regulação de temperatura, monitoramento remoto em tempo real e aprimoramento da eficiência operacional, resultando em motores elétricos de alta qualidade e consistência em todas as unidades da empresa. O sistema proposto será apoiado por uma plataforma na Web desenvolvida em Asp.net MVC que dará suporte aos cadastros com exibição dos dados no formato de consultas e dashboards.
+
+## DESCRIÇÃO DA PROPOSTA:
+Em um cenário global de produção de motores elétricos, uma empresa líder na indústria enfrenta um desafio crítico relacionado ao controle e monitoramento de temperatura em suas estufas de secagem do enrolamento dos motores. Essas estufas desempenham um papel essencial na fase de fabricação, onde o correto tratamento térmico é crucial para garantir a qualidade e durabilidade dos motores elétricos produzidos em diversas unidades ao redor do mundo.
+
+A área de atuação dessa empresa abrange a fabricação de motores elétricos destinados a uma variedade de aplicações industriais, comerciais e residenciais. A eficiência e confiabilidade desses motores estão diretamente ligadas à precisão no controle térmico durante o processo de secagem do enrolamento.
+
+A necessidade premente da indústria é estabelecer um sistema avançado de controle e monitoramento de temperatura nas estufas de secagem. Para atender a essa demanda, propõe-se a implementação de um sistema de controle em malha fechada mostrado na figura 1, onde elementos essenciais incluem um sensor de temperatura LM35, um microcontrolador ESP32 e um transistor Mosfet IRF540. Além disso, a estufa utiliza elementos resistivos de 180 ohm para viabilizar o aquecimento.
+
+
+
