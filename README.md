@@ -30,7 +30,7 @@ Esses ODS destacam a importância da inovação na indústria de motores elétri
 
 ### Sistemas Embarcados (Fábio Cabrini):
 1. Diagrama completo da arquitetura, incluindo as camadas de IoT, back-end e front-end.
-2. Implementação de um servidor FIWARE em ambiente de nuvem.
+2. Implementação de um servidor FIWARE em ambiente de nuvem. - https://github.com/fabiocabrini/fiware
 3. Visualização das informações do sensor em tempo de execução consumidas através da API do Orion Context Broker.
 4. Visualização das informações históricas através do consumo da API do STH-Comet.
 
