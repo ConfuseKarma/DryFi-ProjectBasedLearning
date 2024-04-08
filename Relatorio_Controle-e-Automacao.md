@@ -9,6 +9,10 @@ Introdução, desenvolvimento da análise de circuitos e obtenção das equaçõ
 
 ### - [docs.google.com/document/d/1CMKNKdv7-q9Bkq4tbYM7Ng_gBm2sA2VbT95HF3UqPbA/edit?usp=sharing](https://docs.google.com/document/d/1CMKNKdv7-q9Bkq4tbYM7Ng_gBm2sA2VbT95HF3UqPbA/edit?usp=sharing) ###
 
+### Link úteis para consulta: ###
+
+### - [embarcados.com.br/controlador-proporcional-em-sistemas-de-segunda-ordem](https://embarcados.com.br/controlador-proporcional-em-sistemas-de-segunda-ordem/)/ 
+
 (Faça Login se quiser editar)
 
 ### Como obter equações para o circuito dentro do contexto de Controle e Automação?
@@ -53,19 +57,18 @@ Dado o sistema descrito, podemos começar com algumas suposições e simplifica�
 Com base nessas suposições, podemos começar a formular as equações. Vamos designar:
 
 - \( T \) como a temperatura medida pelo sensor LM35.
-- \( T_s \) como o setpoint desejado de temperatura.
-- \( e \) como o erro entre a temperatura medida e o setpoint: \( e = T_s - T \).
+- \( Ts \) como o setpoint desejado de temperatura.
+- \( e \) como o erro entre a temperatura medida e o setpoint: \( e = Ts - T \). 
 - \( P \) como a potência fornecida ao aquecedor.
 
 Agora, para manter a temperatura dentro de uma faixa específica, podemos usar um controlador proporcional (P), integral (I) e derivativo (D), conhecido como controlador PID. Neste caso, vamos começar com uma abordagem proporcional, que é mais simples. A potência fornecida ao aquecedor será proporcional ao erro.
 
 Então, uma possível equação seria:
 
-\[ P = K_p \times e \]
+\[ P = Kp × e \]
 
-Onde \( K_p \) é o ganho proporcional do controlador.
+Onde \( Kp \) é o ganho proporcional do controlador.
 
 Essa é uma equação muito simplificada. Para uma implementação mais robusta, você precisará considerar outros fatores, como a dinâmica térmica do sistema, a resposta do sensor de temperatura, a inércia térmica dos elementos de aquecimento, entre outros. Além disso, para uma abordagem PID completa, você também incluiria os termos integral e derivativo para lidar com o erro acumulado e a taxa de mudança do erro, respectivamente.
 
 Essa equação simples serve como um ponto de partida e pode ser refinada à medida que você avança no projeto e na análise do sistema.
-
