@@ -43,6 +43,7 @@ Relatório com descrição de todas as etapas, sendo elas: Introdução, desenvo
 
 ### Linguagem de Programação I (Eduardo Rosalem Marcelino)
 - Desenvolvimento de uma aplicação Web em Asp.net Core MVC que dê suporte ao sistema desenvolvido pelas demais disciplinas. Este sistema envolve o desenvolvimento de cadastros, dashboards, telas de consulta envolvendo os conteúdos ministrados na disciplina.
+
 - O programa deve possuir as seguintes características:
   - Pelo menos 3 CRUDs, sendo que todos deverão possuir relacionamento com outra tabela. As listagens de tabelas que possuam relacionamento devem fazer o "join" e exibir o campo relacionado.
   - Ao menos um CRUD deverá se utilizar das APIs fornecidas no seguinte endereço: [https://github.com/fabiocabrini/fiware](https://github.com/fabiocabrini/fiware).
@@ -54,4 +55,6 @@ Relatório com descrição de todas as etapas, sendo elas: Introdução, desenvo
   - O sistema deve possuir uma página inicial (Home).
   - Ao menos 2 Dashboards, que podem se valer dos mesmos filtros criados nas telas de consulta.
   - Todos os conceitos e boas práticas de programação que já foram tratadas em outras disciplinas devem ser aplicadas aqui, como identação do código, controle de exceção, orientação a objetos, complexidade ciclomática, etc.
+
+
 
