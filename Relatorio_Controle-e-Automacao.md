@@ -32,3 +32,40 @@ Para obter as equações deste circuito e analisá-lo dentro do contexto de cont
 
 Ao seguir esses passos, é possível obter as equações que descrevem o comportamento do sistema e utilizá-las para projetar um controlador eficiente que atenda às necessidades de controle de temperatura nas estufas de secagem dos enrolamentos dos motores elétricos. É importante ressaltar que o conhecimento em controle e automação será fundamental para realizar essa análise e modelagem de forma adequada.
 
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+# Formulação da Equação para o Controle Térmico em Malha Fechada #
+
+Para formular as equações que descrevem o comportamento do sistema de controle térmico em malha fechada proposto no projeto, precisamos considerar os componentes principais do sistema e suas interações. 
+
+Dado o sistema descrito, podemos começar com algumas suposições e simplificações:
+
+1. **Sensor de Temperatura LM35:** Supomos que o sensor LM35 forneça uma leitura direta e precisa da temperatura ambiente.
+
+2. **Microcontrolador ESP32:** O ESP32 coleta os dados do sensor de temperatura e calcula o erro entre a temperatura medida e o setpoint desejado. Ele então usa esse erro para controlar a potência fornecida ao aquecedor (elementos resistivos).
+
+3. **Transistor Mosfet IRF540:** O transistor Mosfet é usado para controlar a potência entregue aos elementos resistivos, modulando a corrente que passa por eles.
+
+4. **Elementos Resistivos:** Eles funcionam como o sistema de aquecimento das estufas de secagem.
+
+Com base nessas suposições, podemos começar a formular as equações. Vamos designar:
+
+- \( T \) como a temperatura medida pelo sensor LM35.
+- \( T_s \) como o setpoint desejado de temperatura.
+- \( e \) como o erro entre a temperatura medida e o setpoint: \( e = T_s - T \).
+- \( P \) como a potência fornecida ao aquecedor.
+
+Agora, para manter a temperatura dentro de uma faixa específica, podemos usar um controlador proporcional (P), integral (I) e derivativo (D), conhecido como controlador PID. Neste caso, vamos começar com uma abordagem proporcional, que é mais simples. A potência fornecida ao aquecedor será proporcional ao erro.
+
+Então, uma possível equação seria:
+
+\[ P = K_p \times e \]
+
+Onde \( K_p \) é o ganho proporcional do controlador.
+
+Essa é uma equação muito simplificada. Para uma implementação mais robusta, você precisará considerar outros fatores, como a dinâmica térmica do sistema, a resposta do sensor de temperatura, a inércia térmica dos elementos de aquecimento, entre outros. Além disso, para uma abordagem PID completa, você também incluiria os termos integral e derivativo para lidar com o erro acumulado e a taxa de mudança do erro, respectivamente.
+
+Essa equação simples serve como um ponto de partida e pode ser refinada à medida que você avança no projeto e na análise do sistema.
+
