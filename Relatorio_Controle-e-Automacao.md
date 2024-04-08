@@ -9,11 +9,11 @@ Introdução, desenvolvimento da análise de circuitos e obtenção das equaçõ
 
 ### - [docs.google.com/document/d/1CMKNKdv7-q9Bkq4tbYM7Ng_gBm2sA2VbT95HF3UqPbA/edit?usp=sharing](https://docs.google.com/document/d/1CMKNKdv7-q9Bkq4tbYM7Ng_gBm2sA2VbT95HF3UqPbA/edit?usp=sharing) ###
 
+(Faça Login se quiser editar)
+
 ### Link úteis para consulta: ###
 
 ### - [embarcados.com.br/controlador-proporcional-em-sistemas-de-segunda-ordem](https://embarcados.com.br/controlador-proporcional-em-sistemas-de-segunda-ordem/)/ 
-
-(Faça Login se quiser editar)
 
 ### Como obter equações para o circuito dentro do contexto de Controle e Automação?
 
