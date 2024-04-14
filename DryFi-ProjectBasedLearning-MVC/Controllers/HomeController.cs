@@ -18,7 +18,7 @@ namespace DryFi_ProjectBasedLearning_MVC.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult About()
         {
             return View();
         }
