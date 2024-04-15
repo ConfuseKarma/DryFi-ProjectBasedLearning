@@ -1,3 +1,7 @@
+## Aplicação de Controle de Acesso e Visualização de Dados ##
+
+Criamos aplicações CRUD's (Create, Read, Update, Delete) com controles de acesso para a visualização de dados além dos cadastros e alterações em usuários.
+
 
 ## Tabelas no Banco de Dados ##
 
