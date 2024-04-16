@@ -16,7 +16,7 @@ CREATE TABLE Funcionarios(
     FOREIGN KEY(DepartamentoId) REFERENCES Departamentos(Id)
 );
 
-CREATE TABLE clientes (
+CREATE TABLE Clientes (
     idCliente INT PRIMARY KEY,
     nomeCliente VARCHAR(100),
     CNPJ VARCHAR(14) UNIQUE, -- Definindo CNPJ como campo único
