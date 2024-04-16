@@ -15,5 +15,14 @@ CREATE TABLE Funcionarios(
     NomeDepartamento NVARCHAR(100) NOT NULL,
     FOREIGN KEY(DepartamentoId) REFERENCES Departamentos(Id)
 );
+
+CREATE TABLE clientes (
+    idCliente INT PRIMARY KEY,
+    nomeCliente VARCHAR(100),
+    CNPJ VARCHAR(14) UNIQUE, -- Definindo CNPJ como campo único
+    endereco VARCHAR(255),
+    telefone VARCHAR(20),
+    email VARCHAR(100)
+);
 ```
 ### Utilizar Stored Procedures ###
