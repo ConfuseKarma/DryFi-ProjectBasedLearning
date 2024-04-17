@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CadAlunoMVC.DAO
+namespace DryFi_ProjectBasedLearning_MVC.DAO
 {
     public static class HelperDAO
     {
