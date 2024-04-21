@@ -1,4 +1,5 @@
-﻿using DryFi_ProjectBasedLearning_MVC.Models;
+﻿using DryFi_ProjectBasedLearning_MVC.DAO;
+using DryFi_ProjectBasedLearning_MVC.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -21,6 +22,15 @@ namespace DryFi_ProjectBasedLearning_MVC.Controllers
         public IActionResult About()
         {
             return View();
+        }
+
+        public IActionResult FuncRegistro() 
+        {
+            ViewBag.Operacao = "I";
+            FuncionarioViewModel funcionario = new FuncionarioViewModel();
+            FuncionarioDAO dao = new FuncionarioDAO();
+            funcionario.Id = dao.ProximoId();            
+            return View("FuncRegistro", funcionario); 
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

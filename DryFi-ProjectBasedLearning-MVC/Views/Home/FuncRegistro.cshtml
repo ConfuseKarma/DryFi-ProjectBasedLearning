@@ -1,0 +1,83 @@
+﻿@model FuncionarioViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container content-fluid mt-5 row-gap-5">
+    <div class="row mt-5 gx-3">
+        <div class="col-md-6 pt-3 d-flex justify-content-center align-items-center">
+            <img src="~/lib/img/registerImage.svg" style="max-width: 100%; height: auto;" />
+        </div>
+        <div class="col-md-6">
+            <h1 class="display-2 fw-semibold mb-5">New <span class="text-info">Guardian</span></h1>
+            <div class="d-flex align-content-center flex-wrap">
+                <form class="needs-validation" novalidate>
+                    <div class="row g-3">
+                        <div class="col-md-7 mb-3">
+                            <label for="Foto" class="form-label">Photo</label>
+                            <input asp-for="Foto" type="file" class="form-control" id="Foto">
+                        </div>
+                        <div class="col-md-5 mb-3 d-flex justify-content-center align-items-center">
+                            <img id="preview" src="~/lib/img/carregarImg.png" alt="Please, choose an image" style="max-width: 40%; height: auto;">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="Nome" class="form-label">Name</label>
+                            <input asp-for="Nome" type="text" class="form-control" id="Nome" value="Guardian's Full Name'" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="Email" class="form-label">E-mail</label>
+                            <div class="input-group has-validation">
+                                <span class="input-group-text" id="spanEmail">&#x00040;</span>
+                                <input asp-for="Email" type="text" class="form-control" id="Email" aria-describedby="inputGroupPrepend" required>
+                                <div class="invalid-feedback">
+                                    Please, inform the email for contact.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="Cargo" class="form-label">Position</label>
+                            <select asp-for="Cargo" class="form-select" id="Cargo" required>
+                                <option selected disabled value="">Choose...</option>
+                                <option>criar o enum pra essa merda</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please select a valid position.
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="Departamento" class="form-label">Departament</label>
+                            <select asp-for="IdDepartamento" class="form-select" id="Departamento" required>
+                                <option selected disabled value="">Choose...</option>
+                                <option>criar o enum pra essa merda</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please select a valid position.
+                            </div>
+                        </div>
+                        <div class="col-md-7 mb-3">
+                            <button asp-controller="Home" asp-action="FuncRegistro" type="button" class="rounded-pill btn btn-lg btn-info mr-3">Register</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#Foto').change(function () {
+            if (this.files && this.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#preview').attr('src', e.target.result);
+                    //$('#preview').removeAttr('hidden');
+                }
+                reader.readAsDataURL(this.files[0]);
+            }
+        });
+    });
+</script>

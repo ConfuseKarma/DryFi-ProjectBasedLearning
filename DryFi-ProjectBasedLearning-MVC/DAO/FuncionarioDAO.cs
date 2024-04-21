@@ -17,6 +17,7 @@ namespace DryFi_ProjectBasedLearning_MVC.DAO
             parametros[2] = new SqlParameter("cargo", model.Cargo);
             parametros[3] = new SqlParameter("foto", model.Foto);
             parametros[4] = new SqlParameter("idDepartamento", model.IdDepartamento);
+            parametros[5] = new SqlParameter("email", model.Email);
             return parametros;
         }
 
@@ -28,6 +29,7 @@ namespace DryFi_ProjectBasedLearning_MVC.DAO
             a.Cargo = registro["cargo"].ToString();
             a.Foto = registro["foto"].ToString();
             a.IdDepartamento = Convert.ToInt32(registro["idDepartamento"]);
+            a.Email = registro["email"].ToString();
             return a;
         }
         protected override void SetTabela()

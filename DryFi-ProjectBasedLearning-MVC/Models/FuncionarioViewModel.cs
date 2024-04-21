@@ -6,6 +6,7 @@
         public string Cargo { get; set; }
         public string Foto { get; set; }
         public int IdDepartamento { get; set; }
+        public string Email  { get; set; }
     }
 
 }

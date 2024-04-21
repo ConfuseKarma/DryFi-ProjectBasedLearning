@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Views\Registers\" />
     <Folder Include="wwwroot\lib\img\" />
   </ItemGroup>
 
