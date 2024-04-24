@@ -29,5 +29,12 @@ CREATE TABLE Clientes (
     Telefone VARCHAR(20),
     Email VARCHAR(100)
 );
+
+CREATE TABLE Monitoramento (
+    IdMonitoramento INT PRIMARY KEY,
+    IdCliente INT FOREIGN KEY,
+    IdFuncionario INT FOREIGN KEY,
+    Temperatura INT
+);
 ```
 ### Utilizar Stored Procedures ###
