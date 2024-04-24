@@ -39,5 +39,20 @@ CREATE TABLE Monitoramento (
     FOREIGN KEY(IdFuncionario) REFERENCES Funcionarios(IdFuncionario)
 );
 
+CREATE TABLE Venda (
+    IdVenda INT PRIMARY KEY,
+    IdCliente INT,
+    IdFuncionario INT,
+    IdMaquina INT,
+    DataVenda DATE,
+    Quantidade INT,
+    ValorMaquina DECIMAL(10,2),
+    ValorTotal DECIMAL(10,2),
+    FOREIGN KEY (IdCliente) REFERENCES Cliente(IdCliente),
+    FOREIGN KEY (IdFuncionario) REFERENCES Funcionario(IdFuncionario),
+    FOREIGN KEY (IdMaquina) REFERENCES Maquina(IdMaquina)
+);
+
+
 ```
 ### Utilizar Stored Procedures ###
