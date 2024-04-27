@@ -56,7 +56,7 @@ CREATE TABLE Venda (
 
 ```
 ### Utilizar Stored Procedures ###
-```Procedures
+```sql
 create procedure spDelete
 (
  @id int ,
