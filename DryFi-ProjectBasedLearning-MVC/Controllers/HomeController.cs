@@ -24,15 +24,6 @@ namespace DryFi_ProjectBasedLearning_MVC.Controllers
             return View();
         }
 
-        public IActionResult FuncRegistro() 
-        {
-            ViewBag.Operacao = "I";
-            FuncionarioViewModel funcionario = new FuncionarioViewModel();
-            FuncionarioDAO dao = new FuncionarioDAO();
-            funcionario.Id = dao.ProximoId();            
-            return View("FuncRegistro", funcionario); 
-        }
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
