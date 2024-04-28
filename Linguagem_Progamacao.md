@@ -7,52 +7,36 @@ Criamos aplicações CRUD's (Create, Read, Update, Delete) com controles de aces
 
 ```sql
 CREATE TABLE Funcionarios(
-    IdFuncionario INT PRIMARY KEY NOT NULL, 
-    Nome NVARCHAR(100) NOT NULL,
-    Cargo NVARCHAR(100) NOT NULL,
-    Foto NVARCHAR(255) NOT NULL, -- Caminho da foto
-    IdDepartamento INT NOT NULL,
-    FOREIGN KEY(IdDepartamento) REFERENCES Departamento(IdDepartamento)
+    Id INT PRIMARY KEY NOT NULL, 
+    Nome VARCHAR(100) NOT NULL,
+    Cargo VARCHAR(100) NOT NULL,
+	Email VARCHAR(100) NOT NULL,
+    Foto VARCHAR(MAX),
+    Departamento VARCHAR(100) NOT NULL,
 );
 
-CREATE TABLE Departamento(
-    IdDepartamento INT PRIMARY KEY NOT NULL, 
-    NomeDepartamento NVARCHAR(100) NOT NULL
+CREATE TABLE Cliente (
+    Id INT PRIMARY KEY,
+    nomeCliente NVARCHAR(100) NOT NULL,
+    CNPJ VARCHAR(14) NOT NULL,
+    email NVARCHAR(100),
+    telefone VARCHAR(20)
 );
 
-
-CREATE TABLE Clientes (
-    IdCliente INT PRIMARY KEY,
-    Nome NVARCHAR(100),
-    CNPJ VARCHAR(14) UNIQUE, -- Definindo CNPJ como campo único
-    Endereco NVARCHAR(255),
-    Telefone NVARCHAR(20),
-    Email NVARCHAR(100)
+CREATE TABLE Maquina (
+    Id INT PRIMARY KEY,
+    maqStatus VARCHAR(50) NOT NULL,
+	endereço VARCHAR(200),
+    idCliente INT,
+    FOREIGN KEY (idCliente) REFERENCES Cliente(Id)
 );
 
 CREATE TABLE Monitoramento (
-    IdMonitoramento INT PRIMARY KEY,
-    IdCliente INT,
-    IdFuncionario INT,
-    Temperatura INT,
-    FOREIGN KEY(IdCliente) REFERENCES Clientes(IdCliente),
-    FOREIGN KEY(IdFuncionario) REFERENCES Funcionarios(IdFuncionario)
+    Id INT PRIMARY KEY,
+    idMaquina INT,
+    Temperatura DECIMAL(5,2),
+    FOREIGN KEY (idMaquina) REFERENCES Maquina(Id)
 );
-
-CREATE TABLE Venda (
-    IdVenda INT PRIMARY KEY,
-    IdCliente INT,
-    IdFuncionario INT,
-    IdMaquina INT,
-    DataVenda DATE,
-    Quantidade INT,
-    ValorMaquina DECIMAL(10,2),
-    ValorTotal DECIMAL(10,2),
-    FOREIGN KEY (IdCliente) REFERENCES Cliente(IdCliente),
-    FOREIGN KEY (IdFuncionario) REFERENCES Funcionario(IdFuncionario),
-    FOREIGN KEY (IdMaquina) REFERENCES Maquina(IdMaquina)
-);
-
 
 ```
 ### Utilizar Stored Procedures ###
@@ -99,6 +83,44 @@ as
 begin
  exec('select isnull(max(id) +1, 1) as MAIOR from '
  +@tabela)
+end
+GO
+```
+### SP Funcionarios ###
+```sql
+create procedure spInsert_Funcionarios
+(
+ @id int,
+ @nome varchar(200),
+ @cargo varchar(100),
+ @foto varchar(max),
+ @Departamento varchar(100),
+ @Email varchar(100)
+)
+as
+begin
+ insert into Funcionarios
+ (id, nome, cargo, foto, departamento, email)
+ values 
+ (@id, @nome, @cargo, @foto, @departamento, @Email)
+end
+GO
+create procedure spUpdate_Funcionarios
+(
+ @id int,
+ @nome varchar(200),
+ @cargo varchar(100),
+ @foto varchar(max),
+ @Departamento varchar(100)
+)
+as
+begin
+ update funcionarios set
+ nome = @nome,
+ cargo = @cargo,
+ departamento = @departamento,
+ foto = @foto
+ where id = @id
 end
 GO
 ```
