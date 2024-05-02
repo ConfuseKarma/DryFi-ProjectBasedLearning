@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DryFi_ProjectBasedLearning_MVC.DAO
+namespace DryFi_ProjectBasedLearning_MVC.Enums
 {
     public enum CargoEnum
     {
