@@ -33,3 +33,4 @@ namespace DryFi_ProjectBasedLearning_MVC.Services
 
         // Adicione métodos para outras requisições do Postman conforme necessário
     }
+}
