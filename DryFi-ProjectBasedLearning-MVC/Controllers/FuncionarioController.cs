@@ -19,6 +19,10 @@ namespace DryFi_ProjectBasedLearning_MVC.Controllers
             funcionario.Id = dao.ProximoId();
             return View("Form", funcionario);
         }
+        public IActionResult Login()
+        {
+            return View();
+        }
         protected override void ValidaDados(FuncionarioViewModel model, string operacao)
         {
             base.ValidaDados(model, operacao);
