@@ -1,3 +1,5 @@
+using DryFi_ProjectBasedLearning_MVC.Services;
+
 namespace DryFi_ProjectBasedLearning_MVC
 {
     public class Program
@@ -8,6 +10,8 @@ namespace DryFi_ProjectBasedLearning_MVC
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddScoped<PostmanRequests>();
+            builder.Services.AddAuthorization();
 
             var app = builder.Build();
 
