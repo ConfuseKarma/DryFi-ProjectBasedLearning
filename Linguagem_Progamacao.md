@@ -6,13 +6,14 @@ Criamos aplicações CRUD's (Create, Read, Update, Delete) com controles de aces
 ## Tabelas no Banco de Dados ##
 
 ```sql
-CREATE TABLE Funcionarios(
-    Id INT PRIMARY KEY NOT NULL, 
-    Nome VARCHAR(100) NOT NULL,
-    Cargo VARCHAR(100) NOT NULL,
-	Email VARCHAR(100) NOT NULL,
-    Foto VARCHAR(MAX),
-    Departamento VARCHAR(100) NOT NULL,
+CREATE TABLE [dbo].[Funcionarios](
+	[Id] [int] NOT NULL,
+	[Nome] [varchar](100) NOT NULL,
+	[Cargo] [varchar](100) NOT NULL,
+	[Email] [varchar](100) NOT NULL,
+	[Foto] [varchar](max) NULL,
+	[Departamento] [varchar](100) NOT NULL,
+	[Imagem] [varbinary](MAX) NULL
 );
 
 CREATE TABLE Cliente (
@@ -95,23 +96,25 @@ create procedure spInsert_Funcionarios
  @cargo varchar(100),
  @foto varchar(max),
  @Departamento varchar(100),
- @Email varchar(100)
+ @Email varchar(100),
+ @imagem varbinary(max)
 )
 as
 begin
  insert into Funcionarios
- (id, nome, cargo, foto, departamento, email)
+ (id, nome, cargo, foto, departamento, email, imagem)
  values 
- (@id, @nome, @cargo, @foto, @departamento, @Email)
+ (@id, @nome, @cargo, @foto, @departamento, @Email, @imagem)
 end
 GO
-create procedure spUpdate_Funcionarios
+create procedure [dbo].[spUpdate_Funcionarios]
 (
  @id int,
  @nome varchar(200),
  @cargo varchar(100),
  @foto varchar(max),
- @Departamento varchar(100)
+ @Departamento varchar(100),
+ @imagem varbinary(max)
 )
 as
 begin
@@ -119,8 +122,10 @@ begin
  nome = @nome,
  cargo = @cargo,
  departamento = @departamento,
- foto = @foto
+ foto = @foto,
+ imagem = @imagem
  where id = @id
 end
 GO
+
 ```
