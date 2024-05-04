@@ -11,7 +11,6 @@ CREATE TABLE [dbo].[Funcionarios](
 	[Nome] [varchar](100) NOT NULL,
 	[Cargo] [varchar](100) NOT NULL,
 	[Email] [varchar](100) NOT NULL,
-	[Foto] [varchar](max) NULL,
 	[Departamento] [varchar](100) NOT NULL,
 	[Imagem] [varbinary](MAX) NULL
 );
@@ -94,7 +93,6 @@ create procedure spInsert_Funcionarios
  @id int,
  @nome varchar(200),
  @cargo varchar(100),
- @foto varchar(max),
  @Departamento varchar(100),
  @Email varchar(100),
  @imagem varbinary(max)
@@ -102,9 +100,9 @@ create procedure spInsert_Funcionarios
 as
 begin
  insert into Funcionarios
- (id, nome, cargo, foto, departamento, email, imagem)
+ (id, nome, cargo, departamento, email, imagem)
  values 
- (@id, @nome, @cargo, @foto, @departamento, @Email, @imagem)
+ (@id, @nome, @cargo, @departamento, @Email, @imagem)
 end
 GO
 create procedure [dbo].[spUpdate_Funcionarios]
@@ -112,7 +110,6 @@ create procedure [dbo].[spUpdate_Funcionarios]
  @id int,
  @nome varchar(200),
  @cargo varchar(100),
- @foto varchar(max),
  @Departamento varchar(100),
  @imagem varbinary(max)
 )
@@ -122,7 +119,6 @@ begin
  nome = @nome,
  cargo = @cargo,
  departamento = @departamento,
- foto = @foto,
  imagem = @imagem
  where id = @id
 end
