@@ -11,13 +11,17 @@ namespace DryFi_ProjectBasedLearning_MVC.DAO
     {
         protected override SqlParameter[] CriaParametros(FuncionarioViewModel model)
         {
+            object imgByte = model.ImagemEmByte;
+            if (imgByte == null)
+                imgByte = DBNull.Value;
+
             SqlParameter[] parametros = new SqlParameter[6];
             parametros[0] = new SqlParameter("id", model.Id);
             parametros[1] = new SqlParameter("nome", model.Nome);
             parametros[2] = new SqlParameter("cargo", model.Cargo);
-            parametros[3] = new SqlParameter("foto", model.Foto);
-            parametros[4] = new SqlParameter("departamento", model.Departamento);
-            parametros[5] = new SqlParameter("email", model.Email);
+            parametros[3] = new SqlParameter("departamento", model.Departamento);
+            parametros[4] = new SqlParameter("email", model.Email);
+            parametros[5] = new SqlParameter("imagem", imgByte);
             return parametros;
         }
 
@@ -27,9 +31,10 @@ namespace DryFi_ProjectBasedLearning_MVC.DAO
             a.Id = Convert.ToInt32(registro["id"]);
             a.Nome = registro["nome"].ToString();
             a.Cargo = registro["cargo"].ToString();
-            a.Foto = registro["foto"].ToString();
             a.Departamento = registro["departamento"].ToString();
             a.Email = registro["email"].ToString();
+            if (registro["imagem"] != DBNull.Value)
+                a.ImagemEmByte = registro["imagem"] as byte[];
             return a;
         }
         protected override void SetTabela()
