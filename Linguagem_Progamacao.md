@@ -123,5 +123,75 @@ begin
  where id = @id
 end
 GO
-
+```
+### SP Cliente ###
+```sql
+CREATE PROCEDURE spInsert_Cliente
+(
+    @Id INT,
+    @nomeCliente NVARCHAR(100),
+    @CNPJ VARCHAR(14),
+    @email NVARCHAR(100),
+    @telefone VARCHAR(20)
+)
+AS
+BEGIN
+    INSERT INTO Cliente
+    (Id, nomeCliente, CNPJ, email, telefone)
+    VALUES 
+    (@Id, @nomeCliente, @CNPJ, @email, @telefone);
+END
+GO
+CREATE PROCEDURE spUpdate_Cliente
+(
+    @Id INT,
+    @nomeCliente NVARCHAR(100),
+    @CNPJ VARCHAR(14),
+    @email NVARCHAR(100),
+    @telefone VARCHAR(20)
+)
+AS
+BEGIN
+    UPDATE Cliente SET
+    nomeCliente = @nomeCliente,
+    CNPJ = @CNPJ,
+    email = @email,
+    telefone = @telefone
+    WHERE Id = @Id;
+END
+GO
+```
+### SP Maquina ###
+```sql
+CREATE PROCEDURE spInsert_Maquina
+(
+    @Id INT,
+    @maqStatus VARCHAR(50),
+    @endereço VARCHAR(200),
+    @idCliente INT
+)
+AS
+BEGIN
+    INSERT INTO Maquina
+    (Id, maqStatus, endereço, idCliente)
+    VALUES 
+    (@Id, @maqStatus, @endereço, @idCliente);
+END
+GO
+CREATE PROCEDURE spUpdate_Maquina
+(
+    @Id INT,
+    @maqStatus VARCHAR(50),
+    @endereço VARCHAR(200),
+    @idCliente INT
+)
+AS
+BEGIN
+    UPDATE Maquina SET
+    maqStatus = @maqStatus,
+    endereço = @endereço,
+    idCliente = @idCliente
+    WHERE Id = @Id;
+END
+GO
 ```
