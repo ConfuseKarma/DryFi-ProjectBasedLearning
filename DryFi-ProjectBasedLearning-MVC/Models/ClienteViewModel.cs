@@ -1,10 +1,10 @@
 ﻿namespace DryFi_ProjectBasedLearning_MVC.Models
 {
-    public class ClienteViewModel
+    public class ClienteViewModel : PadraoViewModel
     {
-        public string Nome { get; set; }
-        public string Cnpj { get; set; }
-        public string Telefone { get; set; }
-        public string Email { get; set; }
+        public string nomeCliente { get; set; }
+        public string CNPJ { get; set; }
+        public string email { get; set; }
+        public string telefone { get; set; }
     }
 }
