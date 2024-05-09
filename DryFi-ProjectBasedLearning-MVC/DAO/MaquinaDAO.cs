@@ -14,7 +14,7 @@ namespace DryFi_ProjectBasedLearning_MVC.DAO
             SqlParameter[] parametros = new SqlParameter[3];
             parametros[0] = new SqlParameter("Id", model.Id);
             parametros[1] = new SqlParameter("maqStatus", model.maqStatus);
-            parametros[2] = new SqlParameter("idCliente ", model.idCliente);
+            parametros[2] = new SqlParameter("idCliente", model.idCliente);
 
             return parametros;
         }
