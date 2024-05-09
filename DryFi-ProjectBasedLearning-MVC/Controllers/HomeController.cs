@@ -10,24 +10,12 @@ namespace DryFi_ProjectBasedLearning_MVC.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly PostmanRequests _postman;
-        
         public HomeController(ILogger<HomeController> logger, PostmanRequests postman)
         {
             _logger = logger;
             _postman = postman;
         }
-
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-        public IActionResult About()
-        {
-            return View();
-        }
-
-        //TESTE POSTMAN
+        
         [HttpGet]
         public async Task<IActionResult> ObterLuminosidadeDaLampada()
         {
@@ -41,6 +29,18 @@ namespace DryFi_ProjectBasedLearning_MVC.Controllers
                 return StatusCode(500, $"Ocorreu um erro: {ex.Message}");
             }
         }
+
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        public IActionResult About()
+        {
+            return View();
+        }
+
+        //TESTE POSTMAN
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

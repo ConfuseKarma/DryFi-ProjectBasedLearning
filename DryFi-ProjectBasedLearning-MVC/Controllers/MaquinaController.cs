@@ -11,6 +11,9 @@ namespace DryFi_ProjectBasedLearning_MVC.Controllers
             DAO = new MaquinaDAO();
             GeraProximoId = true;
         }
+
+        [HttpPost] 
+        [Route("api/maquina/registro")] 
         public IActionResult MaquinaRegistro()
         {
             ViewBag.Operacao = "I";
@@ -20,6 +23,8 @@ namespace DryFi_ProjectBasedLearning_MVC.Controllers
             return View("Form", maquina);
         }
 
+        [HttpPost] 
+        [Route("api/maquina/valida")] 
         protected override void ValidaDados(MaquinaViewModel model, string operacao)
         {
             base.ValidaDados(model, operacao);
