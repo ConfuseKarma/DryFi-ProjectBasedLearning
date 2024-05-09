@@ -23,6 +23,7 @@ namespace DryFi_ProjectBasedLearning_MVC.Controllers
         {
             return View();
         }
+
         protected override void ValidaDados(FuncionarioViewModel model, string operacao)
         {
             base.ValidaDados(model, operacao);
