@@ -13,10 +13,10 @@ namespace DryFi_ProjectBasedLearning_MVC.DAO
         {
             SqlParameter[] parametros = new SqlParameter[5];
             parametros[0] = new SqlParameter("Id", model.Id);
-            parametros[1] = new SqlParameter("Nome", model.nomeCliente);
-            parametros[2] = new SqlParameter("CNPJ", model.CNPJ);
-            parametros[3] = new SqlParameter("Email", model.email);
-            parametros[4] = new SqlParameter("Telefone", model.telefone);
+            parametros[1] = new SqlParameter("NomeCliente", model.NomeCliente);
+            parametros[2] = new SqlParameter("CNPJ", model.Cnpj);
+            parametros[3] = new SqlParameter("Email", model.Email);
+            parametros[4] = new SqlParameter("Telefone", model.Telefone);
             
             return parametros;
         }
@@ -24,10 +24,10 @@ namespace DryFi_ProjectBasedLearning_MVC.DAO
         {
             ClienteViewModel c = new ClienteViewModel();
             c.Id = Convert.ToInt32(registro["Id"]);
-            c.nomeCliente = registro["Nome"].ToString();
-            c.CNPJ = registro["CNPJ"].ToString();
-            c.email = registro["Email"].ToString();
-            c.telefone = registro["Telefone"].ToString();
+            c.NomeCliente = registro["NomeCliente"].ToString();
+            c.Cnpj = registro["CNPJ"].ToString();
+            c.Email = registro["Email"].ToString();
+            c.Telefone = registro["Telefone"].ToString();
             
             return c;
         }

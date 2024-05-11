@@ -28,9 +28,9 @@ namespace DryFi_ProjectBasedLearning_MVC.Controllers
         protected override void ValidaDados(MaquinaViewModel model, string operacao)
         {
             base.ValidaDados(model, operacao);
-            if (operacao == "A" && DAO.Consulta(model.idCliente) == null)
+            if (operacao == "A" && DAO.Consulta(model.IdCliente) == null)
                 ModelState.AddModelError("idCliente", "Este registro de cliente não existe!");
-            if (model.idCliente <= 0)
+            if (model.IdCliente <= 0)
                 ModelState.AddModelError("idCliente", "Id de cliente inválido!");
         }
     }
