@@ -6,14 +6,15 @@ Criamos aplicações CRUD's (Create, Read, Update, Delete) com controles de aces
 ## Tabelas no Banco de Dados ##
 
 ```sql
-CREATE TABLE [dbo].[Funcionarios](
-	[Id] [int] NOT NULL,
-	[Nome] [varchar](100) NOT NULL,
-	[Cargo] [varchar](100) NOT NULL,
-	[Email] [varchar](100) NOT NULL,
-	[Departamento] [varchar](100) NOT NULL,
-	[Imagem] [varbinary](MAX) NULL
+CREATE TABLE Funcionarios (
+    Id INT NOT NULL PRIMARY KEY,
+    Nome VARCHAR(100) NOT NULL,
+    Email VARCHAR(100) NOT NULL,
+    Foto VARCHAR(MAX) NULL,
+    Imagem VARBINARY(MAX) NULL,
+    CargoId INT NULL
 );
+
 
 CREATE TABLE Cliente (
     Id INT PRIMARY KEY,
@@ -88,37 +89,34 @@ GO
 ```
 ### SP Funcionarios ###
 ```sql
-create procedure spInsert_Funcionarios
+create procedure spInsert_Funcionario
 (
  @id int,
  @nome varchar(200),
- @cargo varchar(100),
- @Departamento varchar(100),
+ @cargoId int,
  @Email varchar(100),
  @imagem varbinary(max)
 )
 as
 begin
- insert into Funcionarios
- (id, nome, cargo, departamento, email, imagem)
+ insert into Funcionario
+ (id, nome, CargoId, email, imagem)
  values 
- (@id, @nome, @cargo, @departamento, @Email, @imagem)
+ (@id, @nome, @cargoId, @Email, @imagem)
 end
-GO
-create procedure [dbo].[spUpdate_Funcionarios]
+
+create procedure [dbo].[spUpdate_Funcionario]
 (
  @id int,
  @nome varchar(200),
- @cargo varchar(100),
- @Departamento varchar(100),
+ @cargoId int,
  @imagem varbinary(max)
 )
 as
 begin
- update funcionarios set
+ update funcionario set
  nome = @nome,
- cargo = @cargo,
- departamento = @departamento,
+ cargoId = @cargoId,
  imagem = @imagem
  where id = @id
 end
