@@ -132,7 +132,8 @@ CREATE PROCEDURE spInsert_Cliente
     @nomeCliente NVARCHAR(100),
     @CNPJ VARCHAR(14),
     @email NVARCHAR(100),
-    @telefone VARCHAR(20)
+    @telefone VARCHAR(20),
+	@TipoClienteId INT
 )
 AS
 BEGIN
@@ -148,7 +149,8 @@ CREATE PROCEDURE spUpdate_Cliente
     @nomeCliente NVARCHAR(100),
     @CNPJ VARCHAR(14),
     @email NVARCHAR(100),
-    @telefone VARCHAR(20)
+    @telefone VARCHAR(20),
+	@TipoClienteId INT
 )
 AS
 BEGIN
@@ -156,7 +158,8 @@ BEGIN
     nomeCliente = @nomeCliente,
     CNPJ = @CNPJ,
     email = @email,
-    telefone = @telefone
+    telefone = @telefone,
+	TipoClienteId = @TipoClienteId
     WHERE Id = @Id;
 END
 GO
