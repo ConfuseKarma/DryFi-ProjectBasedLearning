@@ -1,6 +1,8 @@
 ﻿using DryFi_ProjectBasedLearning_MVC.DAO;
 using DryFi_ProjectBasedLearning_MVC.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Data.SqlTypes;
 
 namespace DryFi_ProjectBasedLearning_MVC.Controllers
 {
@@ -59,6 +61,48 @@ namespace DryFi_ProjectBasedLearning_MVC.Controllers
             else
                 return null;
         }
+
+        //public IActionResult ConsultaAvancadaFuncionario()
+        //{
+        //    try
+        //    {
+        //        PreparaComboCategorias();
+        //        ViewBag.Categorias.Insert(0, new SelectListItem("TODAS", "0"));
+        //        return View("ConsultaAvancada");
+        //    }
+        //    catch (Exception erro)
+        //    {
+        //        return View("Error", new ErrorViewModel(erro.Message));
+        //    }
+        //}
+
+        //public IActionResult ObtemDadosConsultaAvancada(string nome,
+        //                                                 int cargo,
+        //                                                 int departamento)
+        //{
+        //    try
+        //    {
+        //        FuncionarioDAO dao = new FuncionarioDAO();
+        //        if (string.IsNullOrEmpty(nome))
+        //            nome = "";
+        //        var lista = dao.ConsultaAvancadaFuncionario(nome, cargo, departamento);
+        //        return PartialView("pvGridJogos", lista);
+        //    }
+        //    catch (Exception erro)
+        //    {
+        //        return Json(new { erro = true, msg = erro.Message });
+        //    }
+        //}
+        //private void PreparaComboCategorias()
+        //{
+        //    CategoriaDAO dao = new CategoriaDAO();
+        //    var lista = dao.Listagem();
+        //    List<SelectListItem> listaRetorno = new List<SelectListItem>();
+        //    foreach (var categ in lista)
+        //        listaRetorno.Add(new SelectListItem(categ.Descricao, categ.Id.ToString()));
+
+        //    ViewBag.Categorias = listaRetorno;
+        //}
 
 
     }

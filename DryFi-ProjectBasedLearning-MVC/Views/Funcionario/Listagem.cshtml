@@ -1,0 +1,38 @@
+﻿@model List<FuncionarioViewModel>
+@{
+    ViewData["Title"] = "Home Page";
+}
+<div>
+    <h2 class="text-white">The Guardians</h2>
+    <br />
+    <a type="button" class="btn btn-info" href="/Funcionario/Form">New Guardian</a>
+    <br />
+</div>
+<br />
+<fieldset id="areaFiltro" class="form-group">
+    <legend>Search your Guardians</legend>
+    <div class="row">
+        <div class="col-lg-4">
+            Nome<br />
+            <input type="text" id="nome" class="form-control" />
+        </div>
+        <div class="col-lg-3">
+            Departamento <br />
+            <select id="departamento" class="form-control" asp-items="@ViewBag.departamento"></select>
+        </div>
+        <div class="col-lg-3">
+            Cargo <br />
+            <select id="cargo" class="form-control" asp-items="@ViewBag.cargo"></select>
+        </div>
+        <div class="col-lg-1">
+            <br />
+            <input type="button" id="btnFiltro" class="btn btn-success" value="Aplicar"
+                   onclick="aplicaFiltroConsultaAvancada()" />
+        </div>
+    </div>
+</fieldset>
+<div id="resultadoConsulta" class="table-responsive">
+</div>
+
+
+
