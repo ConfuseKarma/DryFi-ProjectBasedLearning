@@ -10,7 +10,11 @@ namespace DryFi_ProjectBasedLearning_MVC.Controllers
         {
             DAO = new ClienteDAO();
             GeraProximoId = true;
+            //List<ClienteViewModel> clienteViewModels = new List<ClienteViewModel>();
+
+            //clienteViewModels.Add();
         }
+
         public IActionResult ClienteRegistro()
         {
             ViewBag.Operacao = "I";
@@ -23,13 +27,13 @@ namespace DryFi_ProjectBasedLearning_MVC.Controllers
         protected override void ValidaDados(ClienteViewModel model, string operacao)
         {
             base.ValidaDados(model, operacao);
-            if (string.IsNullOrEmpty(model.nomeCliente))
+            if (string.IsNullOrEmpty(model.NomeCliente))
                 ModelState.AddModelError("Nome", "Preencha o nome.");
-            if (string.IsNullOrEmpty(model.CNPJ))
+            if (string.IsNullOrEmpty(model.Cnpj))
                 ModelState.AddModelError("CNPJ", "Preencha o CNPJ.");
-            if (string.IsNullOrEmpty(model.email))
+            if (string.IsNullOrEmpty(model.Email))
                 ModelState.AddModelError("Email", "Preencha o Email.");
-            if (string.IsNullOrEmpty(model.telefone))
+            if (string.IsNullOrEmpty(model.Telefone))
                 ModelState.AddModelError("Telefone", "Preencha o Telefone.");
         }
     }

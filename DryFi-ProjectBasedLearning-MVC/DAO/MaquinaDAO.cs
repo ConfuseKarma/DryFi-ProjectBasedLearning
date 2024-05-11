@@ -13,8 +13,8 @@ namespace DryFi_ProjectBasedLearning_MVC.DAO
         {
             SqlParameter[] parametros = new SqlParameter[3];
             parametros[0] = new SqlParameter("Id", model.Id);
-            parametros[1] = new SqlParameter("maqStatus", model.maqStatus);
-            parametros[2] = new SqlParameter("idCliente", model.idCliente);
+            parametros[1] = new SqlParameter("maqStatus", model.MaqStatus);
+            parametros[2] = new SqlParameter("idCliente", model.IdCliente);
 
             return parametros;
         }
@@ -22,8 +22,8 @@ namespace DryFi_ProjectBasedLearning_MVC.DAO
         {
             MaquinaViewModel m = new MaquinaViewModel();
             m.Id = Convert.ToInt32(registro["Id"]);
-            m.maqStatus = registro["maqStatus"].ToString();
-            m.idCliente = Convert.ToInt32(registro["idCliente"]);
+            m.MaqStatus = registro["maqStatus"].ToString();
+            m.IdCliente = Convert.ToInt32(registro["idCliente"]);
 
             return m;
         }

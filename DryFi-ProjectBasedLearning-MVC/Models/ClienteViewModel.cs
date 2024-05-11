@@ -2,9 +2,9 @@
 {
     public class ClienteViewModel : PadraoViewModel
     {
-        public string nomeCliente { get; set; }
-        public string CNPJ { get; set; }
-        public string email { get; set; }
-        public string telefone { get; set; }
+        public string NomeCliente { get; set; }
+        public string Cnpj { get; set; }
+        public string Email { get; set; }
+        public string Telefone { get; set; }
     }
 }
