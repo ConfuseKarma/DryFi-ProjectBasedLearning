@@ -15,13 +15,22 @@ CREATE TABLE Funcionarios (
     CargoId INT NULL
 );
 
+CREATE TABLE TipoCliente (
+    Id INT PRIMARY KEY,
+    Tipo VARCHAR(50)
+);
+INSERT INTO TipoCliente (Id, Tipo)
+VALUES
+    (1, 'Nacional'),
+    (2, 'Internacional');
 
 CREATE TABLE Cliente (
     Id INT PRIMARY KEY,
     nomeCliente NVARCHAR(100) NOT NULL,
     CNPJ VARCHAR(14) NOT NULL,
     email NVARCHAR(100),
-    telefone VARCHAR(20)
+    telefone VARCHAR(20),
+    TipoClienteId INT
 );
 
 CREATE TABLE Maquina (
@@ -124,7 +133,7 @@ GO
 ```
 ### SP Cliente ###
 ```sql
-CREATE PROCEDURE spInsert_Cliente
+CREATE PROCEDURE [dbo].[spInsert_Cliente]
 (
     @Id INT,
     @nomeCliente NVARCHAR(100),
@@ -136,9 +145,9 @@ CREATE PROCEDURE spInsert_Cliente
 AS
 BEGIN
     INSERT INTO Cliente
-    (Id, nomeCliente, CNPJ, email, telefone)
+    (Id, nomeCliente, CNPJ, email, telefone, TipoClienteId)
     VALUES 
-    (@Id, @nomeCliente, @CNPJ, @email, @telefone);
+    (@Id, @nomeCliente, @CNPJ, @email, @telefone, @TipoClienteId);
 END
 GO
 CREATE PROCEDURE spUpdate_Cliente
