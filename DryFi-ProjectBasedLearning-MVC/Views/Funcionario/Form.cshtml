@@ -41,18 +41,8 @@
                         </div>
                         <div class="col-md-6">
                             <label for="Cargo" class="form-label">Position</label>
-                            <select asp-for="Cargo" asp-items="Html.GetEnumSelectList<CargoEnum>()" class="form-select" id="Cargo" required>
+                            <select asp-for="CargoId" asp-items="Html.GetEnumSelectList<CargoEnum>()" class="form-select" id="Cargo" required>
                                 <option selected disabled value="">Choose...</option>
-                            </select>
-                            <div class="invalid-feedback">
-                                Please select a valid position.
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="Departamento" class="form-label">Departament</label>
-                            <select asp-for="Departamento" class="form-select" id="Departamento" required>
-                                <option selected disabled value="">Choose...</option>
-                                <option>criar o enum pra essa merda</option>
                             </select>
                             <div class="invalid-feedback">
                                 Please select a valid position.

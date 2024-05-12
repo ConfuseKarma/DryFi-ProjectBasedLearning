@@ -1,6 +1,8 @@
 ﻿using DryFi_ProjectBasedLearning_MVC.DAO;
 using DryFi_ProjectBasedLearning_MVC.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Data.SqlTypes;
 
 namespace DryFi_ProjectBasedLearning_MVC.Controllers
 {
@@ -10,6 +12,11 @@ namespace DryFi_ProjectBasedLearning_MVC.Controllers
         {
             DAO = new FuncionarioDAO();
             GeraProximoId = true;
+        }
+        public IActionResult ListarFunc()
+        {
+            List<FuncionarioViewModel> func = new List<FuncionarioViewModel>();
+            return View("Index", func);
         }
         public IActionResult FuncRegistro()
         {
@@ -59,6 +66,47 @@ namespace DryFi_ProjectBasedLearning_MVC.Controllers
             else
                 return null;
         }
+
+        public IActionResult ConsultaAvancadaFuncionario()
+        {
+            try
+            {
+                // PreparaComboCategorias();
+                ViewBag.Categorias.Insert(0, new SelectListItem("TODAS", "0"));
+                return View("Listagem");
+            }
+            catch (Exception erro)
+            {
+                return View("Error", new ErrorViewModel(erro.Message));
+            }
+        }
+
+        public IActionResult ObtemDadosConsultaAvancada(string nome,
+                                                         int cargo)
+        {
+            try
+            {
+                FuncionarioDAO dao = new FuncionarioDAO();
+                if (string.IsNullOrEmpty(nome))
+                    nome = "";
+                var lista = dao.ConsultaAvancadaFuncionario(nome, cargo);
+                return PartialView("pvGridJogos", lista);
+            }
+            catch (Exception erro)
+            {
+                return Json(new { erro = true, msg = erro.Message });
+            }
+        }
+        //private void PreparaComboCategorias()
+        //{
+        //    CategoriaDAO dao = new CategoriaDAO();
+        //    var lista = dao.Listagem();
+        //    List<SelectListItem> listaRetorno = new List<SelectListItem>();
+        //    foreach (var categ in lista)
+        //        listaRetorno.Add(new SelectListItem(categ.Descricao, categ.Id.ToString()));
+
+        //    ViewBag.Categorias = listaRetorno;
+        //}
 
 
     }

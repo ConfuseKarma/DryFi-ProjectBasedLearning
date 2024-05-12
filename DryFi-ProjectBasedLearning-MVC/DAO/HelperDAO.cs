@@ -60,7 +60,7 @@ namespace DryFi_ProjectBasedLearning_MVC.DAO
                 {
                     comando.CommandType = CommandType.StoredProcedure;
                     if (parametros != null)
-                        comando.Parameters.AddRange(parametros);
+                         comando.Parameters.AddRange(parametros);
                     comando.ExecuteNonQuery();
                 }
                 conexao.Close();
