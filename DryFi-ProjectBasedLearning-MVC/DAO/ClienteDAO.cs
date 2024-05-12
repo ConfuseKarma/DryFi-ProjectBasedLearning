@@ -11,13 +11,14 @@ namespace DryFi_ProjectBasedLearning_MVC.DAO
     {
         protected override SqlParameter[] CriaParametros(ClienteViewModel model)
         {
-            SqlParameter[] parametros = new SqlParameter[5];
+            SqlParameter[] parametros = new SqlParameter[6];
             parametros[0] = new SqlParameter("Id", model.Id);
             parametros[1] = new SqlParameter("NomeCliente", model.NomeCliente);
             parametros[2] = new SqlParameter("CNPJ", model.Cnpj);
             parametros[3] = new SqlParameter("Email", model.Email);
             parametros[4] = new SqlParameter("Telefone", model.Telefone);
-            
+            parametros[5] = new SqlParameter("TipoClienteId", model.TipoClienteId);
+
             return parametros;
         }
         protected override ClienteViewModel MontaModel(DataRow registro)
@@ -28,7 +29,8 @@ namespace DryFi_ProjectBasedLearning_MVC.DAO
             c.Cnpj = registro["CNPJ"].ToString();
             c.Email = registro["Email"].ToString();
             c.Telefone = registro["Telefone"].ToString();
-            
+            c.TipoClienteId = Convert.ToInt32(registro["TipoClienteId"]);
+
             return c;
         }
         protected override void SetTabela()

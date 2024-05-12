@@ -11,10 +11,13 @@ namespace DryFi_ProjectBasedLearning_MVC.Controllers
             DAO = new ClienteDAO();
             GeraProximoId = true;
             //List<ClienteViewModel> clienteViewModels = new List<ClienteViewModel>();
-
             //clienteViewModels.Add();
         }
-
+        public IActionResult ListarCliente()
+        {
+            List<ClienteViewModel> cliente = new List<ClienteViewModel>();
+            return View("Index", cliente);
+        }
         public IActionResult ClienteRegistro()
         {
             ViewBag.Operacao = "I";
@@ -23,7 +26,6 @@ namespace DryFi_ProjectBasedLearning_MVC.Controllers
             cliente.Id = dao.ProximoId();
             return View("Form", cliente);
         }
-
         protected override void ValidaDados(ClienteViewModel model, string operacao)
         {
             base.ValidaDados(model, operacao);

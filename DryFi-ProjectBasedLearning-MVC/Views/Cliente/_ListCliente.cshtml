@@ -1,0 +1,54 @@
+﻿@model List<ClienteViewModel>
+
+<div class="text-center gap-3">
+    <table id="clienteTable" class="table table-dark">
+        <thead>
+            <tr>
+                <th scope="col">Ações</th>
+                <th scope="col">Nome</th>
+                <th scope="col">CNPJ</th>
+                <th scope="col">Email</th>
+                <th scope="col">Telefone</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (var i = 0; i >= Model.Count; i++)
+            {
+                <tr>
+                    <td class="col-md-5">
+                        <a href="/home/Edit?id=@Model[i].Id" class="btn btn-primary"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                        <a href="javascript:apagarCliente(@Model[i].Id)" class="btn btn-danger">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </a>
+                    </td>
+                    <td class="col-md-2">@Model[i].NomeCliente</td>
+                    <td class="col-md-2">@Model[i].Cnpj</td>
+                    <td class="col-md-2">@Model[i].Email</td>
+                    <td class="col-md-2">@Model[i].Telefone</td>
+                    <td class="col-md-2">@Model[i].TipoClienteId</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script>
+    function aplicaFiltroConsultaAvancada() {
+        var nome = $('#nome').val();
+        var cnpj = $('#cnpj').val();
+        var email = $('#email').val();
+        var telefone = $('#telefone').val(); // Adicionando a variável telefone
+        var telefone = $('#tipoclienteid').val();
+
+        var filtro = {
+            nome: nome,
+            cnpj: cnpj,
+            email: email,
+            telefone: telefone // Incluindo o telefone no filtro
+            //tipoclienteid
+        };
+
+        // Aqui você pode usar o filtro para enviar uma solicitação AJAX para aplicar o filtro e atualizar a tabela
+        console.log(filtro);
+    }
+</script>

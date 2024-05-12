@@ -10,7 +10,7 @@
         <div class="col-md-6">
             <h1 class="display-2 fw-semibold mb-5">Novo <span class="text-info">Cliente</span></h1>
             <div class="d-flex align-content-center flex-wrap">
-                <form asp-action="save" class="needs-validation" enctype="multipart/form-data" novalidate>
+                <form asp-action="save" class="needs-validation" novalidate>
                     <div class="row g-3">
                         <div class="col-md-6">
                             <input value="@ViewBag.Operacao" type="hidden" name="Operacao">
@@ -45,6 +45,17 @@
                                 Por favor, informe um número de telefone válido.
                             </div>
                         </div>
+
+                        <div class="col-md-6">
+                            <label for="TipoCliente" class="form-label">Client Type</label>
+                            <select asp-for="TipoClienteId" asp-items="Html.GetEnumSelectList<TipoClienteEnum>()" class="form-select" id="TipoCliente" required>
+                                <option selected disabled value="">Choose...</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please select a valid position.
+                            </div>
+                        </div>
+
                         <div class="col-md-7 mb-3">
                             <button type="submit" value="Salvar dados" class="rounded-pill btn btn-lg btn-info mr-3">Registrar</button>
                         </div>
