@@ -1,11 +1,11 @@
-﻿@model List<FuncionarioViewModel>
+﻿@using DryFi_ProjectBasedLearning_MVC.Enums
 @{
     ViewData["Title"] = "Home Page";
 }
 <div>
     <h2 class="text-white">The Guardians</h2>
     <br />
-    <a type="button" class="btn btn-info" href="/Funcionario/Form">New Guardian</a>
+    <a type="button" class="btn btn-info" href="/Funcionario/FuncRegistro">New Guardian</a>
     <br />
 </div>
 <br />
@@ -17,12 +17,10 @@
             <input type="text" id="nome" class="form-control" />
         </div>
         <div class="col-lg-3">
-            Departamento <br />
-            <select id="departamento" class="form-control" asp-items="@ViewBag.departamento"></select>
-        </div>
-        <div class="col-lg-3">
             Cargo <br />
-            <select id="cargo" class="form-control" asp-items="@ViewBag.cargo"></select>
+            <select asp-items="Html.GetEnumSelectList<CargoEnum>()" class="form-select" id="Cargo" required>
+                <option selected disabled value="">Choose...</option>
+            </select>
         </div>
         <div class="col-lg-1">
             <br />

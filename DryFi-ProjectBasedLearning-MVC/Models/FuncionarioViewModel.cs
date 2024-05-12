@@ -3,9 +3,9 @@
     public class FuncionarioViewModel : PadraoViewModel
     {
         public string Nome { get; set; }
-        public string Cargo { get; set; }
-        public string Departamento { get; set; }
+        public int CargoId { get; set; }
         public string Email  { get; set; }
+        public string DescricaoCategoria { get; set; }
         /// Imagem recebida do form pelo controller
         /// </summary>
         public IFormFile Imagem { get; set; }

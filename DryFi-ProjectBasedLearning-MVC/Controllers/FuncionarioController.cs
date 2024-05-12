@@ -13,6 +13,11 @@ namespace DryFi_ProjectBasedLearning_MVC.Controllers
             DAO = new FuncionarioDAO();
             GeraProximoId = true;
         }
+        public IActionResult ListarFunc()
+        {
+            List<FuncionarioViewModel> func = new List<FuncionarioViewModel>();
+            return View("Index", func);
+        }
         public IActionResult FuncRegistro()
         {
             ViewBag.Operacao = "I";
@@ -62,37 +67,36 @@ namespace DryFi_ProjectBasedLearning_MVC.Controllers
                 return null;
         }
 
-        //public IActionResult ConsultaAvancadaFuncionario()
-        //{
-        //    try
-        //    {
-        //        PreparaComboCategorias();
-        //        ViewBag.Categorias.Insert(0, new SelectListItem("TODAS", "0"));
-        //        return View("ConsultaAvancada");
-        //    }
-        //    catch (Exception erro)
-        //    {
-        //        return View("Error", new ErrorViewModel(erro.Message));
-        //    }
-        //}
+        public IActionResult ConsultaAvancadaFuncionario()
+        {
+            try
+            {
+                // PreparaComboCategorias();
+                ViewBag.Categorias.Insert(0, new SelectListItem("TODAS", "0"));
+                return View("Listagem");
+            }
+            catch (Exception erro)
+            {
+                return View("Error", new ErrorViewModel(erro.Message));
+            }
+        }
 
-        //public IActionResult ObtemDadosConsultaAvancada(string nome,
-        //                                                 int cargo,
-        //                                                 int departamento)
-        //{
-        //    try
-        //    {
-        //        FuncionarioDAO dao = new FuncionarioDAO();
-        //        if (string.IsNullOrEmpty(nome))
-        //            nome = "";
-        //        var lista = dao.ConsultaAvancadaFuncionario(nome, cargo, departamento);
-        //        return PartialView("pvGridJogos", lista);
-        //    }
-        //    catch (Exception erro)
-        //    {
-        //        return Json(new { erro = true, msg = erro.Message });
-        //    }
-        //}
+        public IActionResult ObtemDadosConsultaAvancada(string nome,
+                                                         int cargo)
+        {
+            try
+            {
+                FuncionarioDAO dao = new FuncionarioDAO();
+                if (string.IsNullOrEmpty(nome))
+                    nome = "";
+                var lista = dao.ConsultaAvancadaFuncionario(nome, cargo);
+                return PartialView("pvGridJogos", lista);
+            }
+            catch (Exception erro)
+            {
+                return Json(new { erro = true, msg = erro.Message });
+            }
+        }
         //private void PreparaComboCategorias()
         //{
         //    CategoriaDAO dao = new CategoriaDAO();
