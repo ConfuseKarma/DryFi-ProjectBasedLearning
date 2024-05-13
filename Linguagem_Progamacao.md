@@ -24,12 +24,22 @@ VALUES
     (1, 'Nacional'),
     (2, 'Internacional');
 
+CREATE TABLE Cargo (
+    Id INT PRIMARY KEY,
+    Cargo VARCHAR(50)
+);
+INSERT INTO TipoCliente (Id, Tipo)
+VALUES
+    (1, 'Administrador'),
+    (2, 'Recrutador'),
+	(3, 'Vendedor'),
+
 CREATE TABLE Cliente (
     Id INT PRIMARY KEY,
-    nomeCliente NVARCHAR(100) NOT NULL,
-    CNPJ VARCHAR(14) NOT NULL,
-    email NVARCHAR(100),
-    telefone VARCHAR(20),
+    NomeCliente NVARCHAR(100) NOT NULL,
+    Cnpj VARCHAR(14) NOT NULL,
+    Email NVARCHAR(100),
+    Telefone VARCHAR(20),
     TipoClienteId INT
 );
 
