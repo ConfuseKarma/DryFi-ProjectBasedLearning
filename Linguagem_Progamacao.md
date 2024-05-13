@@ -15,15 +15,6 @@ CREATE TABLE Funcionarios (
     CargoId INT NULL
 );
 
-CREATE TABLE TipoCliente (
-    Id INT PRIMARY KEY,
-    Tipo VARCHAR(50)
-);
-INSERT INTO TipoCliente (Id, Tipo)
-VALUES
-    (1, 'Nacional'),
-    (2, 'Internacional');
-
 CREATE TABLE Cargo (
     Id INT PRIMARY KEY,
     Cargo VARCHAR(50)
@@ -32,7 +23,7 @@ INSERT INTO TipoCliente (Id, Tipo)
 VALUES
     (1, 'Administrador'),
     (2, 'Recrutador'),
-	(3, 'Vendedor'),
+    (3, 'Vendedor');
 
 CREATE TABLE Cliente (
     Id INT PRIMARY KEY,
@@ -42,6 +33,15 @@ CREATE TABLE Cliente (
     Telefone VARCHAR(20),
     TipoClienteId INT
 );
+
+CREATE TABLE TipoCliente (
+    Id INT PRIMARY KEY,
+    Tipo VARCHAR(50)
+);
+INSERT INTO TipoCliente (Id, Tipo)
+VALUES
+    (1, 'Nacional'),
+    (2, 'Internacional');
 
 CREATE TABLE Maquina (
     Id INT PRIMARY KEY,
