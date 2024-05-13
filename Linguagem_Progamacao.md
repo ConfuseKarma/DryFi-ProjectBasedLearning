@@ -140,7 +140,7 @@ begin
  where id = @id
 end
 GO
-create procedure [dbo].[spConsultaAvancadaFuncionario]
+create procedure [dbo].[spConsultaAvancadaFuncionarios]
 (
  @nome varchar(max),
  @cargo int)
