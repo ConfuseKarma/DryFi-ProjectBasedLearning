@@ -3,7 +3,7 @@
 
 // Write your JavaScript code.
 function aplicaFiltroConsultaAvancada() {
-    var vDescricao = document.getElementById('nome').value;
+    var vNome = document.getElementById('nome').value;
     var vCargo = document.getElementById('cargo').value;
     $.ajax({
         url: "/Funcionario/ObtemDadosConsultaAvancada",

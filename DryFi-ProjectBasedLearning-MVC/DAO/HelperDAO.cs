@@ -69,7 +69,6 @@ namespace DryFi_ProjectBasedLearning_MVC.DAO
 
 
         public static DataTable ExecutaProcSelect(string nomeSP, SqlParameter[] parametros)
-
         {
             using (SqlConnection conexao = ConexaoBD.GetConexao())
             {
@@ -79,9 +78,12 @@ namespace DryFi_ProjectBasedLearning_MVC.DAO
 
                     if (parametros != null)
                         adapter.SelectCommand.Parameters.AddRange(parametros);
+
+                    adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+
                     DataTable tabela = new DataTable();
                     adapter.Fill(tabela);
-                    conexao.Close();
+                    
                     return tabela;
                 }
             }

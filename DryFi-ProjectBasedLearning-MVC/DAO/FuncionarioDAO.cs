@@ -41,11 +41,11 @@ namespace DryFi_ProjectBasedLearning_MVC.DAO
         }
 
         public List<FuncionarioViewModel> ConsultaAvancadaFuncionario(string nome,
-                                                         int cargo)
+                                                         int cargoId)
         {
             SqlParameter[] p = {
              new SqlParameter("nome", nome),
-             new SqlParameter("cargo", cargo),
+             new SqlParameter("cargoId", cargoId),
             };
             var tabela = HelperDAO.ExecutaProcSelect("spConsultaAvancadaFuncionarios", p);
             var lista = new List<FuncionarioViewModel>();

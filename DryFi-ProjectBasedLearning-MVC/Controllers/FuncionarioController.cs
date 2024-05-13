@@ -73,7 +73,7 @@ namespace DryFi_ProjectBasedLearning_MVC.Controllers
             {
                 // PreparaComboCategorias();
                 ViewBag.Categorias.Insert(0, new SelectListItem("TODAS", "0"));
-                return View("Listagem");
+                return View("_ListFunc");
             }
             catch (Exception erro)
             {
@@ -82,14 +82,18 @@ namespace DryFi_ProjectBasedLearning_MVC.Controllers
         }
 
         public IActionResult ObtemDadosConsultaAvancada(string nome,
-                                                         int cargo)
+                                                         int cargoId)
         {
             try
             {
                 FuncionarioDAO dao = new FuncionarioDAO();
                 if (string.IsNullOrEmpty(nome))
                     nome = "";
-                var lista = dao.ConsultaAvancadaFuncionario(nome, cargo);
+
+                if (cargoId == 0)
+                    cargoId = ""; 
+
+                var lista = dao.ConsultaAvancadaFuncionario(nome, cargoId);
                 return PartialView("_ListFunc", lista);
             }
             catch (Exception erro)
