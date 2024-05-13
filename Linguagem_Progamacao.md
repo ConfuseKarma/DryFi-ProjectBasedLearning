@@ -140,6 +140,22 @@ begin
  where id = @id
 end
 GO
+create procedure [dbo].[spConsultaAvancadaJogos]
+(
+ @nome varchar(max),
+@cargo int)
+as
+begin
+declare @categIni int
+declare @categFim int
+set @categIni = case @cargo when 0 then 0 else @categoria end
+set @categFim = case @cargo when 0 then 999999 else @cargo end
+ select jogos.*, Cargo.cargo as 'DescricaoCategoria'
+from Funcionario
+inner join Cargo on Funcionario.CargoId = Cargo.id
+where Funcionario.nome like '%' + @nome + '%' and
+ funcionario.CargoID between @categIni and @categFim; 
+end
 ```
 ### SP Cliente ###
 ```sql
