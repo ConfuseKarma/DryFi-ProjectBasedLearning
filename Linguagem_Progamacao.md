@@ -10,7 +10,6 @@ CREATE TABLE Funcionario (
     Id INT NOT NULL PRIMARY KEY,
     Nome VARCHAR(100) NOT NULL,
     Email VARCHAR(100) NOT NULL,
-    Foto VARCHAR(MAX) NULL,
     Imagem VARBINARY(MAX) NULL,
     CargoId INT NULL
 );
