@@ -6,7 +6,7 @@ Criamos aplicações CRUD's (Create, Read, Update, Delete) com controles de aces
 ## Tabelas no Banco de Dados ##
 
 ```sql
-CREATE TABLE Funcionarios (
+CREATE TABLE Funcionario (
     Id INT NOT NULL PRIMARY KEY,
     Nome VARCHAR(100) NOT NULL,
     Email VARCHAR(100) NOT NULL,
