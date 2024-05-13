@@ -90,7 +90,7 @@ namespace DryFi_ProjectBasedLearning_MVC.Controllers
                 if (string.IsNullOrEmpty(nome))
                     nome = "";
                 var lista = dao.ConsultaAvancadaFuncionario(nome, cargo);
-                return PartialView("pvGridJogos", lista);
+                return PartialView("_ListFunc", lista);
             }
             catch (Exception erro)
             {

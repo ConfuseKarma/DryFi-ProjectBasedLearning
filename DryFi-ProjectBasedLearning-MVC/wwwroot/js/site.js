@@ -4,15 +4,16 @@
 // Write your JavaScript code.
 function aplicaFiltroConsultaAvancada() {
     var vDescricao = document.getElementById('nome').value;
-    var vDataInicial = document.getElementById('cargo').value;
+    var vCargo = document.getElementById('cargo').value;
     $.ajax({
-        url: "/funcionario/ObtemDadosConsultaAvancada",
+        url: "/Funcionario/ObtemDadosConsultaAvancada",
         data: { nome: vNome, cargo: vCargo },
         success: function (dados) {
             if (dados.erro != undefined) {
                 alert(dados.msg);
             }
             else {
+                console.log("cheguei");
                 document.getElementById('resultadoConsulta').innerHTML = dados;
             }
         },
