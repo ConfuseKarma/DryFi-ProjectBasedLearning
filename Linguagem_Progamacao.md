@@ -19,7 +19,7 @@ CREATE TABLE Cargo (
     Id INT PRIMARY KEY,
     Cargo VARCHAR(50)
 );
-INSERT INTO TipoCliente (Id, Tipo)
+INSERT INTO Cargo (Id, Tipo)
 VALUES
     (1, 'Administrador'),
     (2, 'Recrutador'),
