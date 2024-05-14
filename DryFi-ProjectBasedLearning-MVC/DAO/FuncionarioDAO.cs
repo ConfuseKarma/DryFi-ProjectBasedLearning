@@ -11,13 +11,16 @@ namespace DryFi_ProjectBasedLearning_MVC.DAO
     {
         protected override SqlParameter[] CriaParametros(FuncionarioViewModel model)
         {
-            SqlParameter[] parametros = new SqlParameter[6];
+            object imgByte = model.ImagemEmByte;
+            if (imgByte == null)
+                imgByte = DBNull.Value;
+
+            SqlParameter[] parametros = new SqlParameter[5];
             parametros[0] = new SqlParameter("id", model.Id);
             parametros[1] = new SqlParameter("nome", model.Nome);
-            parametros[2] = new SqlParameter("cargo", model.Cargo);
-            parametros[3] = new SqlParameter("foto", model.Foto);
-            parametros[4] = new SqlParameter("departamento", model.Departamento);
-            parametros[5] = new SqlParameter("email", model.Email);
+            parametros[2] = new SqlParameter("cargoId", model.CargoId);
+            parametros[3] = new SqlParameter("email", model.Email);
+            parametros[4] = new SqlParameter("imagem", imgByte);
             return parametros;
         }
 
@@ -26,15 +29,35 @@ namespace DryFi_ProjectBasedLearning_MVC.DAO
             FuncionarioViewModel a = new FuncionarioViewModel();
             a.Id = Convert.ToInt32(registro["id"]);
             a.Nome = registro["nome"].ToString();
-            a.Cargo = registro["cargo"].ToString();
-            a.Foto = registro["foto"].ToString();
-            a.Departamento = registro["departamento"].ToString();
+            a.CargoId = Convert.ToInt32(registro["cargoId"]);
             a.Email = registro["email"].ToString();
+            if (registro["imagem"] != DBNull.Value)
+                a.ImagemEmByte = registro["imagem"] as byte[];
+            
+                                       
+            if (registro.Table.Columns.Contains("DescricaoCategoria"))
+                a.DescricaoCategoria = registro["DescricaoCategoria"].ToString();
             return a;
         }
+
+        public List<FuncionarioViewModel> ConsultaAvancadaFuncionario(string nome,
+                                                         int cargo)
+        {
+            SqlParameter[] p = {
+             new SqlParameter("nome", nome),
+             new SqlParameter("cargo", cargo),
+            };
+            var tabela = HelperDAO.ExecutaProcSelect("spConsultaAvancadaFuncionarios", p);
+            var lista = new List<FuncionarioViewModel>();
+            foreach (DataRow dr in tabela.Rows)
+                lista.Add(MontaModel(dr));
+            return lista;
+        }
+
+
         protected override void SetTabela()
         {
-            Tabela = "Funcionarios";
+            Tabela = "Funcionario";
         }
     }
 

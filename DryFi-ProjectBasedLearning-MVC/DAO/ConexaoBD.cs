@@ -15,9 +15,15 @@ namespace DryFi_ProjectBasedLearning_MVC.DAO
         /// <returns>Conexão aberta</returns>
         public static SqlConnection GetConexao()
         {
-            //string strCon = "Data Source=LOCALHOST; Database=AULADB; user id=sa; password=123456";
+            //String LAB
+            // string strCon = "Data Source=LOCALHOST; Database=AULADB; user id=sa; password=123456";
+            
             //String EDUARDO TOLEDO
             string strCon = "Data Source=DESKTOP-R99OVQ8\\SQLEXPRESS; Database=linguagemProgramacao; integrated security=true";
+
+            //String GUILHERME SANTOS
+            //string strCon = "Data Source=GUILHERME\\SQLSERVER2022; Database=AulaDB; integrated security=true";
+
             SqlConnection conexao = new SqlConnection(strCon);
             conexao.Open();
             return conexao;

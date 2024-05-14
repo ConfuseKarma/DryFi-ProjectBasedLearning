@@ -1,32 +1,31 @@
 ﻿@using DryFi_ProjectBasedLearning_MVC.Enums
-@model FuncionarioViewModel
+@model ClienteViewModel
 
 @{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="container content-fluid mt-5 row-gap-5">
-    <div class="row mt-5 gx-3"> 
+    <div class="row mt-5 gx-3">
         <div class="col-md-6">
-            <h1 class="display-2 fw-semibold mb-5">New <span class="text-info">Guardian</span></h1>
+            <h1 class="display-2 fw-semibold mb-5">Novo <span class="text-info">Cliente</span></h1>
             <div class="d-flex align-content-center flex-wrap">
-                <form asp-action="save" class="needs-validation" enctype="multipart/form-data" novalidate>
+                <form asp-action="save" class="needs-validation" novalidate>
                     <div class="row g-3">
-                        <div class="col-md-7 mb-3">
+                        <div class="col-md-6">
                             <input value="@ViewBag.Operacao" type="hidden" name="Operacao">
                             <input asp-for="Id" class="form-control" id="id" hidden>
-                            <label for="Foto" class="form-label">Photo</label>
-                            <input type="file" name="Imagem" id="Imagem" onchange="exibirImagem()" class="btn btn-secondary">
-                        </div>
-                        <div class="col-md-5 mb-3 d-flex justify-content-center align-items-center">
-                            <img id="imgPreview" src="data:image/jpeg;base64,@Model.ImagemEmBase64" class="img-responsive"
-                                 width="100">
+                            <label for="Nome" class="form-label">Nome</label>
+                            <input asp-for="NomeCliente" type="text" class="form-control" id="Nome" required>
+                            <div class="valid-feedback">
+                                Parece bom!
+                            </div>
                         </div>
                         <div class="col-md-6">
-                            <label for="Nome" class="form-label">Name</label>
-                            <input asp-for="Nome" type="text" class="form-control" id="Nome" required>
+                            <label for="Cnpj" class="form-label">Cnpj</label>
+                            <input asp-for="Cnpj" type="text" class="form-control" id="Cnpj" required>
                             <div class="valid-feedback">
-                                Looks good!
+                                Parece bom!
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -35,21 +34,30 @@
                                 <span class="input-group-text" id="spanEmail">&#x00040;</span>
                                 <input asp-for="Email" type="text" class="form-control" id="Email" aria-describedby="inputGroupPrepend" required>
                                 <div class="invalid-feedback">
-                                    Please, inform the email for contact.
+                                    Por favor, informe o e-mail para contato.
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <label for="Cargo" class="form-label">Position</label>
-                            <select asp-for="CargoId" asp-items="Html.GetEnumSelectList<CargoEnum>()" class="form-select" id="Cargo" required>
+                            <label for="Telefone" class="form-label">Telefone</label>
+                            <input asp-for="Telefone" type="text" class="form-control" id="Telefone" required>
+                            <div class="invalid-feedback">
+                                Por favor, informe um número de telefone válido.
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="TipoCliente" class="form-label">Client Type</label>
+                            <select asp-for="TipoClienteId" asp-items="Html.GetEnumSelectList<TipoClienteEnum>()" class="form-select" id="TipoCliente" required>
                                 <option selected disabled value="">Choose...</option>
                             </select>
                             <div class="invalid-feedback">
                                 Please select a valid position.
                             </div>
                         </div>
+
                         <div class="col-md-7 mb-3">
-                            <button type="submit" value="Salvar dados" class="rounded-pill btn btn-lg btn-info mr-3">Register</button>
+                            <button type="submit" value="Salvar dados" class="rounded-pill btn btn-lg btn-info mr-3">Registrar</button>
                         </div>
                     </div>
                 </form>
@@ -60,12 +68,3 @@
         </div>
     </div>
 </div>
-<script>
-    function exibirImagem() {
-        var oFReader = new FileReader();
-        oFReader.readAsDataURL(document.getElementById("Imagem").files[0]);
-        oFReader.onload = function (oFREvent) {
-            document.getElementById("imgPreview").src = oFREvent.target.result;
-        };
-    }
-</script>

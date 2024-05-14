@@ -63,7 +63,7 @@ namespace DryFi_ProjectBasedLearning_MVC.Controllers
                         DAO.Insert(model);
                     else
                         DAO.Update(model);
-                    return RedirectToAction(NomeViewIndex);
+                    return View (NomeViewIndex); //return ReturnToAction (NomeViewIndex)
                 }
             }
             catch (Exception erro)
