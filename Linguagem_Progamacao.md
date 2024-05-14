@@ -139,22 +139,29 @@ begin
  where id = @id
 end
 GO
-create procedure [dbo].[spConsultaAvancadaFuncionarios]
+CREATE PROCEDURE [dbo].[spConsultaAvancadaFuncionarios]
 (
- @nome varchar(max),
- @cargo int)
-as
-begin
-declare @categIni int
-declare @categFim int
-set @categIni = case @cargo when 0 then 0 else @cargo end
-set @categFim = case @cargo when 0 then 999999 else @cargo end
- select funcionario.*, Cargo.cargo as 'DescricaoCategoria'
-from Funcionario
-inner join Cargo on Funcionario.CargoId = Cargo.id
-where Funcionario.nome like '%' + @nome + '%' and
- funcionario.CargoID between @categIni and @categFim; 
-end
+    @nome VARCHAR(MAX),
+    @cargo INT
+)
+AS
+BEGIN
+    IF @cargo = 0
+    BEGIN
+        SELECT funcionario.*, Cargo.cargo AS 'DescricaoCategoria'
+        FROM Funcionario
+        INNER JOIN Cargo ON Funcionario.CargoId = Cargo.id
+        WHERE Funcionario.nome LIKE '%' + @nome + '%';
+    END
+    ELSE
+    BEGIN
+        SELECT funcionario.*, Cargo.cargo AS 'DescricaoCategoria'
+        FROM Funcionario
+        INNER JOIN Cargo ON Funcionario.CargoId = Cargo.id
+        WHERE Funcionario.nome LIKE '%' + @nome + '%' AND Funcionario.CargoID = @cargo;
+    END
+END
+
 ```
 ### SP Cliente ###
 ```sql
