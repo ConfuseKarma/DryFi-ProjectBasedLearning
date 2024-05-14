@@ -16,16 +16,18 @@
             @for (var i = 0; i < Model.Count; i++)
             {
                 <tr>
-                    <td class="col-md-3">
-                        <a href="/home/Edit?id=@Model[i].Id" class="btn btn-primary"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                    <td class="col-md-1 d-flex flex-column gap-2">
+                        <a href="/home/Edit?id=@Model[i].Id" class="btn btn-primary">
+                            <i class="fas fa-edit"></i>
+                        </a>
                         <a href="javascript:apagarPizza(@Model[i].Id)" class="btn btn-danger">
-                            <i class="fa fa-trash" aria-hidden="true"></i>
-                            <a href="/home/Listar?id=@Model[i].Id" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                            <i class="fas fa-trash" aria-hidden="true"></i>
+                        </a>
                     </td>
                     <td class="col-md-3"> <img src="data:image/jpeg;base64,@Model[i].ImagemEmBase64" alt="Imagem do Funcionário" style="max-width: 100px; max-height: 100px;"></td>
-                    <td class="col-md-2">@Model[i].Nome</td>
+                    <td class="col-md-3">@Model[i].Nome</td>
                     <td class="col-md-2">@Model[i].CargoId</td>
-                    <td class="col-md-2">@Model[i].Email</td>
+                    <td class="col-md-3">@Model[i].Email</td>
                 </tr>
             }
         </tbody>

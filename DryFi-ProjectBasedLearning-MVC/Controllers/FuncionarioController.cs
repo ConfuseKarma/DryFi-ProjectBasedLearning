@@ -67,20 +67,6 @@ namespace DryFi_ProjectBasedLearning_MVC.Controllers
                 return null;
         }
 
-        //public IActionResult ConsultaAvancadaFuncionario()
-        //{
-        //    try
-        //    {
-        //        // PreparaComboCategorias();
-        //        ViewBag.Categorias.Insert(0, new SelectListItem("TODAS", "0"));
-        //        return View("_ListFunc");
-        //    }
-        //    catch (Exception erro)
-        //    {
-        //        return View("Error", new ErrorViewModel(erro.Message));
-        //    }
-        //}
-
         public IActionResult ObtemDadosConsultaAvancada(string nome,
                                                          int cargo)
         {
@@ -101,17 +87,5 @@ namespace DryFi_ProjectBasedLearning_MVC.Controllers
                 return Json(new { erro = true, msg = erro.Message });
             }
         }
-        //private void PreparaComboCategorias()
-        //{
-        //    CategoriaDAO dao = new CategoriaDAO();
-        //    var lista = dao.Listagem();
-        //    List<SelectListItem> listaRetorno = new List<SelectListItem>();
-        //    foreach (var categ in lista)
-        //        listaRetorno.Add(new SelectListItem(categ.Descricao, categ.Id.ToString()));
-
-        //    ViewBag.Categorias = listaRetorno;
-        //}
-
-
     }
 }
