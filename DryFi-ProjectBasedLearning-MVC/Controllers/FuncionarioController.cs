@@ -82,7 +82,7 @@ namespace DryFi_ProjectBasedLearning_MVC.Controllers
         //}
 
         public IActionResult ObtemDadosConsultaAvancada(string nome,
-                                                         int cargoId)
+                                                         int cargo)
         {
             try
             {
@@ -90,10 +90,10 @@ namespace DryFi_ProjectBasedLearning_MVC.Controllers
                 if (string.IsNullOrEmpty(nome))
                     nome = "";
 
-                if (cargoId == 0)
-                    cargoId = 1; 
+                if (cargo == 0)
+                    cargo = 1; 
 
-                List<FuncionarioViewModel> lista = dao.ConsultaAvancadaFuncionario(nome, cargoId);
+                List<FuncionarioViewModel> lista = dao.ConsultaAvancadaFuncionario(nome, cargo);
                 return PartialView("_ListFunc", lista);
             }
             catch (Exception erro)
