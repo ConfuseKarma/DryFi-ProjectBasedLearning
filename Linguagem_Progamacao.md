@@ -204,6 +204,30 @@ BEGIN
     WHERE Id = @Id;
 END
 GO
+CREATE PROCEDURE [dbo].[spConsultaAvancadaClientes]
+(
+    @nome NVARCHAR(100),
+    @cnpj VARCHAR(14),
+    @tipoCliente INT
+)
+AS
+BEGIN
+    IF @tipoCliente = 0
+    BEGIN
+        SELECT cliente.*, TipoCliente.Tipo AS 'DescricaoTipoCliente'
+        FROM Cliente
+        INNER JOIN TipoCliente ON Cliente.TipoClienteId = TipoCliente.Id
+        WHERE (Cliente.NomeCliente LIKE '%' + @nome + '%' OR Cliente.Cnpj LIKE '%' + @cnpj + '%');
+    END
+    ELSE
+    BEGIN
+        SELECT cliente.*, TipoCliente.Tipo AS 'DescricaoTipoCliente'
+        FROM Cliente
+        INNER JOIN TipoCliente ON Cliente.TipoClienteId = TipoCliente.Id
+        WHERE (Cliente.NomeCliente LIKE '%' + @nome + '%' OR Cliente.Cnpj LIKE '%' + @cnpj + '%')
+        AND Cliente.TipoClienteId = @tipoCliente;
+    END
+END
 ```
 ### SP Maquina ###
 ```sql
