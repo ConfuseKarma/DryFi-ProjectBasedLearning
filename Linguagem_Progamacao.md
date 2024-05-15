@@ -127,6 +127,7 @@ create procedure [dbo].[spUpdate_Funcionario]
 (
  @id int,
  @nome varchar(200),
+ @email varchar(100),
  @cargoId int,
  @imagem varbinary(max)
 )
@@ -135,6 +136,7 @@ begin
  update funcionario set
  nome = @nome,
  cargoId = @cargoId,
+ Email = @email,
  imagem = @imagem
  where id = @id
 end
