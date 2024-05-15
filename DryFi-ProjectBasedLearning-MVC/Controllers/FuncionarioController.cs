@@ -13,6 +13,7 @@ namespace DryFi_ProjectBasedLearning_MVC.Controllers
             DAO = new FuncionarioDAO();
             GeraProximoId = true;
         }
+
         public IActionResult ListarFunc()
         {
             List<FuncionarioViewModel> func = new List<FuncionarioViewModel>();
@@ -75,9 +76,6 @@ namespace DryFi_ProjectBasedLearning_MVC.Controllers
                 FuncionarioDAO dao = new FuncionarioDAO();
                 if (string.IsNullOrEmpty(nome))
                     nome = "";
-
-                if (cargo == 0)
-                    cargo = 1; 
 
                 List<FuncionarioViewModel> lista = dao.ConsultaAvancadaFuncionario(nome, cargo);
                 return PartialView("_ListFunc", lista);

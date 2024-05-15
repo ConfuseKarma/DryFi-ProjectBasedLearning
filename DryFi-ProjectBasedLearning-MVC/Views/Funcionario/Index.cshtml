@@ -32,5 +32,10 @@
 <div id="resultadoConsulta" class="table-responsive">
 </div>
 
-
+<script>
+    function apagarFunc(id) {
+        if (confirm('Confirma a exclusão do registro?'))
+            location.href = 'delete?id=' + id;
+    }
+</script>
 

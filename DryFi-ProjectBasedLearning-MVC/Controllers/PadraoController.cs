@@ -85,12 +85,13 @@ namespace DryFi_ProjectBasedLearning_MVC.Controllers
         {
             try
             {
-                ViewBag.Operacao = "A";
                 var model = DAO.Consulta(id);
                 if (model == null)
                     return RedirectToAction(NomeViewIndex);
                 else
                 {
+                    // Define a propriedade 'Operacao' antes de retornar a view
+                    ViewBag.Operacao = "A";
                     PreencheDadosParaView("A", model);
                     return View(NomeViewForm, model);
                 }
@@ -100,6 +101,7 @@ namespace DryFi_ProjectBasedLearning_MVC.Controllers
                 return View("Error", new ErrorViewModel(erro.ToString()));
             }
         }
+
         public IActionResult Delete(int id)
         {
             try

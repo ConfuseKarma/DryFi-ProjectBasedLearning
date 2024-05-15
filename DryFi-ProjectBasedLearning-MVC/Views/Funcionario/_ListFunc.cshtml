@@ -16,42 +16,20 @@
             @for (var i = 0; i < Model.Count; i++)
             {
                 <tr>
-                    <td class="col-md-1 d-flex flex-column gap-2">
-                        <a href="/home/Edit?id=@Model[i].Id" class="btn btn-primary">
+                    <td class="d-flex flex-column gap-2">
+                        <a href="/Funcionario/Edit?id=@Model[i].Id" class="btn btn-primary">
                             <i class="fas fa-edit"></i>
                         </a>
-                        <a href="javascript:apagarPizza(@Model[i].Id)" class="btn btn-danger">
+                        <a href="javascript:apagarFunc(@Model[i].Id)" class="btn btn-danger">
                             <i class="fas fa-trash" aria-hidden="true"></i>
                         </a>
                     </td>
                     <td class="col-md-3"> <img src="data:image/jpeg;base64,@Model[i].ImagemEmBase64" alt="Imagem do Funcionário" style="max-width: 100px; max-height: 100px;"></td>
                     <td class="col-md-3">@Model[i].Nome</td>
-                    <td class="col-md-2">@Model[i].CargoId</td>
+                    <td class="col-md-2">@Model[i].DescricaoCategoria</td>
                     <td class="col-md-3">@Model[i].Email</td>
                 </tr>
             }
         </tbody>
     </table>
 </div>
-
-<script>
-    function apagarPizza(id) {
-        if (confirm('Confirma a exclusão do registro?'))
-            location.href = 'Home/Delete?id=' + id;
-    }
-    $(document).ready(function () {
-        var pizzaList = [];
-
-        $('#pizzaTable tr').each(function () {
-            var id = $(this).find('td:eq(1)').text();
-            var descricao = $(this).find('td:eq(2)').text();
-            var pizzaItem = {
-                id: id,
-                descricao: descricao
-            };
-            pizzaList.push(pizzaItem);
-        });
-
-        console.log(pizzaList);
-    });
-</script>
