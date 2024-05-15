@@ -20,9 +20,9 @@ CREATE TABLE Cargo (
 );
 INSERT INTO Cargo (Id, Cargo)
 VALUES
-    (1, 'Administrador'),
-    (2, 'Recrutador'),
-    (3, 'Vendedor');
+    (1, 'Administrator'),
+    (2, 'Recruiter'),
+    (3, 'Salesperson');
 
 CREATE TABLE Cliente (
     Id INT PRIMARY KEY,
@@ -39,8 +39,8 @@ CREATE TABLE TipoCliente (
 );
 INSERT INTO TipoCliente (Id, Tipo)
 VALUES
-    (1, 'Nacional'),
-    (2, 'Internacional');
+    (1, 'National'),
+    (2, 'International');
 
 CREATE TABLE Maquina (
     Id INT PRIMARY KEY,
