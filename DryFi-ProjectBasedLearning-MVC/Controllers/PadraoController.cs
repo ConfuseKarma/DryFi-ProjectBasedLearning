@@ -63,7 +63,7 @@ namespace DryFi_ProjectBasedLearning_MVC.Controllers
                         DAO.Insert(model);
                     else
                         DAO.Update(model);
-                    return View (NomeViewIndex); //return ReturnToAction (NomeViewIndex)
+                    /*return RedirectToAction(NomeViewIndex);*/ return View (NomeViewIndex);
                 }
             }
             catch (Exception erro)
@@ -107,7 +107,7 @@ namespace DryFi_ProjectBasedLearning_MVC.Controllers
             try
             {
                 DAO.Delete(id);
-                return RedirectToAction(NomeViewIndex);
+                /*return RedirectToAction(NomeViewIndex);*/ return View(NomeViewIndex);
             }
             catch (Exception erro)
             {

@@ -9,7 +9,7 @@ namespace DryFi_ProjectBasedLearning_MVC.Enums
 {
     public enum TipoClienteEnum
     {
-        Nacional = 1,
-        Internacional = 2
+        National = 1,
+        International = 2
     }
 }

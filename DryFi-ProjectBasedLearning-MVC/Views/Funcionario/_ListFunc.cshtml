@@ -1,33 +1,36 @@
 ﻿@model List<FuncionarioViewModel>
 
+<br>
 <div class="text-center gap-3">
     
     <table id="funcTable" class="table table-dark">
         <thead>
             <tr>
                 <th scope="col">Actions</th>
-                <th scope="col">Foto</th>
-                <th scope="col">Nome</th>
-                <th scope="col">Cargo</th>
-                <th scope="col">E-mail</th>
+                <th scope="col">Picture</th>
+                <th scope="col">Name</th>
+                <th scope="col">Position</th>
+                <th scope="col">Email</th>
             </tr>
         </thead>
         <tbody>
             @for (var i = 0; i < Model.Count; i++)
             {
                 <tr>
-                    <td class="d-flex flex-column gap-2">
-                        <a href="/Funcionario/Edit?id=@Model[i].Id" class="btn btn-primary">
-                            <i class="fas fa-edit"></i>
-                        </a>
-                        <a href="javascript:apagarFunc(@Model[i].Id)" class="btn btn-danger">
-                            <i class="fas fa-trash" aria-hidden="true"></i>
-                        </a>
+                    <td style="width: 15%;">
+                        <div class="btn-group-vertical" style="width: 100%;">
+                            <a href="/Funcionario/Edit?id=@Model[i].Id" class="btn btn-primary mb-2" style="width: 100%;">
+                                <i class="fas fa-edit"></i> Edit
+                            </a>
+                            <button type="button" onclick="apagarFunc(@Model[i].Id)" class="btn btn-danger" style="width: 100%;">
+                                <i class="fas fa-trash" aria-hidden="true"></i> Delete
+                            </button>
+                        </div>
                     </td>
-                    <td class="col-md-3"> <img src="data:image/jpeg;base64,@Model[i].ImagemEmBase64" alt="Imagem do Funcionário" style="max-width: 100px; max-height: 100px;"></td>
-                    <td class="col-md-3">@Model[i].Nome</td>
+                    <td class="col-md-2"> <img src="data:image/jpeg;base64,@Model[i].ImagemEmBase64" alt="Imagem do Funcionário" style="max-width: 100px; max-height: 100px;"></td>
+                    <td class="col-md-2">@Model[i].Nome</td>
                     <td class="col-md-2">@Model[i].DescricaoCategoria</td>
-                    <td class="col-md-3">@Model[i].Email</td>
+                    <td class="col-md-2">@Model[i].Email</td>
                 </tr>
             }
         </tbody>

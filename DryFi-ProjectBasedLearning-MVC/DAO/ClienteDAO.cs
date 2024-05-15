@@ -31,7 +31,25 @@ namespace DryFi_ProjectBasedLearning_MVC.DAO
             c.Telefone = registro["Telefone"].ToString();
             c.TipoClienteId = Convert.ToInt32(registro["TipoClienteId"]);
 
+            if (registro.Table.Columns.Contains("DescricaoTipoCliente"))
+                c.DescricaoTipoCliente = registro["DescricaoTipoCliente"].ToString();
+
             return c;
+        }
+        public List<ClienteViewModel> ConsultaAvancadaCliente(string nomeCliente,
+                                                              string cnpj,
+                                                              int tipo)
+        {
+            SqlParameter[] p = {
+             new SqlParameter("nomeCliente", nomeCliente),
+             new SqlParameter("cnpj", cnpj),
+             new SqlParameter("tipo", tipo),
+            };
+            var tabela = HelperDAO.ExecutaProcSelect("spConsultaAvancadaClientes", p);
+            var lista = new List<ClienteViewModel>();
+            foreach (DataRow dr in tabela.Rows)
+                lista.Add(MontaModel(dr));
+            return lista;
         }
         protected override void SetTabela()
         {
