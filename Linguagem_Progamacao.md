@@ -212,22 +212,51 @@ CREATE PROCEDURE [dbo].[spConsultaAvancadaClientes]
 )
 AS
 BEGIN
-    IF @tipo = 0
+    IF (@nomeCliente IS NULL OR @nomeCliente = '')
+        AND (@cnpj IS NULL OR @cnpj = '')
+        AND (@tipo IS NULL OR @tipo = 0)
     BEGIN
+        -- Se todos os parâmetros forem nulos ou vazios, busca todos os registros
+        SELECT cliente.*, TipoCliente.Tipo AS 'DescricaoTipoCliente'
+        FROM Cliente
+        INNER JOIN TipoCliente ON Cliente.TipoClienteId = TipoCliente.Id;
+    END
+    ELSE IF (@nomeCliente IS NOT NULL AND @nomeCliente <> '')
+    BEGIN
+        -- Se somente o nome do cliente for preenchido, busca somente pelo nome
         SELECT cliente.*, TipoCliente.Tipo AS 'DescricaoTipoCliente'
         FROM Cliente
         INNER JOIN TipoCliente ON Cliente.TipoClienteId = TipoCliente.Id
-        WHERE (Cliente.NomeCliente LIKE '%' + @nomeCliente + '%' OR Cliente.Cnpj LIKE '%' + @cnpj + '%');
+        WHERE Cliente.NomeCliente LIKE '%' + @nomeCliente + '%';
+    END
+    ELSE IF (@cnpj IS NOT NULL AND @cnpj <> '')
+    BEGIN
+        -- Se somente o CNPJ for preenchido, busca somente pelo CNPJ
+        SELECT cliente.*, TipoCliente.Tipo AS 'DescricaoTipoCliente'
+        FROM Cliente
+        INNER JOIN TipoCliente ON Cliente.TipoClienteId = TipoCliente.Id
+        WHERE Cliente.Cnpj LIKE '%' + @cnpj + '%';
+    END
+    ELSE IF (@tipo IS NOT NULL AND @tipo <> 0)
+    BEGIN
+        -- Se somente o tipo de cliente for preenchido, busca somente pelo tipo
+        SELECT cliente.*, TipoCliente.Tipo AS 'DescricaoTipoCliente'
+        FROM Cliente
+        INNER JOIN TipoCliente ON Cliente.TipoClienteId = TipoCliente.Id
+        WHERE Cliente.TipoClienteId = @tipo;
     END
     ELSE
     BEGIN
+        -- Se mais de um parâmetro for preenchido, busca pelos registros que têm todos os parâmetros preenchidos em comum
         SELECT cliente.*, TipoCliente.Tipo AS 'DescricaoTipoCliente'
         FROM Cliente
         INNER JOIN TipoCliente ON Cliente.TipoClienteId = TipoCliente.Id
-        WHERE (Cliente.NomeCliente LIKE '%' + @nomeCliente + '%' OR Cliente.Cnpj LIKE '%' + @cnpj + '%')
-        AND Cliente.TipoClienteId = @tipo;
+        WHERE (Cliente.NomeCliente LIKE '%' + @nomeCliente + '%' OR @nomeCliente IS NULL)
+        AND (Cliente.Cnpj LIKE '%' + @cnpj + '%' OR @cnpj IS NULL)
+        AND (Cliente.TipoClienteId = @tipo OR @tipo = 0);
     END
 END
+
 ```
 ### SP Maquina ###
 ```sql
