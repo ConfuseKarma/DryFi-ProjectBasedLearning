@@ -206,26 +206,26 @@ END
 GO
 CREATE PROCEDURE [dbo].[spConsultaAvancadaClientes]
 (
-    @nome NVARCHAR(100),
+    @nomeCliente NVARCHAR(100),
     @cnpj VARCHAR(14),
-    @tipoCliente INT
+    @tipo INT
 )
 AS
 BEGIN
-    IF @tipoCliente = 0
+    IF @tipo = 0
     BEGIN
         SELECT cliente.*, TipoCliente.Tipo AS 'DescricaoTipoCliente'
         FROM Cliente
         INNER JOIN TipoCliente ON Cliente.TipoClienteId = TipoCliente.Id
-        WHERE (Cliente.NomeCliente LIKE '%' + @nome + '%' OR Cliente.Cnpj LIKE '%' + @cnpj + '%');
+        WHERE (Cliente.NomeCliente LIKE '%' + @nomeCliente + '%' OR Cliente.Cnpj LIKE '%' + @cnpj + '%');
     END
     ELSE
     BEGIN
         SELECT cliente.*, TipoCliente.Tipo AS 'DescricaoTipoCliente'
         FROM Cliente
         INNER JOIN TipoCliente ON Cliente.TipoClienteId = TipoCliente.Id
-        WHERE (Cliente.NomeCliente LIKE '%' + @nome + '%' OR Cliente.Cnpj LIKE '%' + @cnpj + '%')
-        AND Cliente.TipoClienteId = @tipoCliente;
+        WHERE (Cliente.NomeCliente LIKE '%' + @nomeCliente + '%' OR Cliente.Cnpj LIKE '%' + @cnpj + '%')
+        AND Cliente.TipoClienteId = @tipo;
     END
 END
 ```
