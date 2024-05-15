@@ -8,7 +8,7 @@
 <div class="container content-fluid mt-5 row-gap-5">
     <div class="row mt-5 gx-3">
         <div class="col-md-6">
-            <h1 class="display-2 fw-semibold mb-5">Novo <span class="text-info">Cliente</span></h1>
+            <h1 class="display-2 fw-semibold mb-5">New <span class="text-info">Warded</span></h1>
             <div class="d-flex align-content-center flex-wrap">
                 <form asp-action="save" class="needs-validation" novalidate>
                     <div class="row g-3">
@@ -47,7 +47,7 @@
                         </div>
 
                         <div class="col-md-6">
-                            <label for="tipo" class="form-label">Type of Warded</label>
+                            <label for="tipo" class="form-label">Type of Client</label>
                             <select asp-for="TipoClienteId" asp-items="Html.GetEnumSelectList<TipoClienteEnum>()" class="form-select" id="tipo" required>
                                 <option selected disabled value="">Choose...</option>
                             </select>
