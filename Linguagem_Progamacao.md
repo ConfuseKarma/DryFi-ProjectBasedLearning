@@ -73,6 +73,7 @@ begin
  exec(@sql)
 end
 GO
+
 create procedure spConsulta
 (
  @id int ,
@@ -86,6 +87,7 @@ begin
  exec(@sql)
 end
 GO
+
 create procedure spListagem
 (
  @tabela varchar(max),
@@ -104,6 +106,7 @@ begin
  +@tabela)
 end
 GO
+
 ```
 ### SP Funcionarios ###
 ```sql
@@ -141,6 +144,7 @@ begin
  where id = @id
 end
 GO
+
 CREATE PROCEDURE [dbo].[spConsultaAvancadaFuncionarios]
 (
     @nome VARCHAR(MAX),
@@ -184,6 +188,7 @@ BEGIN
     (@Id, @nomeCliente, @CNPJ, @email, @telefone, @TipoClienteId);
 END
 GO
+
 CREATE PROCEDURE spUpdate_Cliente
 (
     @Id INT,
@@ -204,6 +209,7 @@ BEGIN
     WHERE Id = @Id;
 END
 GO
+
 CREATE PROCEDURE [dbo].[spConsultaAvancadaClientes]
 (
     @nomeCliente NVARCHAR(100),
@@ -275,6 +281,7 @@ BEGIN
     (@Id, @maqStatus, @endereço, @idCliente);
 END
 GO
+
 CREATE PROCEDURE spUpdate_Maquina
 (
     @Id INT,
