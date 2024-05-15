@@ -227,33 +227,9 @@ BEGIN
         FROM Cliente
         INNER JOIN TipoCliente ON Cliente.TipoClienteId = TipoCliente.Id;
     END
-    ELSE IF (@nomeCliente IS NOT NULL AND @nomeCliente <> '')
-    BEGIN
-        -- Se somente o nome do cliente for preenchido, busca somente pelo nome
-        SELECT cliente.*, TipoCliente.Tipo AS 'DescricaoTipoCliente'
-        FROM Cliente
-        INNER JOIN TipoCliente ON Cliente.TipoClienteId = TipoCliente.Id
-        WHERE Cliente.NomeCliente LIKE '%' + @nomeCliente + '%';
-    END
-    ELSE IF (@cnpj IS NOT NULL AND @cnpj <> '')
-    BEGIN
-        -- Se somente o CNPJ for preenchido, busca somente pelo CNPJ
-        SELECT cliente.*, TipoCliente.Tipo AS 'DescricaoTipoCliente'
-        FROM Cliente
-        INNER JOIN TipoCliente ON Cliente.TipoClienteId = TipoCliente.Id
-        WHERE Cliente.Cnpj LIKE '%' + @cnpj + '%';
-    END
-    ELSE IF (@tipo IS NOT NULL AND @tipo <> 0)
-    BEGIN
-        -- Se somente o tipo de cliente for preenchido, busca somente pelo tipo
-        SELECT cliente.*, TipoCliente.Tipo AS 'DescricaoTipoCliente'
-        FROM Cliente
-        INNER JOIN TipoCliente ON Cliente.TipoClienteId = TipoCliente.Id
-        WHERE Cliente.TipoClienteId = @tipo;
-    END
     ELSE
     BEGIN
-        -- Se mais de um parâmetro for preenchido, busca pelos registros que têm todos os parâmetros preenchidos em comum
+        -- Se algum parâmetro estiver preenchido, busca pelos registros que batem 100%
         SELECT cliente.*, TipoCliente.Tipo AS 'DescricaoTipoCliente'
         FROM Cliente
         INNER JOIN TipoCliente ON Cliente.TipoClienteId = TipoCliente.Id
