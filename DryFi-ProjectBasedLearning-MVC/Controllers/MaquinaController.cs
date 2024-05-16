@@ -12,6 +12,12 @@ namespace DryFi_ProjectBasedLearning_MVC.Controllers
             GeraProximoId = true;
         }
 
+        public IActionResult ListarMaquina()
+        {
+            List<MaquinaViewModel> maquina = new List<MaquinaViewModel>();
+            return View("Index", maquina);
+        }
+
         [HttpPost] 
         [Route("api/maquina/registro")] 
         public IActionResult MaquinaRegistro()
