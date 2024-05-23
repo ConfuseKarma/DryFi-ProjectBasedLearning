@@ -245,7 +245,7 @@ END
 CREATE PROCEDURE spInsert_Maquina
 (
     @Id INT,
-    @maqStatus VARCHAR(50),
+    @maqStatus INT,
     @endereço VARCHAR(200),
     @idCliente INT
 )
@@ -261,7 +261,7 @@ GO
 CREATE PROCEDURE spUpdate_Maquina
 (
     @Id INT,
-    @maqStatus VARCHAR(50),
+    @maqStatus INT,
     @endereço VARCHAR(200),
     @idCliente INT
 )
