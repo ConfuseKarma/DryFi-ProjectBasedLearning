@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 
 namespace DryFi_ProjectBasedLearning_MVC.Enums
 {
-    public enum CargoEnum
+    public enum 
+    CargoEnum
     {
-        Administrador = 1,
-        Recrutador = 2,
-        Vendedor = 3
+        Administrator = 1,
+        Recruiter = 2,
+        Salesperson = 3
     }
 }

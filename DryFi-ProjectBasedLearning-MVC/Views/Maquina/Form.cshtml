@@ -1,0 +1,42 @@
+@using DryFi_ProjectBasedLearning_MVC.Enums
+@model MaquinaViewModel
+
+@{
+    ViewData["Title"] = "New Machine";
+}
+
+<div class="container content-fluid mt-5 row-gap-5">
+    <div class="row mt-5 gx-3">
+        <div class="col-md-6">
+            <h1 class="display-2 fw-semibold mb-5">New <span class="text-info">Machine</span></h1>
+            <div class="d-flex align-content-center flex-wrap">
+                <form asp-action="save" class="needs-validation" novalidate>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <input value="@ViewBag.Operacao" type="hidden" name="Operacao">
+                            <input asp-for="Id" class="form-control" id="id" hidden>
+                            <label for="MaqStatus" class="form-label">Machine Status</label>
+                            <input asp-for="MaqStatus" type="text" class="form-control" id="maqStatus" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="IdCliente" class="form-label">Client ID</label>
+                            <input asp-for="IdCliente" type="text" class="form-control" id="idCliente" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <div class="col-md-7 mb-3">
+                            <button type="submit" value="Save Data" class="rounded-pill btn btn-lg btn-info mr-3">Register</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-6 pt-3 d-flex justify-content-center align-items-center">
+            <img src="~/lib/img/machineImage.svg" style="max-width: 100%; height: auto;" />
+        </div>
+    </div>
+</div>

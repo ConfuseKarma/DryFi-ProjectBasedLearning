@@ -3,7 +3,7 @@
     ViewData["Title"] = "Home Page";
 }
 <div>
-    <h2 class="text-white">The Guardians</h2>
+    <h2 class="text-white">Guardians</h2>
     <br />
     <a type="button" class="btn btn-info" href="/Funcionario/FuncRegistro">New Guardian</a>
     <br />
@@ -24,13 +24,26 @@
         </div>
         <div class="col-lg-1">
             <br />
-            <input type="button" id="btnFiltro" class="btn btn-success" value="Aplicar"
-                   onclick="aplicaFiltroConsultaAvancada()" />
+            <div class="btn-group" role="group" aria-label="Button group">
+                <input type="button" id="btnFiltro" class="btn btn-success text-center" value="Apply" style="width: 100%; border-radius: 8%; margin-right: 10%;"
+                       onclick="aplicaFiltroConsultaAvancadaFuncionario()" />
+                <input type="button" id="btnClear" class="btn btn-danger text-center" value="Clear" style="width: 100%; border-radius: 8%;"
+                       onclick="limparFiltros()" />
+            </div>
         </div>
     </div>
 </fieldset>
 <div id="resultadoConsulta" class="table-responsive">
 </div>
 
+<script>
+    function apagarFunc(id) {
+        if (confirm('Confirma a exclusão do registro?'))
+            location.href = 'delete?id=' + id;
+    }
 
-
+    function limparFiltros() {
+        document.getElementById('nome').value = '';
+        document.getElementById('cargo').value = '';
+    }
+</script>

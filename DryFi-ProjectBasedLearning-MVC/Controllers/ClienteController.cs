@@ -10,8 +10,6 @@ namespace DryFi_ProjectBasedLearning_MVC.Controllers
         {
             DAO = new ClienteDAO();
             GeraProximoId = true;
-            //List<ClienteViewModel> clienteViewModels = new List<ClienteViewModel>();
-            //clienteViewModels.Add();
         }
         public IActionResult ListarCliente()
         {
@@ -37,6 +35,26 @@ namespace DryFi_ProjectBasedLearning_MVC.Controllers
                 ModelState.AddModelError("Email", "Preencha o Email.");
             if (string.IsNullOrEmpty(model.Telefone))
                 ModelState.AddModelError("Telefone", "Preencha o Telefone.");
+        }
+        public IActionResult ObtemDadosConsultaAvancada(string nomeCliente,
+                                                        string cnpj,
+                                                        int tipo)
+        {
+            try
+            {
+                ClienteDAO dao = new ClienteDAO();
+                if (string.IsNullOrEmpty(nomeCliente))
+                    nomeCliente = "";
+                if (string.IsNullOrEmpty(cnpj))
+                    cnpj = "";
+
+                List<ClienteViewModel> lista = dao.ConsultaAvancadaCliente(nomeCliente, cnpj, tipo);
+                return PartialView("_ListCliente", lista);
+            }
+            catch (Exception erro)
+            {
+                return Json(new { erro = true, msg = erro.Message });
+            }
         }
     }
 }

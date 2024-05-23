@@ -1,55 +1,38 @@
 ﻿@model List<FuncionarioViewModel>
 
+<br>
 <div class="text-center gap-3">
-    
+
     <table id="funcTable" class="table table-dark">
         <thead>
             <tr>
                 <th scope="col">Actions</th>
-                <th scope="col">Foto</th>
-                <th scope="col">Nome</th>
-                <th scope="col">Cargo</th>
-                <th scope="col">E-mail</th>
+                <th scope="col">Picture</th>
+                <th scope="col">Name</th>
+                <th scope="col">Position</th>
+                <th scope="col">Email</th>
             </tr>
         </thead>
         <tbody>
             @for (var i = 0; i < Model.Count; i++)
             {
-                <tr>
-                    <td class="col-md-3">
-                        <a href="/home/Edit?id=@Model[i].Id" class="btn btn-primary"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                        <a href="javascript:apagarPizza(@Model[i].Id)" class="btn btn-danger">
-                            <i class="fa fa-trash" aria-hidden="true"></i>
-                            <a href="/home/Listar?id=@Model[i].Id" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                <tr class="align-middle">
+                    <td style="width: 15%;">
+                        <div class="btn-group-vertical" style="width: 100%;">
+                            <a href="/Funcionario/Edit?id=@Model[i].Id" class="btn btn-primary mb-2" style="width: 100%;">
+                                <i class="fas fa-edit"></i> Edit
+                            </a>
+                            <button type="button" onclick="apagarFunc(@Model[i].Id)" class="btn btn-danger" style="width: 100%;">
+                                <i class="fas fa-trash" aria-hidden="true"></i> Delete
+                            </button>
+                        </div>
                     </td>
-                    <td class="col-md-3"> <img src="data:image/jpeg;base64,@Model[i].ImagemEmBase64" alt="Imagem do Funcionário" style="max-width: 100px; max-height: 100px;"></td>
+                    <td class="col-md-2"> <img src="data:image/jpeg;base64,@Model[i].ImagemEmBase64" alt="Imagem do Funcionário" style="max-width: 100px; max-height: 100px;"></td>
                     <td class="col-md-2">@Model[i].Nome</td>
-                    <td class="col-md-2">@Model[i].CargoId</td>
+                    <td class="col-md-2">@Model[i].DescricaoCategoria</td>
                     <td class="col-md-2">@Model[i].Email</td>
                 </tr>
             }
         </tbody>
     </table>
 </div>
-
-<script>
-    function apagarPizza(id) {
-        if (confirm('Confirma a exclusão do registro?'))
-            location.href = 'Home/Delete?id=' + id;
-    }
-    $(document).ready(function () {
-        var pizzaList = [];
-
-        $('#pizzaTable tr').each(function () {
-            var id = $(this).find('td:eq(1)').text();
-            var descricao = $(this).find('td:eq(2)').text();
-            var pizzaItem = {
-                id: id,
-                descricao: descricao
-            };
-            pizzaList.push(pizzaItem);
-        });
-
-        console.log(pizzaList);
-    });
-</script>

@@ -12,6 +12,12 @@ namespace DryFi_ProjectBasedLearning_MVC.Controllers
             GeraProximoId = true;
         }
 
+        public IActionResult ListarMaquina()
+        {
+            List<MaquinaViewModel> maquina = new List<MaquinaViewModel>();
+            return View("Index", maquina);
+        }
+
         [HttpPost] 
         [Route("api/maquina/registro")] 
         public IActionResult MaquinaRegistro()
@@ -33,5 +39,24 @@ namespace DryFi_ProjectBasedLearning_MVC.Controllers
             if (model.IdCliente <= 0)
                 ModelState.AddModelError("idCliente", "Id de cliente inválido!");
         }
+
+        public IActionResult ObtemDadosConsultaAvancada(string maqStatus, int idCliente)
+        {
+            try
+            {
+                MaquinaDAO dao = new MaquinaDAO();
+                if (string.IsNullOrEmpty(maqStatus))
+                    maqStatus = "";
+
+                List<MaquinaViewModel> lista = dao.ConsultaAvancadaMaquina(maqStatus, idCliente);
+                return PartialView("_ListMaquina", lista);
+            }
+            catch (Exception erro)
+            {
+                return Json(new { erro = true, msg = erro.Message });
+            }
+        }
+
+
     }
 }

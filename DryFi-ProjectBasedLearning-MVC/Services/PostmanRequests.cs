@@ -15,6 +15,22 @@ namespace DryFi_ProjectBasedLearning_MVC.Services
             _client.DefaultRequestHeaders.Add("fiware-servicepath", "/");
         }
 
+        public async Task<string> GetTemperatura()
+        {
+            try
+            {
+                HttpResponseMessage response = await _client.GetAsync("http://20.185.230.186:8666/STH/v2/entities/urn:ngsi-ld:Temp:001/attrs/temperature?type=Temp&lastN=30");
+                response.EnsureSuccessStatusCode();
+                string content = await response.Content.ReadAsStringAsync();
+                return content;
+            }
+            catch (HttpRequestException ex)
+            {
+                Console.WriteLine($"Erro na requisição HTTP: {ex.Message}");
+                throw;
+            }
+        }
+
         public async Task<string> GetLuminosidadeDaLampada()
         {
             try
@@ -30,6 +46,35 @@ namespace DryFi_ProjectBasedLearning_MVC.Services
                 throw;
             }
         }
+        //CONSULTAR TEMPERATURA COM DADOS DA AULA
+        //var client = new HttpClient();
+        //var request = new HttpRequestMessage(HttpMethod.Get, "http://20.185.230.186:8666/STH/v2/entities/urn:ngsi-ld:Temp:001/attrs/temperature?type=Temp&lastN=30");
+        //request.Headers.Add("fiware-service", "smart");
+        //request.Headers.Add("fiware-servicepath", "/");
+        //var response = await client.SendAsync(request);
+        //response.EnsureSuccessStatusCode();
+        //Console.WriteLine(await response.Content.ReadAsStringAsync());
+
+        //CRIAR MÁQUINA
+        //var client = new HttpClient();
+        //var request = new HttpRequestMessage(HttpMethod.Post, "http://20.185.230.186:4041/iot/devices");
+        //request.Headers.Add("fiware-service", "smart");
+        //request.Headers.Add("fiware-servicepath", "/");
+        //var content = new StringContent("{\n  \"devices\": [\n    {\n      \"device_id\":   \"temp001\",         \n      \"entity_name\": \"urn:ngsi-ld:Temp:001\",   \n      \"entity_type\": \"Temp\",          \n      \"protocol\":    \"PDI-IoTA-UltraLight\",  \n      \"transport\":   \"MQTT\",            \n\n      \n      \"attributes\": [\n        { \"object_id\": \"t\", \"name\": \"temperature\", \"type\": \"Float\" }  \n      ]\n    }\n  ]\n}\n", null, "application/json");
+        //request.Content = content;
+        //var response = await client.SendAsync(request);
+        //response.EnsureSuccessStatusCode();
+        //Console.WriteLine(await response.Content.ReadAsStringAsync());
+
+        //BUSCAR MEDIDAS
+        //var client = new HttpClient();
+        //var request = new HttpRequestMessage(HttpMethod.Get, "http://20.185.230.186:8666/STH/v2/entities/urn:ngsi-ld:Temp:001/attrs/temperature?type=Temp&lastN=100");
+        //request.Headers.Add("fiware-service", "smart");
+        //request.Headers.Add("fiware-servicepath", "/");
+        //var response = await client.SendAsync(request);
+        //response.EnsureSuccessStatusCode();
+        //Console.WriteLine(await response.Content.ReadAsStringAsync());
+
         /*var client = new HttpClient();
         var request = new HttpRequestMessage(HttpMethod.Post, "http://20.185.230.186:4041/iot/devices");
         request.Headers.Add("fiware-service", "smart");

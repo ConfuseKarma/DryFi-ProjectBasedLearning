@@ -1,0 +1,47 @@
+@using DryFi_ProjectBasedLearning_MVC.Enums
+@{
+    ViewData["Title"] = "Home Page";
+}
+<div>
+    <h2 class="text-white">Machines</h2>
+    <br />
+    <a type="button" class="btn btn-info" href="/Maquina/MaquinaRegistro">New Machine</a>
+    <br />
+</div>
+<br />
+<fieldset id="areaFiltro" class="form-group">
+    <legend>Search our Machines</legend>
+    <div class="row">
+        <div class="col-lg-2">
+            Machine Status<br />
+            <input type="text" id="maqStatus" class="form-control" />
+        </div>
+        <div class="col-lg-2">
+            Client ID<br />
+            <input type="text" id="idCliente" class="form-control" />
+        </div>
+        <div class="col-lg-2">
+            <br />
+            <div class="btn-group" role="group" aria-label="Button group">
+                <input type="button" id="btnFiltro" class="btn btn-success text-center" value="Apply" style="width: 100%; border-radius: 8%; margin-right: 10%;" 
+                onclick="aplicaFiltroConsultaAvancadaMaquina()" />
+                <input type="button" id="btnClear" class="btn btn-danger text-center" value="Clear" style="width: 100%; border-radius: 8%;" 
+                onclick="limparFiltros()" />
+            </div>
+        </div>
+    </div>
+</fieldset>
+<div id="resultadoConsulta" class="table-responsive">
+</div>
+
+<script>
+    function apagarMaquina(id) {
+        if (confirm('Confirm deletion of the record?'))
+            location.href = 'delete?id=' + id;
+    }
+
+    function limparFiltros() {
+        document.getElementById('maqStatus').value = '';
+        document.getElementById('idCliente').value = '';
+    }
+</script>

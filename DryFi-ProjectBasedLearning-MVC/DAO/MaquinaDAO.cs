@@ -27,6 +27,25 @@ namespace DryFi_ProjectBasedLearning_MVC.DAO
 
             return m;
         }
+
+        public List<MaquinaViewModel> ConsultaAvancadaMaquina(string maqStatus, int idCliente)
+        {
+            SqlParameter[] p = {
+                new SqlParameter("@maqStatus", maqStatus),
+                new SqlParameter("@idCliente", idCliente)
+            };
+        
+            var tabela = HelperDAO.ExecutaProcSelect("spConsultaAvancadaMaquinas", p);
+            var lista = new List<MaquinaViewModel>();
+        
+            foreach (DataRow dr in tabela.Rows)
+            {
+                lista.Add(MontaModel(dr));
+            }
+        
+            return lista;
+        }
+
         protected override void SetTabela()
         {
             Tabela = "Maquina";

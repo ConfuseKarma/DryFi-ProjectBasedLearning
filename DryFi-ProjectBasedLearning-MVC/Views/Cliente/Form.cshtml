@@ -8,28 +8,28 @@
 <div class="container content-fluid mt-5 row-gap-5">
     <div class="row mt-5 gx-3">
         <div class="col-md-6">
-            <h1 class="display-2 fw-semibold mb-5">Novo <span class="text-info">Cliente</span></h1>
+            <h1 class="display-2 fw-semibold mb-5">New <span class="text-info">Warded</span></h1>
             <div class="d-flex align-content-center flex-wrap">
                 <form asp-action="save" class="needs-validation" novalidate>
                     <div class="row g-3">
                         <div class="col-md-6">
                             <input value="@ViewBag.Operacao" type="hidden" name="Operacao">
                             <input asp-for="Id" class="form-control" id="id" hidden>
-                            <label for="Nome" class="form-label">Nome</label>
-                            <input asp-for="NomeCliente" type="text" class="form-control" id="Nome" required>
+                            <label for="Nome" class="form-label">Name</label>
+                            <input asp-for="NomeCliente" type="text" class="form-control" id="nomeCliente" required>
                             <div class="valid-feedback">
                                 Parece bom!
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <label for="Cnpj" class="form-label">Cnpj</label>
+                            <label for="Cnpj" class="form-label">CNPJ</label>
                             <input asp-for="Cnpj" type="text" class="form-control" id="Cnpj" required>
                             <div class="valid-feedback">
                                 Parece bom!
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <label for="Email" class="form-label">E-mail</label>
+                            <label for="Email" class="form-label">Email</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text" id="spanEmail">&#x00040;</span>
                                 <input asp-for="Email" type="text" class="form-control" id="Email" aria-describedby="inputGroupPrepend" required>
@@ -39,7 +39,7 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <label for="Telefone" class="form-label">Telefone</label>
+                            <label for="Telefone" class="form-label">Phone Number</label>
                             <input asp-for="Telefone" type="text" class="form-control" id="Telefone" required>
                             <div class="invalid-feedback">
                                 Por favor, informe um número de telefone válido.
@@ -47,8 +47,8 @@
                         </div>
 
                         <div class="col-md-6">
-                            <label for="TipoCliente" class="form-label">Client Type</label>
-                            <select asp-for="TipoClienteId" asp-items="Html.GetEnumSelectList<TipoClienteEnum>()" class="form-select" id="TipoCliente" required>
+                            <label for="tipo" class="form-label">Type of Client</label>
+                            <select asp-for="TipoClienteId" asp-items="Html.GetEnumSelectList<TipoClienteEnum>()" class="form-select" id="tipo" required>
                                 <option selected disabled value="">Choose...</option>
                             </select>
                             <div class="invalid-feedback">

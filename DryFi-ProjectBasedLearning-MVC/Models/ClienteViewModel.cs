@@ -7,5 +7,6 @@
         public string Email { get; set; }
         public string Telefone { get; set; }
         public int TipoClienteId { get; set; }
+        public string DescricaoTipoCliente { get; set; }
     }
 }
