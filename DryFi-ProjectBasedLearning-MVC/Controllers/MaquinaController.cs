@@ -18,8 +18,6 @@ namespace DryFi_ProjectBasedLearning_MVC.Controllers
             return View("Index", maquina);
         }
 
-        [HttpPost] 
-        [Route("api/maquina/registro")] 
         public IActionResult MaquinaRegistro()
         {
             ViewBag.Operacao = "I";
@@ -29,8 +27,6 @@ namespace DryFi_ProjectBasedLearning_MVC.Controllers
             return View("Form", maquina);
         }
 
-        [HttpPost] 
-        [Route("api/maquina/valida")] 
         protected override void ValidaDados(MaquinaViewModel model, string operacao)
         {
             base.ValidaDados(model, operacao);
