@@ -44,7 +44,7 @@ VALUES
 
 CREATE TABLE Maquina (
     Id INT PRIMARY KEY,
-    maqStatus VARCHAR(50) NOT NULL,
+    maqStatus INT,
 	endereço VARCHAR(200),
     idCliente INT,
     FOREIGN KEY (idCliente) REFERENCES Cliente(Id)
