@@ -2,7 +2,8 @@
 {
     public class MaquinaViewModel : PadraoViewModel
     {
-        public string MaqStatus { get; set; }
+        public int MaqStatus { get; set; }
+        public string Endereco { get; set; }
         public int IdCliente {  get; set; }
     }
 }

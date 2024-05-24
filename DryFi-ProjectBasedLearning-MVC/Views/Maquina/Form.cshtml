@@ -10,13 +10,19 @@
         <div class="col-md-6">
             <h1 class="display-2 fw-semibold mb-5">New <span class="text-info">Machine</span></h1>
             <div class="d-flex align-content-center flex-wrap">
-                <form asp-action="save" class="needs-validation" novalidate>
+                <form asp-action="Save" class="needs-validation" novalidate>
                     <div class="row g-3">
                         <div class="col-md-6">
                             <input value="@ViewBag.Operacao" type="hidden" name="Operacao">
                             <input asp-for="Id" class="form-control" id="id" hidden>
                             <label for="MaqStatus" class="form-label">Machine Status</label>
-                            <input asp-for="MaqStatus" type="text" class="form-control" id="maqStatus" required>
+                            <select asp-for="MaqStatus" class="form-control" required>
+                                <option value="">Choose...</option>
+                                @foreach (var status in Enum.GetValues(typeof(MachineStatusEnum)))
+                                {
+                                    <option value="@status">@status</option>
+                                }
+                            </select>
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
