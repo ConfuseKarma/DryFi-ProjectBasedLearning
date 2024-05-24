@@ -45,7 +45,7 @@ VALUES
 CREATE TABLE Maquina (
     Id INT PRIMARY KEY,
     maqStatus INT,
-	endereço VARCHAR(200),
+    endereco VARCHAR(200),
     idCliente INT,
     FOREIGN KEY (idCliente) REFERENCES Cliente(Id)
 );
@@ -257,15 +257,15 @@ CREATE PROCEDURE spInsert_Maquina
 (
     @Id INT,
     @maqStatus INT,
-    @endereço VARCHAR(200),
+    @endereco VARCHAR(200),
     @idCliente INT
 )
 AS
 BEGIN
     INSERT INTO Maquina
-    (Id, maqStatus, endereço, idCliente)
+    (Id, maqStatus, endereco, idCliente)
     VALUES 
-    (@Id, @maqStatus, @endereço, @idCliente);
+    (@Id, @maqStatus, @endereco, @idCliente);
 END
 GO
 
@@ -273,14 +273,14 @@ CREATE PROCEDURE spUpdate_Maquina
 (
     @Id INT,
     @maqStatus INT,
-    @endereço VARCHAR(200),
+    @endereco VARCHAR(200),
     @idCliente INT
 )
 AS
 BEGIN
     UPDATE Maquina SET
     maqStatus = @maqStatus,
-    endereço = @endereço,
+    endereco = @endereco,
     idCliente = @idCliente
     WHERE Id = @Id;
 END
