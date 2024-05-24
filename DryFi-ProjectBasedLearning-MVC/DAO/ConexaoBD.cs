@@ -19,10 +19,10 @@ namespace DryFi_ProjectBasedLearning_MVC.DAO
             //string strCon = "Data Source=LOCALHOST; Database=AULADB; user id=sa; password=123456";
 
             //String LAB2
-            string strCon = "Data Source=LOCALHOST; Database=N1BD; user id=sa; password=123456";
+            //string strCon = "Data Source=LOCALHOST; Database=N1BD; user id=sa; password=123456";
 
             //String EDUARDO TOLEDO
-            //string strCon = "Data Source=DESKTOP-R99OVQ8\\SQLEXPRESS; Database=linguagemProgramacao; integrated security=true";
+            string strCon = "Data Source=DESKTOP-R99OVQ8\\SQLEXPRESS; Database=linguagemProgramacao; integrated security=true";
 
             //String GUILHERME SANTOS
             //string strCon = "Data Source=GUILHERME\\SQLSERVER2022; Database=AulaDB; integrated security=true";

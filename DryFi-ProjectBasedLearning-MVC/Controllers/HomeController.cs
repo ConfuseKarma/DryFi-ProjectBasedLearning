@@ -3,6 +3,7 @@ using DryFi_ProjectBasedLearning_MVC.Models;
 using Microsoft.AspNetCore.Mvc;
 using DryFi_ProjectBasedLearning_MVC.Services;
 using System.Diagnostics;
+using Newtonsoft.Json.Linq;
 
 namespace DryFi_ProjectBasedLearning_MVC.Controllers
 {
@@ -15,7 +16,7 @@ namespace DryFi_ProjectBasedLearning_MVC.Controllers
             _logger = logger;
             _postman = postman;
         }
-        
+        //Primeiro exemplo das lampadas
         [HttpGet]
         public async Task<IActionResult> ObterLuminosidadeDaLampada()
         {
@@ -23,6 +24,20 @@ namespace DryFi_ProjectBasedLearning_MVC.Controllers
             {
                 string luminosidade = await _postman.GetLuminosidadeDaLampada();
                 return Ok(luminosidade);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Ocorreu um erro: {ex.Message}");
+            }
+        }
+        //teste
+        [HttpGet]
+        public async Task<IActionResult> GetTemperatura()
+        {
+            try
+            {
+                List<JObject> temperatura = await _postman.GetTemperatura1000();
+                return Ok(temperatura);
             }
             catch (Exception ex)
             {

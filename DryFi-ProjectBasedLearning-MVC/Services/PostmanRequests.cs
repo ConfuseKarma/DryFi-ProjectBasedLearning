@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 
 namespace DryFi_ProjectBasedLearning_MVC.Services
 {
@@ -15,11 +16,41 @@ namespace DryFi_ProjectBasedLearning_MVC.Services
             _client.DefaultRequestHeaders.Add("fiware-servicepath", "/");
         }
 
-        public async Task<string> GetTemperatura()
+        public async Task<List<JObject>> GetTemperatura1000()
+        {
+            var allData = new List<JObject>();
+            int offset = 0;
+            const int batchSize = 100;
+
+            while (true)
+            {
+                var request = new HttpRequestMessage(HttpMethod.Get, $"http://20.185.230.186:8666/STH/v2/entities/urn:ngsi-ld:Temp:001/attrs/temperature?type=Temp&hOffset={offset}&lastN={batchSize}");
+                request.Headers.Add("fiware-service", "smart");
+                request.Headers.Add("fiware-servicepath", "/");
+
+                var response = await _client.SendAsync(request);
+                response.EnsureSuccessStatusCode();
+
+                var content = await response.Content.ReadAsStringAsync();
+                var dataBatch = JArray.Parse(content); // Assumindo que o conteúdo seja um array JSON
+                
+                allData.AddRange((IEnumerable<JObject>)dataBatch);
+
+                if (offset >= 1000)
+                {
+                    break; // Termina o loop se não houver mais dados
+                }
+
+                offset += batchSize;
+            }
+            return allData;
+        }
+
+        public async Task<string> GetTemperatura1()
         {
             try
             {
-                HttpResponseMessage response = await _client.GetAsync("http://20.185.230.186:8666/STH/v2/entities/urn:ngsi-ld:Temp:001/attrs/temperature?type=Temp&lastN=30");
+                HttpResponseMessage response = await _client.GetAsync("http://20.185.230.186:8666/STH/v2/entities/urn:ngsi-ld:Temp:001/attrs/temperature?type=Temp&lastN=100");
                 response.EnsureSuccessStatusCode();
                 string content = await response.Content.ReadAsStringAsync();
                 return content;
