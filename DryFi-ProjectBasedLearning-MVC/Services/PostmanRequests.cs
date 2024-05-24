@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Net.Http;
+using System.Runtime.Intrinsics.X86;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 
 namespace DryFi_ProjectBasedLearning_MVC.Services
 {
@@ -15,11 +17,57 @@ namespace DryFi_ProjectBasedLearning_MVC.Services
             _client.DefaultRequestHeaders.Add("fiware-servicepath", "/");
         }
 
-        public async Task<string> GetTemperatura()
+        public async Task<List<JObject>> GetTemperatura1000()
+        {
+            var allData = new List<JObject>();
+            int offset = 0;
+            const int batchSize = 100;
+
+            while (true)
+            {
+                var request = new HttpRequestMessage(HttpMethod.Get, $"http://20.185.230.186:8666/STH/v2/entities/urn:ngsi-ld:Temp:001/attrs/temperature?type=Temp&hOffset={offset}&lastN=100");
+
+                var response = await _client.SendAsync(request);
+                response.EnsureSuccessStatusCode();
+
+                var content = await response.Content.ReadAsStringAsync();
+                var jsonObject = JObject.Parse(content);
+
+                // Acessar a propriedade 'value' que é um array
+                var dataBatch = (JArray)jsonObject["value"];
+
+                foreach (var item in dataBatch)
+                {
+                    var obj = item as JObject;
+                    if (obj != null &&
+                        obj.TryGetValue("_id", out JToken idToken) && !string.IsNullOrWhiteSpace(idToken.ToString()) &&
+                        obj.TryGetValue("recvTime", out JToken recvTimeToken) && !string.IsNullOrWhiteSpace(recvTimeToken.ToString()) &&
+                        obj.TryGetValue("attrName", out JToken attrNameToken) && !string.IsNullOrWhiteSpace(attrNameToken.ToString()) &&
+                        obj.TryGetValue("attrType", out JToken attrTypeToken) && !string.IsNullOrWhiteSpace(attrTypeToken.ToString()) &&
+                        obj.TryGetValue("attrValue", out JToken attrValueToken) && !string.IsNullOrWhiteSpace(attrValueToken.ToString()))
+                    {
+                        allData.Add(obj);
+                    }
+                }
+
+                // Converter JArray em IEnumerable<JObject>
+                // allData.AddRange(dataBatch.Cast<JObject>());
+
+                if (offset >= 1000)
+                {
+                    break; // Termina o loop se não houver mais dados ou se o limite de 1000 for atingido
+                }
+
+                offset += batchSize;
+            }
+            return allData;
+        }
+
+        public async Task<string> GetTemperatura1()
         {
             try
             {
-                HttpResponseMessage response = await _client.GetAsync("http://20.185.230.186:8666/STH/v2/entities/urn:ngsi-ld:Temp:001/attrs/temperature?type=Temp&lastN=30");
+                HttpResponseMessage response = await _client.GetAsync("http://20.185.230.186:8666/STH/v2/entities/urn:ngsi-ld:Temp:001/attrs/temperature?type=Temp&lastN=100");
                 response.EnsureSuccessStatusCode();
                 string content = await response.Content.ReadAsStringAsync();
                 return content;
