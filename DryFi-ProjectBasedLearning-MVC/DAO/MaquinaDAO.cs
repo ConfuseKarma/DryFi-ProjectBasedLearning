@@ -11,22 +11,26 @@ namespace DryFi_ProjectBasedLearning_MVC.DAO
     {
         protected override SqlParameter[] CriaParametros(MaquinaViewModel model)
         {
-            SqlParameter[] parametros = new SqlParameter[3];
-            parametros[0] = new SqlParameter("Id", model.Id);
-            parametros[1] = new SqlParameter("maqStatus", model.MaqStatus);
-            parametros[2] = new SqlParameter("idCliente", model.IdCliente);
+            SqlParameter[] parametros = new SqlParameter[4];
+            parametros[0] = new SqlParameter("@Id", model.Id);
+            parametros[1] = new SqlParameter("@maqStatus", model.MaqStatus);
+            parametros[2] = new SqlParameter("@endereco", model.Endereco);
+            parametros[3] = new SqlParameter("@idCliente", model.IdCliente);
 
             return parametros;
         }
+
         protected override MaquinaViewModel MontaModel(DataRow registro)
         {
             MaquinaViewModel m = new MaquinaViewModel();
             m.Id = Convert.ToInt32(registro["Id"]);
-            m.MaqStatus = registro["maqStatus"].ToString();
+            m.MaqStatus = Convert.ToInt32(registro["maqStatus"]);  // Corrigido para int
+            m.Endereco = registro["endereco"].ToString();  // Adicionado Endereco
             m.IdCliente = Convert.ToInt32(registro["idCliente"]);
 
             return m;
         }
+
 
         public List<MaquinaViewModel> ConsultaAvancadaMaquina(string maqStatus, int idCliente)
         {
@@ -45,6 +49,8 @@ namespace DryFi_ProjectBasedLearning_MVC.DAO
         
             return lista;
         }
+
+
 
         protected override void SetTabela()
         {

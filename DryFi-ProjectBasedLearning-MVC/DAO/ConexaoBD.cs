@@ -27,7 +27,11 @@ namespace DryFi_ProjectBasedLearning_MVC.DAO
             //String GUILHERME SANTOS
             //string strCon = "Data Source=GUILHERME\\SQLSERVER2022; Database=AulaDB; integrated security=true";
 
+            //String KAUÊ DE SOUZA
+            string strCon = "Data Source=CONFUSEDKARMA\\SQLEXPRESS01; Database=LinguagemProgramacao; Integrated Security=True;";
             SqlConnection conexao = new SqlConnection(strCon);
+
+
             conexao.Open();
             return conexao;
         }
