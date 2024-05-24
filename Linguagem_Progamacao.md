@@ -50,6 +50,17 @@ CREATE TABLE Maquina (
     FOREIGN KEY (idCliente) REFERENCES Cliente(Id)
 );
 
+CREATE TABLE MaquinaStatus (
+    Id INT PRIMARY KEY,
+    StatusNome VARCHAR(50) NOT NULL
+);
+
+-- Inserir os valores do enum
+INSERT INTO MachineStatus (Id, StatusName) VALUES (1, 'On');
+INSERT INTO MachineStatus (Id, StatusName) VALUES (2, 'Off');
+INSERT INTO MachineStatus (Id, StatusName) VALUES (3, 'Standby');
+
+
 CREATE TABLE Monitoramento (
     Id INT PRIMARY KEY,
     idMaquina INT,
