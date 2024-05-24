@@ -47,7 +47,6 @@ CREATE TABLE Maquina (
     maqStatus INT,
     endereco VARCHAR(200),
     idCliente INT,
-    FOREIGN KEY (idCliente) REFERENCES Cliente(Id)
 );
 
 CREATE TABLE MaquinaStatus (
