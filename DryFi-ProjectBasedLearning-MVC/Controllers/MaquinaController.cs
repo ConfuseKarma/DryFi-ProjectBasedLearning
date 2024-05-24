@@ -1,6 +1,10 @@
 ﻿using DryFi_ProjectBasedLearning_MVC.DAO;
 using DryFi_ProjectBasedLearning_MVC.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Data.SqlClient;
+using System.Data;
+using DryFi_ProjectBasedLearning_MVC.Enums;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace DryFi_ProjectBasedLearning_MVC.Controllers
 {
@@ -51,6 +55,17 @@ namespace DryFi_ProjectBasedLearning_MVC.Controllers
             {
                 return Json(new { erro = true, msg = erro.Message });
             }
+        }
+
+        public List<SelectListItem> GetMachineStatusList()
+        {
+            return Enum.GetValues(typeof(MachineStatusEnum))
+                       .Cast<MachineStatusEnum>()
+                       .Select(e => new SelectListItem
+                       {
+                           Value = ((int)e).ToString(),
+                           Text = e.ToString()
+                       }).ToList();
         }
 
 
