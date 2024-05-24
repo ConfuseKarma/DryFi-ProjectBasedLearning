@@ -15,14 +15,17 @@
                         <div class="col-md-6">
                             <input value="@ViewBag.Operacao" type="hidden" name="Operacao">
                             <input asp-for="Id" class="form-control" id="id" hidden>
-                            <label for="MaqStatus" class="form-label">Machine Status</label>
-                            <select asp-for="MaqStatus" class="form-control" required>
-                                <option value="">Choose...</option>
-                                @foreach (var status in Enum.GetValues(typeof(MachineStatusEnum)))
-                                {
-                                    <option value="@status">@status</option>
-                                }
+                            <label for="MaqStatus" class="form-label">Machine Status</label>        
+                                <select asp-for="MaqStatus" asp-items="Html.GetEnumSelectList<MachineStatusEnum>()" class="form-select" id="MaqStatus" required>
+                                    <option selected disabled value="">Choose...</option>
                             </select>
+                            <div class="invalid-feedback">
+                                Please select a valid machine status.
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="Endereco" class="form-label">Address</label>
+                            <input asp-for="Endereco" type="text" class="form-control" id="endereco" required>
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
