@@ -1,0 +1,25 @@
+﻿<div>
+    <canvas id="graficoAoVivo"></canvas>
+    <script type="text/javascript">
+        var ctx = document.getElementById('graficoAoVivo').getContext('2d');
+        var graficoAoVivo = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['1s', '2s', '3s', '4s', '5s'],
+                datasets: [{
+                    label: 'Dados ao Vivo',
+                    data: [15, 25, 35, 45, 55],
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</div>

@@ -1,0 +1,22 @@
+﻿<meta charset="UTF-8">
+<title>Gráficos</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<h1>Gráficos</h1>
+<button id="btnHistorico">Gráfico Histórico</button>
+<button id="btnAoVivo">Gráfico ao Vivo</button>
+
+<div id="graficoContainer"></div>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#btnHistorico").click(function(){
+            $("#graficoContainer").load('@Url.Action("GraficoHistorico", "Home")');
+        });
+
+        $("#btnAoVivo").click(function(){
+            $("#graficoContainer").load('@Url.Action("GraficoAoVivo", "Home")');
+        });
+    });
+</script>
