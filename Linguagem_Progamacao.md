@@ -54,10 +54,11 @@ CREATE TABLE MaquinaStatus (
     StatusNome VARCHAR(50) NOT NULL
 );
 
+
 -- Inserir os valores do enum
-INSERT INTO MachineStatus (Id, StatusName) VALUES (1, 'On');
-INSERT INTO MachineStatus (Id, StatusName) VALUES (2, 'Off');
-INSERT INTO MachineStatus (Id, StatusName) VALUES (3, 'Standby');
+INSERT INTO MaquinaStatus(Id, StatusNome) VALUES (1, 'On');
+INSERT INTO MaquinaStatus (Id, StatusNome) VALUES (2, 'Off');
+INSERT INTO MaquinaStatus (Id, StatusNome) VALUES (3, 'Standby');
 
 
 CREATE TABLE Monitoramento (
