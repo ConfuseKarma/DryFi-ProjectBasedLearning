@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using System.Runtime.Intrinsics.X86;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 
@@ -24,21 +25,37 @@ namespace DryFi_ProjectBasedLearning_MVC.Services
 
             while (true)
             {
-                var request = new HttpRequestMessage(HttpMethod.Get, $"http://20.185.230.186:8666/STH/v2/entities/urn:ngsi-ld:Temp:001/attrs/temperature?type=Temp&hOffset={offset}&lastN={batchSize}");
-                request.Headers.Add("fiware-service", "smart");
-                request.Headers.Add("fiware-servicepath", "/");
+                var request = new HttpRequestMessage(HttpMethod.Get, $"http://20.185.230.186:8666/STH/v2/entities/urn:ngsi-ld:Temp:001/attrs/temperature?type=Temp&hOffset={offset}&lastN=100");
 
                 var response = await _client.SendAsync(request);
                 response.EnsureSuccessStatusCode();
 
                 var content = await response.Content.ReadAsStringAsync();
-                var dataBatch = JArray.Parse(content); // Assumindo que o conteúdo seja um array JSON
-                
-                allData.AddRange((IEnumerable<JObject>)dataBatch);
+                var jsonObject = JObject.Parse(content);
+
+                // Acessar a propriedade 'value' que é um array
+                var dataBatch = (JArray)jsonObject["value"];
+
+                foreach (var item in dataBatch)
+                {
+                    var obj = item as JObject;
+                    if (obj != null &&
+                        obj.TryGetValue("_id", out JToken idToken) && !string.IsNullOrWhiteSpace(idToken.ToString()) &&
+                        obj.TryGetValue("recvTime", out JToken recvTimeToken) && !string.IsNullOrWhiteSpace(recvTimeToken.ToString()) &&
+                        obj.TryGetValue("attrName", out JToken attrNameToken) && !string.IsNullOrWhiteSpace(attrNameToken.ToString()) &&
+                        obj.TryGetValue("attrType", out JToken attrTypeToken) && !string.IsNullOrWhiteSpace(attrTypeToken.ToString()) &&
+                        obj.TryGetValue("attrValue", out JToken attrValueToken) && !string.IsNullOrWhiteSpace(attrValueToken.ToString()))
+                    {
+                        allData.Add(obj);
+                    }
+                }
+
+                // Converter JArray em IEnumerable<JObject>
+                // allData.AddRange(dataBatch.Cast<JObject>());
 
                 if (offset >= 1000)
                 {
-                    break; // Termina o loop se não houver mais dados
+                    break; // Termina o loop se não houver mais dados ou se o limite de 1000 for atingido
                 }
 
                 offset += batchSize;
