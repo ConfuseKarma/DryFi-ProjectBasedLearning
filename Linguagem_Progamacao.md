@@ -286,6 +286,32 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE [dbo].[spConsultaAvancadaMaquinas]
+(
+    @maqStatus INT,
+    @idCliente INT
+)
+AS
+BEGIN
+    IF (@maqStatus IS NULL OR @maqStatus = 0)
+        AND (@idCliente IS NULL OR @idCliente = 0)
+    BEGIN
+        -- Se todos os parâmetros forem nulos ou vazios, busca todos os registros
+        SELECT Maquina.*
+        FROM Maquina;
+    END
+    ELSE
+    BEGIN
+        -- Se algum parâmetro estiver preenchido, busca pelos registros que batem 100%
+        SELECT Maquina.*
+        FROM Maquina
+        WHERE (Maquina.maqStatus = @maqStatus OR @maqStatus = 0)
+        AND (Maquina.idCliente = @idCliente OR @idCliente = 0);
+    END
+END
+GO
+
+
 ```
 ### SP Monitoramento ###
 ```sql
