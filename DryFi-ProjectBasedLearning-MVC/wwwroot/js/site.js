@@ -38,4 +38,24 @@ function aplicaFiltroConsultaAvancadaCliente() {
             }
         },
     });
+
 }
+
+
+function aplicaFiltroConsultaAvancadaMaquina() {
+    var vMaqStatus = document.getElementById('maqStatus').value;
+    var vIdCliente = document.getElementById('idCliente').value;
+    $.ajax({
+        url: "/Maquina/ObtemDadosConsultaAvancada",
+        data: { maqStatus: vMaqStatus, idCliente: vIdCliente },
+        success: function (dados) {
+            if (dados.erro != undefined) {
+                alert(dados.msg);
+            } else {
+                console.log("cheguei");
+                document.getElementById('resultadoConsulta').innerHTML = dados;
+            }
+        },
+    });
+}
+
