@@ -23,17 +23,16 @@
         <div class="col-lg-2">
             <br />
             <div class="btn-group" role="group" aria-label="Button group">
-                <input type="button" id="btnFiltro" class="btn btn-success text-center" value="Apply" style="width: 100%; border-radius: 8%; margin-right: 10%;" 
-                onclick="aplicaFiltroConsultaAvancadaMaquina()" />
-                <input type="button" id="btnClear" class="btn btn-danger text-center" value="Clear" style="width: 100%; border-radius: 8%;" 
-                onclick="limparFiltros()" />
+                <input type="button" id="btnFiltro" class="btn btn-success text-center" value="Apply" style="width: 100%; border-radius: 8%; margin-right: 10%;"
+                       onclick="aplicaFiltroConsultaAvancadaMaquina()" />
+                <input type="button" id="btnClear" class="btn btn-danger text-center" value="Clear" style="width: 100%; border-radius: 8%;"
+                       onclick="limparFiltros()" />
             </div>
         </div>
     </div>
 </fieldset>
 <div id="resultadoConsulta" class="table-responsive">
 </div>
-
 <script>
     function apagarMaquina(id) {
         if (confirm('Confirm deletion of the record?'))

@@ -24,8 +24,8 @@ namespace DryFi_ProjectBasedLearning_MVC.DAO
         {
             MaquinaViewModel m = new MaquinaViewModel();
             m.Id = Convert.ToInt32(registro["Id"]);
-            m.MaqStatus = Convert.ToInt32(registro["maqStatus"]);  // Corrigido para int
-            m.Endereco = registro["endereco"].ToString();  // Adicionado Endereco
+            m.MaqStatus = Convert.ToInt32(registro["maqStatus"]);  
+            m.Endereco = registro["endereco"].ToString();  
             m.IdCliente = Convert.ToInt32(registro["idCliente"]);
 
             return m;
