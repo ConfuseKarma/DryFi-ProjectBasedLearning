@@ -50,9 +50,6 @@ namespace DryFi_ProjectBasedLearning_MVC.Services
                     }
                 }
 
-                // Converter JArray em IEnumerable<JObject>
-                // allData.AddRange(dataBatch.Cast<JObject>());
-
                 if (offset >= 1000)
                 {
                     break; // Termina o loop se não houver mais dados ou se o limite de 1000 for atingido

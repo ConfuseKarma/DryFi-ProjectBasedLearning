@@ -1,25 +1,53 @@
-﻿<div>
-    <canvas id="graficoHistorico"></canvas>
-    <script type="text/javascript">
-        var ctx = document.getElementById('graficoHistorico').getContext('2d');
-        var graficoHistorico = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio'],
-                datasets: [{
-                    label: 'Dados Históricos',
-                    data: [10, 20, 30, 40, 50],
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
+﻿@model List<Newtonsoft.Json.Linq.JObject>
+@using Newtonsoft.Json.Linq
+@using Newtonsoft.Json
+
+<h2>Gráfico de Temperatura</h2>
+
+<canvas id="myChart" width="400" height="200"></canvas>
+
+@section Scripts {
+    <script>
+        function renderChart(data) {
+            console.log("Função renderChart chamada"); // Log para depuração
+            var labels = data.map(function (item) {
+                return item.recvTime;
+            });
+            var dataValues = data.map(function (item) {
+                return item.attrValue;
+            });
+
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Temperatura ao longo do tempo',
+                        data: dataValues,
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: false
+                        }
                     }
                 }
-            }
+            });
+        }
+
+        $(document).ready(function () {
+            var dataFromServer = @Html.Raw(JsonConvert.SerializeObject(Model));
+            renderChart(dataFromServer);
         });
     </script>
-</div>
+}
+
+        var dataFromServer = @Html.Raw(JsonConvert.SerializeObject(Model));
+        renderChart(dataFromServer);
+    </script>
+}

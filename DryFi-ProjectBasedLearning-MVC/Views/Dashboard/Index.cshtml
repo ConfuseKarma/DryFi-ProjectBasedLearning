@@ -1,22 +1,32 @@
-﻿<meta charset="UTF-8">
-<title>Gráficos</title>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+﻿@{
+    ViewData["Title"] = "Chart Example";
+}
 
-<h1>Gráficos</h1>
-<a asp-controller="Dashboard" asp-action="GetTemperatura1000" id="btnHistorico">Gráfico Histórico</a>
-<button id="btnAoVivo">Gráfico ao Vivo</button>
+<h2>@ViewData["Title"]</h2>
 
-<div id="graficoContainer"></div>
+<button id="loadChartButton">Load Chart</button>
+<div id="chartContainer">
+    <!-- Partial view será carregada aqui -->
+</div>
 
-<script type="text/javascript">
-    $(document).ready(function(){
-        $("#btnHistorico").click(function(){
-            $("#graficoContainer").load('@Url.Action("GraficoHistorico", "Home")');
+@section Scripts {
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#loadChartButton').click(function () {
+                $.ajax({
+                    url: '@Url.Action("GetTemperatura1000", "Dashboard")',
+                    type: 'GET',
+                    success: function (data) {
+                        $('#chartContainer').html(data);
+                        console.log("Partial view carregada"); // Log para depuração
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Ocorreu um erro ao carregar o gráfico:", error);
+                    }
+                });
+            });
         });
-
-        $("#btnAoVivo").click(function(){
-            $("#graficoContainer").load('@Url.Action("GraficoAoVivo", "Home")');
-        });
-    });
-</script>
+    </script>
+}
