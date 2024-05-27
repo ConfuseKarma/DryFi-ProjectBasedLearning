@@ -15,6 +15,7 @@
     <script>
         $(document).ready(function () {
             $('#loadChartButton').click(function () {
+                console.log("chamou ajax");
                 $.ajax({
                     url: '@Url.Action("GetTemperatura1000", "Dashboard")',
                     type: 'GET',
@@ -24,6 +25,7 @@
                     },
                     error: function (xhr, status, error) {
                         console.error("Ocorreu um erro ao carregar o gráfico:", error);
+                        $('#chartContainer').html("<p>Ocorreu um erro ao carregar o gráfico.</p>");
                     }
                 });
             });

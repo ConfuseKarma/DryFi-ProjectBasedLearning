@@ -2,6 +2,7 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
+
 function aplicaFiltroConsultaAvancadaFuncionario() {
     var vNome = document.getElementById('nome').value;
     var vCargo = document.getElementById('cargo').value;
@@ -59,3 +60,4 @@ function aplicaFiltroConsultaAvancadaMaquina() {
     });
 }
 
+//GRAFICO 1000

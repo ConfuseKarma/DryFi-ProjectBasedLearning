@@ -1,5 +1,6 @@
 ﻿using DryFi_ProjectBasedLearning_MVC.Services;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace DryFi_ProjectBasedLearning_MVC.Controllers
@@ -25,9 +26,29 @@ namespace DryFi_ProjectBasedLearning_MVC.Controllers
             {
                 List<JObject> temperatura = await _postman.GetTemperatura1000();
 
-               
+                // Adicionando logs para verificar o conteúdo da lista
+                //foreach (var item in temperatura)
+                //{
+                //    Console.WriteLine(item.ToString());
+                //}
 
-                return PartialView("_GraficoHistorico", temperatura);
+                // Se desejar, pode transformar os dados em um formato mais amigável
+                //var formattedTemperatura = temperatura.Select(t => new
+                //{
+                //    Id = t["_id"]?.ToString(),
+                //    RecvTime = t["recvTime"]?.ToString(),
+                //    AttrName = t["attrName"]?.ToString(),
+                //    AttrType = t["attrType"]?.ToString(),
+                //    AttrValue = t["attrValue"]?.ToString()
+                //}).ToList();
+
+                var formattedTemperatura = temperatura.Select(t => new
+                {
+                    RecvTime = t["recvTime"]?.ToString(),
+                    AttrValue = float.Parse(t["attrValue"]?.ToString() ?? "0")
+                }).ToList();
+                ViewBag.dados = JsonConvert.SerializeObject(formattedTemperatura);
+                return PartialView("_GraficoHistorico", formattedTemperatura);
             }
             catch (Exception ex)
             {

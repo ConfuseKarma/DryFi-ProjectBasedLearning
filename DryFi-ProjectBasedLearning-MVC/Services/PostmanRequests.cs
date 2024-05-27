@@ -50,7 +50,7 @@ namespace DryFi_ProjectBasedLearning_MVC.Services
                     }
                 }
 
-                if (offset >= 1000)
+                if (offset >= 100)
                 {
                     break; // Termina o loop se não houver mais dados ou se o limite de 1000 for atingido
                 }
