@@ -2,6 +2,8 @@
 using System.Net.Http;
 using System.Runtime.Intrinsics.X86;
 using System.Threading.Tasks;
+using DryFi_ProjectBasedLearning_MVC.Models;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace DryFi_ProjectBasedLearning_MVC.Services
@@ -91,6 +93,54 @@ namespace DryFi_ProjectBasedLearning_MVC.Services
                 throw;
             }
         }
+
+
+        public async Task CreateMachine(MaquinaViewModel maquina)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Post, "http://20.185.230.186:4041/iot/devices");
+
+            // Adicionar cabeçalhos
+            request.Headers.Add("fiware-service", "smart");
+            request.Headers.Add("fiware-servicepath", "/");
+
+            // Converter objeto MaquinaViewModel para JSON
+            var jsonContent = JsonConvert.SerializeObject(new
+            {
+                devices = new[]
+                {
+                new
+                {
+                    device_id = $"maq{maquina.IdCliente}",
+                    entity_name = $"urn:ngsi-ld:Maq:{maquina.IdCliente}",
+                    entity_type = "Maq",
+                    protocol = "PDI-IoTA-UltraLight",
+                    transport = "MQTT",
+                    attributes = new[]
+                    {
+                        new { object_id = "s", name = "status", type = "Integer" },
+                        new { object_id = "d", name = "descricaoStatus", type = "String" },
+                        new { object_id = "e", name = "endereco", type = "String" }
+                    }
+                }
+            }
+            });
+
+            // Adicionar conteúdo JSON à requisição
+            request.Content = new StringContent(jsonContent, System.Text.Encoding.UTF8, "application/json");
+
+            // Enviar requisição
+            var response = await _client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+
+            // Ler a resposta
+            var responseContent = await response.Content.ReadAsStringAsync();
+            Console.WriteLine(responseContent);
+        }
+
+
+
+
+
         //CONSULTAR TEMPERATURA COM DADOS DA AULA
         //var client = new HttpClient();
         //var request = new HttpRequestMessage(HttpMethod.Get, "http://20.185.230.186:8666/STH/v2/entities/urn:ngsi-ld:Temp:001/attrs/temperature?type=Temp&lastN=30");
@@ -130,5 +180,7 @@ namespace DryFi_ProjectBasedLearning_MVC.Services
         response.EnsureSuccessStatusCode();
         Console.WriteLine(await response.Content.ReadAsStringAsync());*/
         // Adicione métodos para outras requisições do Postman conforme necessário
+
+
     }
 }
