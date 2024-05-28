@@ -1,6 +1,6 @@
 # DryFi: Aplicação de IoT no monitoramento de estufas utilizadas na construção de motores elétricos
 
-![Estufa de secagem de motores](https://github.com/ConfuseKarma/DryFi-ProjectBasedLearning/assets/145780136/c67884b3-7a04-48d6-a9e5-190e555915e9)
+![PBL](https://github.com/ConfuseKarma/DryFi-ProjectBasedLearning/assets/145780136/0b524d20-9c2a-4933-a8b1-2ce07323772f)
 
 ## Grupo:
 - Aparecida Joana Moreto, RA: 082210001
