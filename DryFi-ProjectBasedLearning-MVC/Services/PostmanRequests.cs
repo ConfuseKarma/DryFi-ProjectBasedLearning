@@ -62,30 +62,19 @@ namespace DryFi_ProjectBasedLearning_MVC.Services
             return allData;
         }
 
-        public async Task<string> GetTemperatura1()
+        public async Task<List<JObject>> GetTemperatura1()
         {
             try
             {
                 HttpResponseMessage response = await _client.GetAsync("http://20.185.230.186:8666/STH/v2/entities/urn:ngsi-ld:Temp:001/attrs/temperature?type=Temp&lastN=100");
                 response.EnsureSuccessStatusCode();
-                string content = await response.Content.ReadAsStringAsync();
-                return content;
-            }
-            catch (HttpRequestException ex)
-            {
-                Console.WriteLine($"Erro na requisição HTTP: {ex.Message}");
-                throw;
-            }
-        }
+                var content = await response.Content.ReadAsStringAsync();
+                var jsonArray = JArray.Parse(content);
 
-        public async Task<string> GetLuminosidadeDaLampada()
-        {
-            try
-            {
-                HttpResponseMessage response = await _client.GetAsync("http://10.5.10.34:8666/STH/v1/contextEntities/type/Lamp/id/urn:ngsi-ld:Lamp:001/attributes/luminosity?lastN=30");
-                response.EnsureSuccessStatusCode();
-                string content = await response.Content.ReadAsStringAsync();
-                return content;
+                // Converte o JArray para List<JObject>
+                List<JObject> jsonObjectList = jsonArray.Select(item => (JObject)item).ToList();
+
+                return jsonObjectList;
             }
             catch (HttpRequestException ex)
             {

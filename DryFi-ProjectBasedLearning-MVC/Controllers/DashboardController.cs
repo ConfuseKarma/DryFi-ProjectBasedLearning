@@ -55,5 +55,31 @@ namespace DryFi_ProjectBasedLearning_MVC.Controllers
                 return StatusCode(500, $"Ocorreu um erro: {ex.Message}");
             }
         }
+
+        public IActionResult GetGraficoAoVivo()
+        {
+            return PartialView("_GraficoAoVivo");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetLatestTemperatura()
+        {
+            try
+            {
+                List<JObject> temperatura = await _postman.GetTemperatura1(); // Ou um método específico para dados recentes
+
+                var latestData = temperatura.Select(t => new
+                {
+                    RecvTime = t["recvTime"]?.ToString(),
+                    AttrValue = float.Parse(t["attrValue"]?.ToString() ?? "0")
+                }).ToList();
+
+                return Json(latestData);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Ocorreu um erro: {ex.Message}");
+            }
+        }
     }
 }

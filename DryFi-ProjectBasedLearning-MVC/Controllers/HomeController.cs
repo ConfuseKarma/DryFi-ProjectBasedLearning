@@ -16,21 +16,6 @@ namespace DryFi_ProjectBasedLearning_MVC.Controllers
             _logger = logger;
             _postman = postman;
         }
-        //Primeiro exemplo das lampadas
-        [HttpGet]
-        public async Task<IActionResult> ObterLuminosidadeDaLampada()
-        {
-            try
-            {
-                string luminosidade = await _postman.GetLuminosidadeDaLampada();
-                return Ok(luminosidade);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Ocorreu um erro: {ex.Message}");
-            }
-        }
-        //teste
         [HttpGet]
         public async Task<IActionResult> GetTemperatura()
         {

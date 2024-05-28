@@ -1,31 +1,54 @@
 ﻿@{
-    ViewData["Title"] = "Chart Example";
+    ViewData["Title"] = "Dashboards";
 }
 
 <h2>@ViewData["Title"]</h2>
-
-<button id="loadChartButton">Load Chart</button>
+<br />
+<div class="d-flex gap-3">
+    <button id="loadChartButton" class="rounded-pill btn btn-lg btn-outline-info mr-3">Gráfico Histórico</button>
+    <button id="loadLiveChartButton" class="rounded-pill btn btn-lg btn-outline-info mr-3">Gráfico Ao Vivo</button>
+</div>
+<br />
 <div id="chartContainer">
-    <!-- Partial view será carregada aqui -->
+    <!-- Partial view do gráfico histórico será carregada aqui -->
+</div>
+
+<div id="liveChartContainer">
+    <!-- Partial view do gráfico ao vivo será carregada aqui -->
 </div>
 
 @section Scripts {
     <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         $(document).ready(function () {
             $('#loadChartButton').click(function () {
-                console.log("chamou ajax");
+                console.log("chamou ajax para gráfico histórico");
                 $.ajax({
                     url: '@Url.Action("GetTemperatura1000", "Dashboard")',
                     type: 'GET',
                     success: function (data) {
                         $('#chartContainer').html(data);
-                        console.log("Partial view carregada"); // Log para depuração
+                        console.log("Partial view do gráfico histórico carregada"); // Log para depuração
                     },
                     error: function (xhr, status, error) {
-                        console.error("Ocorreu um erro ao carregar o gráfico:", error);
-                        $('#chartContainer').html("<p>Ocorreu um erro ao carregar o gráfico.</p>");
+                        console.error("Ocorreu um erro ao carregar o gráfico histórico:", error);
+                        $('#chartContainer').html("<p>Ocorreu um erro ao carregar o gráfico histórico.</p>");
+                    }
+                });
+            });
+
+            $('#loadLiveChartButton').click(function () {
+                console.log("chamou ajax para gráfico ao vivo");
+                $.ajax({
+                    url: '@Url.Action("GetGraficoAoVivo", "Dashboard")',
+                    type: 'GET',
+                    success: function (data) {
+                        $('#liveChartContainer').html(data);
+                        console.log("Partial view do gráfico ao vivo carregada"); // Log para depuração
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Ocorreu um erro ao carregar o gráfico ao vivo:", error);
+                        $('#liveChartContainer').html("<p>Ocorreu um erro ao carregar o gráfico ao vivo.</p>");
                     }
                 });
             });

@@ -1,14 +1,26 @@
-﻿<div>
+﻿@{
+    Layout = null;
+}
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h2>Gráfico de Temperatura (Ao Vivo)</h2>
+<div>
     <canvas id="graficoAoVivo"></canvas>
-    <script type="text/javascript">
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    $(document).ready(function () {
         var ctx = document.getElementById('graficoAoVivo').getContext('2d');
         var graficoAoVivo = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: ['1s', '2s', '3s', '4s', '5s'],
+                labels: [], // Inicialmente vazio
                 datasets: [{
                     label: 'Dados ao Vivo',
-                    data: [15, 25, 35, 45, 55],
+                    data: [],
                     borderColor: 'rgba(255, 99, 132, 1)',
                     borderWidth: 1
                 }]
@@ -21,5 +33,28 @@
                 }
             }
         });
-    </script>
-</div>
+
+        function updateChart() {
+            $.ajax({
+                url: '@Url.Action("GetLatestTemperatura", "Dashboard")',
+                type: 'GET',
+                success: function (data) {
+                    if (data && data.length > 0) {
+                        var labels = data.map(item => item.RecvTime);
+                        var values = data.map(item => item.AttrValue);
+
+                        graficoAoVivo.data.labels = labels;
+                        graficoAoVivo.data.datasets[0].data = values;
+                        graficoAoVivo.update();
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error("Ocorreu um erro ao atualizar o gráfico:", error);
+                }
+            });
+        }
+
+        // Atualizar gráfico a cada 5 segundos
+        setInterval(updateChart, 5000);
+    });
+</script>
