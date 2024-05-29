@@ -86,21 +86,10 @@ A curva em malha fechada é mais linear e estabiliza rapidamente ao redor do set
 \[ q = U \cdot A_{\text{Superfície}} \cdot \Delta T \]
 
 **Dados Necessários:**
-- \( A_{\text{Superfície}} \): Área da superfície do resistor em contato com o ar.
-- \( \Delta T \): Diferença de temperatura entre o resistor e o ambiente.
-- \( q \): Calor dissipado, obtido através da potência elétrica convertida em calor.
+- A superfície: Área da superfície do resistor em contato com o ar.
+- Delta T: Diferença de temperatura entre o resistor e o ambiente.
+- q: Calor dissipado, obtido através da potência elétrica convertida em calor.
 
-**Exemplo de Cálculo:**
-1. **Área da Superfície (A_{\text{Superfície}}):** Supondo que o resistor é cilíndrico com raio \( r \) e comprimento \( l \):
-\[ A_{\text{Superfície}} = 2 \pi r l + 2 \pi r^2 \]
-
-2. **Diferença de Temperatura (\(\Delta T\)):** Supondo uma diferença de 50°C entre o resistor e o ambiente.
-
-3. **Calor Dissipado (q):** Supondo que o resistor dissipa 10W de potência.
-\[ U = \frac{q}{A_{\text{Superfície}} \cdot \Delta T} \]
-
-Substituindo os valores:
-\[ U = \frac{10}{(2 \pi \cdot r \cdot l + 2 \pi \cdot r^2) \cdot 50} \]
 
 ### Aplicações
 
