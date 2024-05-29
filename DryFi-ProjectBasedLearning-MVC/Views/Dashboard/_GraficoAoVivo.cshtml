@@ -1,51 +1,102 @@
-﻿@{
-    Layout = null;
-}
-@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model IEnumerable<dynamic>
+@using Newtonsoft.Json
 
-<h2>Gráfico de Temperatura (Ao Vivo)</h2>
-<div>
-    <canvas id="graficoAoVivo"></canvas>
-</div>
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+</head>
+<body>
+    <h2>Gráfico de Temperatura (Ao Vivo)</h2>
+    <canvas id="graficoAoVivo" width="400" height="200"></canvas>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
+<script type="module">
+    import { parse } from 'https://cdn.jsdelivr.net/npm/date-fns@2.22.1/esm/index.js';
+    import { enUS } from 'https://cdn.jsdelivr.net/npm/date-fns@2.22.1/esm/locale/index.js';
+
+    // Certifique-se de que o adaptador de data está corretamente carregado
+    Chart._adapters._date.override(window.dateFns);
+    console.log('Chart.js version:', Chart.version);
+    console.log('Date Adapter Loaded:', typeof Chart._adapters._date !== 'undefined');
+
+    var graficoAoVivo;
+    var labels = []; // Variável global para armazenar labels
+    var values = []; // Variável global para armazenar valores
+
     $(document).ready(function () {
         var ctx = document.getElementById('graficoAoVivo').getContext('2d');
-        var graficoAoVivo = new Chart(ctx, {
+        graficoAoVivo = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: [], // Inicialmente vazio
+                labels: labels,
                 datasets: [{
-                    label: 'Dados ao Vivo',
-                    data: [],
+                    label: 'Temperatura',
+                    data: values,
                     borderColor: 'rgba(255, 99, 132, 1)',
-                    borderWidth: 1
+                    borderWidth: 1,
+                    fill: false // Não preencher abaixo da linha
                 }]
             },
             options: {
                 scales: {
+                    x: {
+                        type: 'time', // Define o tipo de escala como tempo
+                        time: {
+                            tooltipFormat: 'MMM dd, yyyy, HH:mm:ss', // Formato da dica de ferramenta
+                            displayFormats: {
+                                second: 'HH:mm:ss',
+                                minute: 'HH:mm',
+                                hour: 'HH:mm',
+                                day: 'MMM dd'
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Time'
+                        }
+                    },
                     y: {
-                        beginAtZero: true
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Temperatura'
+                        }
                     }
                 }
             }
         });
 
         function updateChart() {
+            console.log("ChamdaUpdateChart");
             $.ajax({
                 url: '@Url.Action("GetLatestTemperatura", "Dashboard")',
                 type: 'GET',
                 success: function (data) {
+                    console.log("Dados recebidos do servidor:", data);
                     if (data && data.length > 0) {
-                        var labels = data.map(item => item.RecvTime);
-                        var values = data.map(item => item.AttrValue);
+                        var newLabels = data.map(function (e) {
+                            console.log(e.RecvTime);
+                            return parse(e.RecvTime, 'dd/MM/yyyy HH:mm:ss', new Date(), { locale: enUS });
+                        });
+                        var newValues = data.map(function (e) {
+                            return e.AttrValue;
+                        });
 
+                        // Adiciona os novos dados às variáveis globais
+                        labels = labels.concat(newLabels);
+                        values = values.concat(newValues);
+
+                        // Atualiza o gráfico com os novos dados
                         graficoAoVivo.data.labels = labels;
                         graficoAoVivo.data.datasets[0].data = values;
                         graficoAoVivo.update();
+
+                        console.log("Labels para o gráfico:", labels);
+                        console.log("Valores para o gráfico:", values);
+                    } else {
+                        console.log("Nenhum dado recebido ou dados estão vazios.");
                     }
                 },
                 error: function (xhr, status, error) {
@@ -54,7 +105,9 @@
             });
         }
 
-        // Atualizar gráfico a cada 5 segundos
-        setInterval(updateChart, 5000);
+        // Atualizar gráfico a cada 10 segundos
+        setInterval(updateChart, 10000);
     });
 </script>
+</body>
+</html>

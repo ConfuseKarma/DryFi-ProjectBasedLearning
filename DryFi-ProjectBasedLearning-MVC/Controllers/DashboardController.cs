@@ -62,24 +62,45 @@ namespace DryFi_ProjectBasedLearning_MVC.Controllers
         }
 
         [HttpGet]
+        [HttpGet]
         public async Task<IActionResult> GetLatestTemperatura()
         {
             try
             {
-                List<JObject> temperatura = await _postman.GetTemperatura1(); // Ou um método específico para dados recentes
+                Console.WriteLine("Método GetLatestTemperatura chamado.");
+
+                List<JObject> temperatura = await _postman.GetTemperatura1();
+
+                if (temperatura == null || !temperatura.Any())
+                {
+                    Console.WriteLine("Nenhum dado de temperatura recebido da API.");
+                    return Json(new List<object>());
+                }
+
+                foreach (var item in temperatura)
+                {
+                    Console.WriteLine($"Item recebido: {item}");
+                }
 
                 var latestData = temperatura.Select(t => new
                 {
                     RecvTime = t["recvTime"]?.ToString(),
-                    AttrValue = float.Parse(t["attrValue"]?.ToString() ?? "0")
+                    AttrValue = t["attrValue"] != null ? float.Parse(t["attrValue"].ToString()) : 0
                 }).ToList();
+
+                foreach (var item in latestData)
+                {
+                    Console.WriteLine($"Dados formatados: RecvTime={item.RecvTime}, AttrValue={item.AttrValue}");
+                }
 
                 return Json(latestData);
             }
             catch (Exception ex)
             {
+                Console.WriteLine($"Ocorreu um erro no método GetLatestTemperatura: {ex.Message}");
                 return StatusCode(500, $"Ocorreu um erro: {ex.Message}");
             }
         }
+
     }
 }

@@ -22,12 +22,12 @@ namespace DryFi_ProjectBasedLearning_MVC.Services
         public async Task<List<JObject>> GetTemperatura1000()
         {
             var allData = new List<JObject>();
-            int offset = 0;
+            int offset = 8000;
             const int batchSize = 100;
 
             while (true)
             {
-                var request = new HttpRequestMessage(HttpMethod.Get, $"http://20.185.230.186:8666/STH/v2/entities/urn:ngsi-ld:Temp:001/attrs/temperature?type=Temp&hOffset={offset}&lastN=100");
+                var request = new HttpRequestMessage(HttpMethod.Get, $"http://20.185.230.186:8666/STH/v2/entities/urn:ngsi-ld:Temp:001/attrs/temperature?type=Temp&hLimit=100&hOffset={offset}");
 
                 var response = await _client.SendAsync(request);
                 response.EnsureSuccessStatusCode();
@@ -52,7 +52,7 @@ namespace DryFi_ProjectBasedLearning_MVC.Services
                     }
                 }
 
-                if (offset >= 100)
+                if (offset >= 9000)
                 {
                     break; // Termina o loop se não houver mais dados ou se o limite de 1000 for atingido
                 }
@@ -66,10 +66,21 @@ namespace DryFi_ProjectBasedLearning_MVC.Services
         {
             try
             {
-                HttpResponseMessage response = await _client.GetAsync("http://20.185.230.186:8666/STH/v2/entities/urn:ngsi-ld:Temp:001/attrs/temperature?type=Temp&lastN=100");
+                var requestUrl = "http://20.185.230.186:8666/STH/v2/entities/urn:ngsi-ld:Temp:001/attrs/temperature?type=Temp&lastN=1";
+                Console.WriteLine($"Enviando solicitação para {requestUrl}");
+
+                HttpResponseMessage response = await _client.GetAsync(requestUrl);
                 response.EnsureSuccessStatusCode();
+
                 var content = await response.Content.ReadAsStringAsync();
-                var jsonArray = JArray.Parse(content);
+                Console.WriteLine($"Resposta recebida: {content}");
+
+                // Se a API retorna um objeto JSON com uma propriedade 'value' que é um array
+                var jsonObject = JObject.Parse(content);
+                var jsonArray = (JArray)jsonObject["value"];
+
+                // Adicionando log para verificar o conteúdo do JArray
+                Console.WriteLine($"Array de temperatura recebido: {jsonArray}");
 
                 // Converte o JArray para List<JObject>
                 List<JObject> jsonObjectList = jsonArray.Select(item => (JObject)item).ToList();
@@ -81,7 +92,18 @@ namespace DryFi_ProjectBasedLearning_MVC.Services
                 Console.WriteLine($"Erro na requisição HTTP: {ex.Message}");
                 throw;
             }
+            catch (JsonException ex)
+            {
+                Console.WriteLine($"Erro ao processar o JSON: {ex.Message}");
+                throw;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erro inesperado: {ex.Message}");
+                throw;
+            }
         }
+
 
 
         public async Task CreateMachine(MaquinaViewModel maquina)
