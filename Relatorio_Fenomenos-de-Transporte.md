@@ -1,3 +1,31 @@
+# INSTRUÇÕES 
+
+Apresentação e entrega de trabalho no moodle da disciplina:
+
+• Apresentação do dispositivo e funcionamento: sensores, armazenamento dos dados, 
+
+características do sistema e possíveis regulagens;
+
+• Mecanismos envolvidos, mecanismos predominantes e desprezíveis;
+
+• Dados obtidos da temperatura em função do tempo em malha aberta e depois de 
+
+estabilizar em malha fechada;
+
+• Explicação da curva obtida;
+
+• Cálculo da superfície dissipada pelo resistor e do coeficiente global de transferência de 
+
+calor. O coeficiente global de transferência de calor (U) é expresso em Energia/(tempo.
+
+superfície. ∆Temperatura);
+
+𝑞 = 𝑈. 𝐴𝑆𝑢𝑝𝑒𝑟𝑓í𝑐𝑖𝑒. ∆𝑇
+
+• Aplicações;
+
+• Sugestões de melhorias no sistema.
+
 # Fenômenos de Transporte
 
 Neste projeto, a análise dos fenômenos de transporte é fundamental para compreender como o calor é transferido durante o processo de secagem dos enrolamentos dos motores elétricos dentro das estufas. Seguem os passos para abordar esse aspecto:
