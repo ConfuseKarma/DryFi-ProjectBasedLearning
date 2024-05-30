@@ -77,12 +77,16 @@
                     console.log("Dados recebidos do servidor:", data);
                     if (data && data.length > 0) {
                         var newLabels = data.map(function (e) {
-                            console.log(e.RecvTime);
-                            return parse(e.RecvTime, 'dd/MM/yyyy HH:mm:ss', new Date(), { locale: enUS });
+                            console.log(e.recvTime);
+                            return parse(e.recvTime, 'dd/MM/yyyy HH:mm:ss', new Date(), { locale: enUS });
                         });
                         var newValues = data.map(function (e) {
-                            return e.AttrValue;
+                            return parseFloat(e.attrValue);
                         });
+
+                        // Verifica se os dados foram convertidos corretamente
+                        console.log("Novos labels:", newLabels);
+                        console.log("Novos valores:", newValues);
 
                         // Adiciona os novos dados às variáveis globais
                         labels = labels.concat(newLabels);
