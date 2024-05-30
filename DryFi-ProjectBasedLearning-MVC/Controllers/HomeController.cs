@@ -21,7 +21,7 @@ namespace DryFi_ProjectBasedLearning_MVC.Controllers
         {
             try
             {
-                List<JObject> temperatura = await _postman.GetTemperatura1000();
+                List<JObject> temperatura = await _postman.GetTemperatura1();
                 return Ok(temperatura);
             }
             catch (Exception ex)

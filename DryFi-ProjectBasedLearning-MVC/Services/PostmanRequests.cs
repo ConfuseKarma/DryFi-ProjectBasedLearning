@@ -19,15 +19,15 @@ namespace DryFi_ProjectBasedLearning_MVC.Services
             _client.DefaultRequestHeaders.Add("fiware-servicepath", "/");
         }
 
-        public async Task<List<JObject>> GetTemperatura1000()
+        public async Task<List<JObject>> GetTemperatura1000(string machine, string Offset)
         {
             var allData = new List<JObject>();
-            int offset = 8000;
+            int offset = Convert.ToInt32(Offset);
             const int batchSize = 100;
 
             while (true)
             {
-                var request = new HttpRequestMessage(HttpMethod.Get, $"http://20.185.230.186:8666/STH/v2/entities/urn:ngsi-ld:Temp:001/attrs/temperature?type=Temp&hLimit=100&hOffset={offset}");
+                var request = new HttpRequestMessage(HttpMethod.Get, $"http://20.185.230.186:8666/STH/v2/entities/urn:ngsi-ld:Temp:{machine}/attrs/temperature?type=Temp&hLimit=100&hOffset={offset}");
 
                 var response = await _client.SendAsync(request);
                 response.EnsureSuccessStatusCode();

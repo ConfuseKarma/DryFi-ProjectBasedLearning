@@ -20,11 +20,11 @@ namespace DryFi_ProjectBasedLearning_MVC.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetTemperatura1000()
+        public async Task<IActionResult> GetTemperatura1000([FromQuery] string machine, [FromQuery] string offset)
         {
             try
             {
-                List<JObject> temperatura = await _postman.GetTemperatura1000();
+                List<JObject> temperatura = await _postman.GetTemperatura1000(machine, offset);
 
                 // Adicionando logs para verificar o conteúdo da lista
                 //foreach (var item in temperatura)
