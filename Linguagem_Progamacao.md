@@ -297,19 +297,22 @@ BEGIN
         AND (@idCliente IS NULL OR @idCliente = 0)
     BEGIN
         -- Se todos os parâmetros forem nulos ou vazios, busca todos os registros
-        SELECT Maquina.*
-        FROM Maquina;
+        SELECT Maquina.*, MaquinaStatus.StatusNome AS 'DescricaoStatus'
+        FROM Maquina
+        INNER JOIN MaquinaStatus ON Maquina.maqStatus = MaquinaStatus.Id;
     END
     ELSE
     BEGIN
         -- Se algum parâmetro estiver preenchido, busca pelos registros que batem 100%
-        SELECT Maquina.*
+        SELECT Maquina.*, MaquinaStatus.StatusNome AS 'DescricaoStatus'
         FROM Maquina
+        INNER JOIN MaquinaStatus ON Maquina.maqStatus = MaquinaStatus.Id
         WHERE (Maquina.maqStatus = @maqStatus OR @maqStatus = 0)
         AND (Maquina.idCliente = @idCliente OR @idCliente = 0);
     END
 END
 GO
+
 
 
 ```
