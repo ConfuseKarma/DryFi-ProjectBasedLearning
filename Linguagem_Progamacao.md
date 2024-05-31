@@ -32,6 +32,8 @@ CREATE TABLE Cliente (
     Telefone VARCHAR(20),
     TipoClienteId INT
 );
+INSERT INTO Cliente (Id, NomeCliente, Cnpj, Email, Telefone, TipoClienteId)
+VALUES (1, 'Empresa XYZ', '12345678901234', 'contato@empresa.xyz', '(11) 98765-4321', 1);
 
 CREATE TABLE TipoCliente (
     Id INT PRIMARY KEY,
@@ -48,6 +50,11 @@ CREATE TABLE Maquina (
     endereco VARCHAR(200),
     idCliente INT,
 );
+INSERT INTO Maquina (Id, maqStatus, endereco, idCliente)
+VALUES (1, 1, 'Rua A, 123', 1),
+       (2, 2, 'Avenida B, 456', 2),
+       (3, 3, 'Rua C, 789', 1),
+       (4, 2, 'Avenida D, 1011', 3);
 
 CREATE TABLE MaquinaStatus (
     Id INT PRIMARY KEY,
