@@ -24,33 +24,33 @@ namespace DryFi_ProjectBasedLearning_MVC.DAO
         {
             MaquinaViewModel m = new MaquinaViewModel();
             m.Id = Convert.ToInt32(registro["Id"]);
-            m.MaqStatus = Convert.ToInt32(registro["maqStatus"]);  
-            m.Endereco = registro["endereco"].ToString();  
+            m.MaqStatus = Convert.ToInt32(registro["maqStatus"]);
+            m.Endereco = registro["endereco"].ToString();
             m.IdCliente = Convert.ToInt32(registro["idCliente"]);
+            m.DescricaoStatus = registro["DescricaoStatus"].ToString();  // Adiciona a descrição do status
+            m.NomeCliente = registro["NomeCliente"].ToString();  // Adiciona o nome do cliente
 
             return m;
         }
 
-
-        public List<MaquinaViewModel> ConsultaAvancadaMaquina(string maqStatus, int idCliente)
+        public List<MaquinaViewModel> ConsultaAvancadaMaquina(int maqStatus, int idCliente, string nomeCliente)
         {
             SqlParameter[] p = {
                 new SqlParameter("@maqStatus", maqStatus),
-                new SqlParameter("@idCliente", idCliente)
+                new SqlParameter("@idCliente", idCliente),
+                new SqlParameter("@nomeCliente", nomeCliente)
             };
-        
+
             var tabela = HelperDAO.ExecutaProcSelect("spConsultaAvancadaMaquinas", p);
             var lista = new List<MaquinaViewModel>();
-        
+
             foreach (DataRow dr in tabela.Rows)
             {
                 lista.Add(MontaModel(dr));
             }
-        
+
             return lista;
         }
-
-
 
         protected override void SetTabela()
         {
