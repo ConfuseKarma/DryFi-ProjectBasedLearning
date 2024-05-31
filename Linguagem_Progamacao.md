@@ -298,26 +298,22 @@ BEGIN
         AND (@idCliente IS NULL OR @idCliente = 0)
         AND (@nomeCliente IS NULL OR @nomeCliente = '')
     BEGIN
-        -- Se todos os parâmetros forem nulos ou vazios, busca todos os registros
-        SELECT Maquina.*, MaquinaStatus.StatusNome AS 'DescricaoStatus', Cliente.NomeCliente
+        -- Se todos os parâmetros forem nulos ou vazios, retorna todas as máquinas
+        SELECT maquina.*, MaquinaStatus.StatusNome AS 'NomeStatus'
         FROM Maquina
-        INNER JOIN MaquinaStatus ON Maquina.maqStatus = MaquinaStatus.Id
-        INNER JOIN Cliente ON Maquina.idCliente = Cliente.Id;
+        INNER JOIN MaquinaStatus ON Maquina.maqStatus = MaquinaStatus.Id;
     END
     ELSE
     BEGIN
         -- Se algum parâmetro estiver preenchido, busca pelos registros que batem 100%
-        SELECT Maquina.*, MaquinaStatus.StatusNome AS 'DescricaoStatus', Cliente.NomeCliente
+        SELECT maquina.*, MaquinaStatus.StatusNome AS 'NomeStatus'
         FROM Maquina
         INNER JOIN MaquinaStatus ON Maquina.maqStatus = MaquinaStatus.Id
-        INNER JOIN Cliente ON Maquina.idCliente = Cliente.Id
-        WHERE (Maquina.maqStatus = @maqStatus OR @maqStatus = 0)
-        AND (Maquina.idCliente = @idCliente OR @idCliente = 0)
-        AND (Cliente.NomeCliente LIKE '%' + @nomeCliente + '%' OR @nomeCliente IS NULL);
+        WHERE (maquina.maqStatus = @maqStatus OR @maqStatus IS NULL)
+        AND (maquina.idCliente = @idCliente OR @idCliente IS NULL)
+        AND (EXISTS (SELECT 1 FROM Cliente WHERE Cliente.Id = maquina.idCliente AND Cliente.NomeCliente LIKE '%' + @nomeCliente + '%') OR @nomeCliente IS NULL);
     END
 END
-GO
-
 
 
 
