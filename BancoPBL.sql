@@ -559,10 +559,8 @@ USE [master]
 GO
 ALTER DATABASE [PBL] SET  READ_WRITE 
 GO
-
 USE [PBL]
 GO
-
 INSERT INTO [dbo].[Cargo] (Id, Cargo)
 VALUES
     (1, 'Administrator'),
