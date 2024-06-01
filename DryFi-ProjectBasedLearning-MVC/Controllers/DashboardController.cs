@@ -1,7 +1,10 @@
-﻿using DryFi_ProjectBasedLearning_MVC.Services;
+﻿using DryFi_ProjectBasedLearning_MVC.DAO;
+using DryFi_ProjectBasedLearning_MVC.Services;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace DryFi_ProjectBasedLearning_MVC.Controllers
 {
@@ -16,14 +19,26 @@ namespace DryFi_ProjectBasedLearning_MVC.Controllers
         }
         public IActionResult Index()
         {
+            var dataTable = HelperDAO.ExecutaProcSelect("GetMaquinaIds", null);
+            var maquinaIds = new List<int>();
+
+            foreach (DataRow row in dataTable.Rows)
+            {
+                maquinaIds.Add(Convert.ToInt32(row["Id"]));
+            }
+
+            ViewBag.MaquinaIds = maquinaIds;
             return View();
         }
-
         [HttpGet]
         public async Task<IActionResult> GetTemperatura1000([FromQuery] string machine, [FromQuery] string offset)
         {
             try
             {
+                if (!string.IsNullOrEmpty(machine))
+                {
+                    machine = machine.PadLeft(3, '0');
+                }
                 List<JObject> temperatura = await _postman.GetTemperatura1000(machine, offset);
 
                 // Adicionando logs para verificar o conteúdo da lista

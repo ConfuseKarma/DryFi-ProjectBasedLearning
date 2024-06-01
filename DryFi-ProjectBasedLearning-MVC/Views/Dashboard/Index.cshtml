@@ -1,4 +1,4 @@
-﻿@model HistoricViewModel
+﻿@model DashboardViewModel
 @{
     ViewData["Title"] = "Dashboards";
 }
@@ -10,7 +10,12 @@
         <div class="d-flex gap-3 align-items-center">
             <div>
                 <label for="Machine" class="form-label">Maquina</label>
-                <input asp-for="Machine" class="form-control" id="machine" maxlength="3" oninput="validateInput(this)">
+                <select asp-for="Machine" class="form-control" id="machine">
+                    @foreach (var id in @ViewBag.MaquinaIds)
+                    {
+                        <option value="@id">@id</option>
+                    }
+                </select>
             </div>
             <div>
                 <label for="Offset" class="form-label">Offset</label>
