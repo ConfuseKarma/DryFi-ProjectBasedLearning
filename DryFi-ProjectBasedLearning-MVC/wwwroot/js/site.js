@@ -44,19 +44,19 @@ function aplicaFiltroConsultaAvancadaCliente() {
 
 
 function aplicaFiltroConsultaAvancadaMaquina() {
-    var vMaqStatus = document.getElementById('maqStatus').value;
-    var vIdCliente = document.getElementById('idCliente').value;
+    var maqStatus = document.getElementById('maqStatus').value;
+    var idCliente = document.getElementById('idCliente').value;
+    var nomeCliente = document.getElementById('nomeCliente').value;
+
     $.ajax({
-        url: "/Maquina/ObtemDadosConsultaAvancada",
-        data: { maqStatus: vMaqStatus, idCliente: vIdCliente },
-        success: function (dados) {
-            if (dados.erro != undefined) {
-                alert(dados.msg);
-            } else {
-                console.log("cheguei");
-                document.getElementById('resultadoConsulta').innerHTML = dados;
-            }
+        url: '/Maquina/ObtemDadosConsultaAvancada',
+        data: { maqStatus: maqStatus, idCliente: idCliente, nomeCliente: nomeCliente },
+        success: function (data) {
+            $('#resultadoConsulta').html(data);
         },
+        error: function (xhr, status, error) {
+            alert('Error: ' + error);
+        }
     });
 }
 
