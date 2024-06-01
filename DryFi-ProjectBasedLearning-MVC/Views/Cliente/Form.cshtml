@@ -8,7 +8,12 @@
 <div class="container content-fluid mt-5 row-gap-5">
     <div class="row mt-5 gx-3">
         <div class="col-md-6">
-            <h1 class="display-2 fw-semibold mb-5">New <span class="text-info">Warded</span></h1>
+            @if (@ViewBag.Operacao == "I"){
+                <h1 class="display-2 fw-semibold mb-5">New <span class="text-info">Warded</span></h1>
+            }
+            else{
+                <h1 class="display-2 fw-semibold mb-5">Update <span class="text-info">Warded</span></h1>
+            }
             <div class="d-flex align-content-center flex-wrap">
                 <form asp-action="save" class="needs-validation" novalidate>
                     <div class="row g-3">
