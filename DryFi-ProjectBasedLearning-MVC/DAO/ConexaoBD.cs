@@ -28,7 +28,8 @@ namespace DryFi_ProjectBasedLearning_MVC.DAO
             string strCon = "Data Source=GUILHERME\\SQLSERVER2022; Database=AulaDB; integrated security=true";
 
             //String KAUÊ DE SOUZA
-            //string strCon = "Data Source=CONFUSEDKARMA\\SQLEXPRESS01; Database=PBL; Integrated Security=True;";
+            string strCon = "Data Source=CONFUSEDKARMA\\SQLEXPRESS01; Database=PBL; Integrated Security=True;";
+
             SqlConnection conexao = new SqlConnection(strCon);
 
 

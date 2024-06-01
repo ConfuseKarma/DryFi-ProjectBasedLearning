@@ -40,15 +40,15 @@ namespace DryFi_ProjectBasedLearning_MVC.Controllers
                 ModelState.AddModelError("idCliente", "Id de cliente inválido!");
         }
 
-        public IActionResult ObtemDadosConsultaAvancada(string maqStatus, int idCliente)
+        public IActionResult ObtemDadosConsultaAvancada(int maqStatus, int idCliente, string nomeCliente)
         {
             try
             {
                 MaquinaDAO dao = new MaquinaDAO();
-                if (string.IsNullOrEmpty(maqStatus))
-                    maqStatus = "";
+                if (nomeCliente == null)
+                    nomeCliente = "";
 
-                List<MaquinaViewModel> lista = dao.ConsultaAvancadaMaquina(maqStatus, idCliente);
+                List<MaquinaViewModel> lista = dao.ConsultaAvancadaMaquina(maqStatus, idCliente, nomeCliente);
                 return PartialView("_ListMaquina", lista);
             }
             catch (Exception erro)
@@ -67,7 +67,5 @@ namespace DryFi_ProjectBasedLearning_MVC.Controllers
                            Text = e.ToString()
                        }).ToList();
         }
-
-
     }
 }
