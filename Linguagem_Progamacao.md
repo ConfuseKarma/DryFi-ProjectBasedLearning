@@ -301,28 +301,78 @@ CREATE PROCEDURE [dbo].[spConsultaAvancadaMaquinas]
 )
 AS
 BEGIN
-    IF (@maqStatus IS NULL OR @maqStatus = 0)
-        AND (@idCliente IS NULL OR @idCliente = 0)
-        AND (@nomeCliente IS NULL OR @nomeCliente = '')
+    IF (@maqStatus = 0 AND @idCliente = 0 AND @nomeCliente = '')
     BEGIN
-        -- Se todos os parâmetros forem nulos ou vazios, retorna todas as máquinas
-        SELECT maquina.*, MaquinaStatus.StatusNome AS 'NomeStatus'
+        -- Se todos os parâmetros forem zero ou vazios, busca todas as máquinas
+        SELECT maquina.*, MaquinaStatus.StatusNome AS 'DescricaoStatus', cliente.NomeCliente
         FROM Maquina
-        INNER JOIN MaquinaStatus ON Maquina.maqStatus = MaquinaStatus.Id;
+        INNER JOIN MaquinaStatus ON Maquina.maqStatus = MaquinaStatus.Id
+        LEFT JOIN Cliente ON Maquina.idCliente = Cliente.Id;
+    END
+    ELSE IF (@maqStatus <> 0 AND @idCliente = 0 AND @nomeCliente = '')
+    BEGIN
+        -- Se apenas o status da máquina for fornecido como filtro
+        SELECT maquina.*, MaquinaStatus.StatusNome AS 'DescricaoStatus', cliente.NomeCliente
+        FROM Maquina
+        INNER JOIN MaquinaStatus ON Maquina.maqStatus = MaquinaStatus.Id
+        LEFT JOIN Cliente ON Maquina.idCliente = Cliente.Id
+        WHERE maquina.maqStatus = @maqStatus;
+    END
+    ELSE IF (@maqStatus = 0 AND @idCliente <> 0 AND @nomeCliente = '')
+    BEGIN
+        -- Se apenas o ID do cliente for fornecido como filtro
+        SELECT maquina.*, MaquinaStatus.StatusNome AS 'DescricaoStatus', cliente.NomeCliente
+        FROM Maquina
+        INNER JOIN MaquinaStatus ON Maquina.maqStatus = MaquinaStatus.Id
+        LEFT JOIN Cliente ON Maquina.idCliente = Cliente.Id
+        WHERE maquina.idCliente = @idCliente;
+    END
+    ELSE IF (@maqStatus = 0 AND @idCliente = 0 AND @nomeCliente <> '')
+    BEGIN
+        -- Se apenas o nome do cliente for fornecido como filtro
+        SELECT maquina.*, MaquinaStatus.StatusNome AS 'DescricaoStatus', cliente.NomeCliente
+        FROM Maquina
+        INNER JOIN MaquinaStatus ON Maquina.maqStatus = MaquinaStatus.Id
+        LEFT JOIN Cliente ON Maquina.idCliente = Cliente.Id
+        WHERE cliente.NomeCliente LIKE '%' + @nomeCliente + '%';
+    END
+    ELSE IF (@maqStatus <> 0 AND @idCliente <> 0 AND @nomeCliente = '')
+    BEGIN
+        -- Se status da máquina e ID do cliente forem fornecidos como filtro
+        SELECT maquina.*, MaquinaStatus.StatusNome AS 'DescricaoStatus', cliente.NomeCliente
+        FROM Maquina
+        INNER JOIN MaquinaStatus ON Maquina.maqStatus = MaquinaStatus.Id
+        LEFT JOIN Cliente ON Maquina.idCliente = Cliente.Id
+        WHERE maquina.maqStatus = @maqStatus AND maquina.idCliente = @idCliente;
+    END
+    ELSE IF (@maqStatus <> 0 AND @idCliente = 0 AND @nomeCliente <> '')
+    BEGIN
+        -- Se status da máquina e nome do cliente forem fornecidos como filtro
+        SELECT maquina.*, MaquinaStatus.StatusNome AS 'DescricaoStatus', cliente.NomeCliente
+        FROM Maquina
+        INNER JOIN MaquinaStatus ON Maquina.maqStatus = MaquinaStatus.Id
+        LEFT JOIN Cliente ON Maquina.idCliente = Cliente.Id
+        WHERE maquina.maqStatus = @maqStatus AND cliente.NomeCliente LIKE '%' + @nomeCliente + '%';
+    END
+    ELSE IF (@maqStatus = 0 AND @idCliente <> 0 AND @nomeCliente <> '')
+    BEGIN
+        -- Se ID do cliente e nome do cliente forem fornecidos como filtro
+        SELECT maquina.*, MaquinaStatus.StatusNome AS 'DescricaoStatus', cliente.NomeCliente
+        FROM Maquina
+        INNER JOIN MaquinaStatus ON Maquina.maqStatus = MaquinaStatus.Id
+        LEFT JOIN Cliente ON Maquina.idCliente = Cliente.Id
+        WHERE maquina.idCliente = @idCliente AND cliente.NomeCliente LIKE '%' + @nomeCliente + '%';
     END
     ELSE
     BEGIN
-        -- Se algum parâmetro estiver preenchido, busca pelos registros que batem 100%
-        SELECT maquina.*, MaquinaStatus.StatusNome AS 'NomeStatus'
+        -- Se todos os parâmetros forem fornecidos como filtro
+        SELECT maquina.*, MaquinaStatus.StatusNome AS 'DescricaoStatus', cliente.NomeCliente
         FROM Maquina
         INNER JOIN MaquinaStatus ON Maquina.maqStatus = MaquinaStatus.Id
-        WHERE (maquina.maqStatus = @maqStatus OR @maqStatus IS NULL)
-        AND (maquina.idCliente = @idCliente OR @idCliente IS NULL)
-        AND (EXISTS (SELECT 1 FROM Cliente WHERE Cliente.Id = maquina.idCliente AND Cliente.NomeCliente LIKE '%' + @nomeCliente + '%') OR @nomeCliente IS NULL);
+        LEFT JOIN Cliente ON Maquina.idCliente = Cliente.Id
+        WHERE maquina.maqStatus = @maqStatus AND maquina.idCliente = @idCliente AND cliente.NomeCliente LIKE '%' + @nomeCliente + '%';
     END
 END
-
-
 
 
 ```
