@@ -373,7 +373,12 @@ BEGIN
         WHERE maquina.maqStatus = @maqStatus AND maquina.idCliente = @idCliente AND cliente.NomeCliente LIKE '%' + @nomeCliente + '%';
     END
 END
-
+GO
+CREATE PROCEDURE GetMaquinaIds
+AS
+BEGIN
+    SELECT Id FROM Maquina
+END
 
 
 ```
