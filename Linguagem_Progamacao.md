@@ -257,6 +257,13 @@ BEGIN
     END
 END
 
+CREATE PROCEDURE [dbo].[GetClienteIds]
+AS
+BEGIN
+    SELECT Id FROM Cliente
+END
+GO
+
 ```
 ### SP Maquina ###
 ```sql
@@ -374,6 +381,7 @@ BEGIN
     END
 END
 GO
+
 CREATE PROCEDURE GetMaquinaIds
 AS
 BEGIN
