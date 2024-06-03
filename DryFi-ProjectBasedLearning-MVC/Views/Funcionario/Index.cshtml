@@ -13,11 +13,11 @@
     <legend>Search your Guardians</legend>
     <div class="row">
         <div class="col-lg-4">
-            Nome<br />
+            Name<br />
             <input type="text" id="nome" class="form-control" />
         </div>
         <div class="col-lg-3">
-            Cargo <br />
+            Position <br />
             <select asp-items="Html.GetEnumSelectList<CargoEnum>()" class="form-select" id="cargo" required>
                 <option selected disabled value="">Choose...</option>
             </select>

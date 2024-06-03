@@ -37,8 +37,14 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <label for="IdCliente" class="form-label">Client ID</label>
-                            <input asp-for="IdCliente" type="text" class="form-control" id="idCliente" required>
+                            Client ID<br />
+                            <select input = "idCliente" id="idCliente" class="form-control">
+                                    <option value="">Select a Client...</option>
+                                    @foreach (var id in @ViewBag.ClienteIds)
+                                    {
+                                        <option value="@id">@id</option>
+                                    }
+                            </select>
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
@@ -51,7 +57,7 @@
             </div>
         </div>
         <div class="col-md-6 pt-3 d-flex justify-content-center align-items-center">
-            <img src="~/lib/img/machineImage.svg" style="max-width: 100%; height: auto;" />
+            <img src="~/lib/img/registerImage.svg" style="max-width: 100%; height: auto;" />
         </div>
     </div>
 </div>

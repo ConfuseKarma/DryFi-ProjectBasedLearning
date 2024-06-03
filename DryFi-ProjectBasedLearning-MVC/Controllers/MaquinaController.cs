@@ -18,12 +18,16 @@ namespace DryFi_ProjectBasedLearning_MVC.Controllers
 
         public IActionResult ListarMaquina()
         {
+            GetClientId();
+
             List<MaquinaViewModel> maquina = new List<MaquinaViewModel>();
             return View("Index", maquina);
         }
 
         public IActionResult MaquinaRegistro()
         {
+            GetClientId();
+
             ViewBag.Operacao = "I";
             MaquinaViewModel maquina = new MaquinaViewModel();
             MaquinaDAO dao = new MaquinaDAO();
@@ -66,6 +70,19 @@ namespace DryFi_ProjectBasedLearning_MVC.Controllers
                            Value = ((int)e).ToString(),
                            Text = e.ToString()
                        }).ToList();
+        }
+
+        public void GetClientId()
+        {
+            var dataTable = HelperDAO.ExecutaProcSelect("GetClienteIds", null);
+            var clienteIds = new List<int>();
+
+            foreach (DataRow row in dataTable.Rows)
+            {
+                clienteIds.Add(Convert.ToInt32(row["Id"]));
+            }
+
+            ViewBag.ClienteIds = clienteIds;
         }
     }
 }

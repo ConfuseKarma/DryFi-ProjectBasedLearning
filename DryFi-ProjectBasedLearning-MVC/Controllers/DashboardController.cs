@@ -1,4 +1,5 @@
-﻿using DryFi_ProjectBasedLearning_MVC.DAO;
+﻿using DryFi_ProjectBasedLearning_MVC.Models;
+using DryFi_ProjectBasedLearning_MVC.DAO;
 using DryFi_ProjectBasedLearning_MVC.Services;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -28,7 +29,11 @@ namespace DryFi_ProjectBasedLearning_MVC.Controllers
             }
 
             ViewBag.MaquinaIds = maquinaIds;
-            return View();
+
+            DashboardViewModel d = new DashboardViewModel();
+            d.Offset = 8000;
+
+            return View(d);
         }
         [HttpGet]
         public async Task<IActionResult> GetTemperatura1000([FromQuery] string machine, [FromQuery] string offset)

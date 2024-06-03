@@ -27,8 +27,12 @@ namespace DryFi_ProjectBasedLearning_MVC.DAO
             m.MaqStatus = Convert.ToInt32(registro["maqStatus"]);
             m.Endereco = registro["endereco"].ToString();
             m.IdCliente = Convert.ToInt32(registro["idCliente"]);
-            m.DescricaoStatus = registro["DescricaoStatus"].ToString();  // Adiciona a descrição do status
-            m.NomeCliente = registro["NomeCliente"].ToString();  // Adiciona o nome do cliente
+
+            if (registro.Table.Columns.Contains("DescricaoStatus"))
+                m.DescricaoStatus = registro["DescricaoStatus"].ToString();
+
+            if (registro.Table.Columns.Contains("NomeCliente"))
+                m.NomeCliente = registro["NomeCliente"].ToString();
 
             return m;
         }
