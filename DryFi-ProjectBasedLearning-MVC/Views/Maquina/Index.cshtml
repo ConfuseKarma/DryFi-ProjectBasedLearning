@@ -23,13 +23,8 @@
         </div>
         <div class="col-lg-2">
             Client ID<br />
-            <select input = "idCliente" id="idCliente" class="form-control">
-                    <option value="">Select a Client...</option>
-                    @foreach (var id in @ViewBag.ClienteIds)
-                    {
-                        <option value="@id">@id</option>
-                    }
-            </select>
+            <input type="text" id="idCliente" name="idCliente" class="form-control" placeholder="Enter Client ID...">
+
         </div>
         <div class="col-lg-2">
             Client Name<br />
