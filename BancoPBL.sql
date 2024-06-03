@@ -204,6 +204,13 @@ BEGIN
     SELECT Id FROM Maquina
 END
 GO
+/****** Object:  StoredProcedure [dbo].[GetClienteIds]    Script Date: 31/05/2024 21:48:53 ******/
+CREATE PROCEDURE [dbo].[GetClienteIds]
+AS
+BEGIN
+    SELECT Id FROM Cliente
+END
+GO
 /****** Object:  StoredProcedure [dbo].[spConsulta]    Script Date: 31/05/2024 21:48:53 ******/
 SET ANSI_NULLS ON
 GO
