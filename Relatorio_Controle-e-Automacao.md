@@ -7,7 +7,7 @@ Introdução, desenvolvimento da análise de circuitos e obtenção das equaçõ
 
 ### Link do Relatório: ###
 
-### - [docs.google.com/document/d/1CMKNKdv7-q9Bkq4tbYM7Ng_gBm2sA2VbT95HF3UqPbA/edit?usp=sharing](https://docs.google.com/document/d/1CMKNKdv7-q9Bkq4tbYM7Ng_gBm2sA2VbT95HF,3UqPbA/edit?usp=sharing)](https://docs.google.com/document/d/1-D07BaICdD99yDaTF9m1ZUXcMX2q3nHi3IJGzinDZJE/edit) ###
+### - https://docs.google.com/document/d/1-D07BaICdD99yDaTF9m1ZUXcMX2q3nHi3IJGzinDZJE/edit ###
 
 (Faça Login se quiser editar)
 
